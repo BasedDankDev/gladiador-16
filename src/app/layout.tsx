@@ -13,7 +13,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Gladiador 16 | Ropa Deportiva de Elite",
-  description: "Poder y Gladiador — Ropa deportiva de elite, San Jose, Costa Rica",
+  description: "Ropa deportiva de elite — Tendencias actuales, verano 2026. San José, Costa Rica.",
 };
 
 export default function RootLayout({
