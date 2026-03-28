@@ -65,6 +65,9 @@ export default function Header() {
               </button>
               <div className="absolute right-0 top-full mt-2 bg-[#111] border border-white/10 py-2 px-4 hidden group-hover:block min-w-[160px]">
                 <p className="text-xs text-white/60 mb-2 truncate">{session.user?.name}</p>
+                <Link href="/perfil" className="block text-xs text-white/80 hover:text-gold py-1 transition-colors">
+                  Mi perfil
+                </Link>
                 <Link href="/pedidos" className="block text-xs text-white/80 hover:text-gold py-1 transition-colors">
                   Mis pedidos
                 </Link>
