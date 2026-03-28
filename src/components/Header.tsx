@@ -8,9 +8,9 @@ import { useCart } from "@/context/CartContext";
 const navLinks = [
   { label: "INICIO", href: "/" },
   { label: "TIENDA", href: "/#productos" },
-  { label: "MUJER", href: "#" },
-  { label: "HOMBRE", href: "#" },
-  { label: "CONTACTO", href: "#" },
+  { label: "MUJER", href: "/#productos" },
+  { label: "HOMBRE", href: "/#productos" },
+  { label: "CONTACTO", href: "/#productos" },
 ];
 
 export default function Header() {
