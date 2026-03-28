@@ -20,32 +20,32 @@ function UserDropdown({ session }: { session: { user?: { name?: string | null; e
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
+  const initial = session.user?.name?.charAt(0).toUpperCase() || "?";
+
   return (
     <div className="relative" ref={ref}>
       <button
-        aria-label="Cuenta"
         onClick={() => setOpen(!open)}
-        className="text-gold hover:text-white transition-colors"
+        className="flex items-center gap-2 hover:opacity-80 transition-opacity"
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-          <circle cx="12" cy="7" r="4" />
+        <div className="w-8 h-8 bg-maroon-light rounded-full flex items-center justify-center text-xs font-bold text-white">
+          {initial}
+        </div>
+        <span className="hidden md:inline text-sm text-white">{session.user?.name}</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className={`transition-transform ${open ? "rotate-180" : ""}`}>
+          <path d="M6 9l6 6 6-6" />
         </svg>
       </button>
       {open && (
-        <div className="absolute right-0 top-full mt-2 bg-[#111] border border-white/10 py-2 px-4 min-w-[160px] z-50">
-          <p className="text-xs text-white/60 mb-2 truncate">{session.user?.name}</p>
-          <Link href="/perfil" onClick={() => setOpen(false)} className="block text-xs text-white/80 hover:text-gold py-1 transition-colors">
-            Mi perfil
-          </Link>
-          <Link href="/pedidos" onClick={() => setOpen(false)} className="block text-xs text-white/80 hover:text-gold py-1 transition-colors">
-            Mis pedidos
+        <div className="absolute right-0 top-full mt-2 bg-white rounded-md shadow-lg py-2 min-w-[160px] z-50">
+          <Link href="/perfil" onClick={() => setOpen(false)} className="block px-4 py-2 text-sm text-black hover:bg-gray-100 transition-colors">
+            Mi Perfil
           </Link>
           <button
             onClick={() => signOut()}
-            className="block text-xs text-white/80 hover:text-red-400 py-1 transition-colors w-full text-left"
+            className="block w-full text-left px-4 py-2 text-sm text-black hover:bg-gray-100 transition-colors"
           >
-            Cerrar sesión
+            Desconectar
           </button>
         </div>
       )}
@@ -120,14 +120,9 @@ export default function Header() {
             )}
           </button>
 
-          {/* CTA Button */}
+          {/* User / Login */}
           {session ? (
-            <Link
-              href="/perfil"
-              className="hidden md:block bg-maroon-light text-white text-xs font-light tracking-[0.2em] uppercase px-6 py-2.5 border border-maroon-light hover:bg-transparent hover:border-white transition-all"
-            >
-              MI PERFIL
-            </Link>
+            <UserDropdown session={session} />
           ) : (
             <Link
               href="/login"
