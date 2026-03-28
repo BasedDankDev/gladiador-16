@@ -63,8 +63,7 @@ export default function RegisterPage() {
 
     await signIn("credentials", { email, password, redirect: false });
     setLoading(false);
-    router.push("/");
-    router.refresh();
+    setStep(3);
   };
 
   return (
@@ -203,6 +202,28 @@ export default function RegisterPage() {
                 ← Volver
               </button>
             </div>
+          </div>
+        ) : (
+          <div className="w-full max-w-md text-center">
+            <Image
+              src="/cool-s-logo.svg"
+              alt="Gladiador 16"
+              width={40}
+              height={52}
+              className="mx-auto mb-8 invert"
+            />
+            <h1 className="text-3xl md:text-4xl font-black tracking-tight uppercase mb-4">
+              ¡BIENVENIDO {name.toUpperCase()}!
+            </h1>
+            <p className="text-white/50 text-sm mb-10">
+              Oficialmente sos parte de la familia más grande y ganadora.
+            </p>
+            <Link
+              href="/perfil"
+              className="inline-block bg-maroon-light text-white text-xs font-medium tracking-[0.2em] uppercase px-10 py-3 rounded-full hover:bg-maroon transition-colors"
+            >
+              Ir a mi perfil
+            </Link>
           </div>
         )}
       </main>
