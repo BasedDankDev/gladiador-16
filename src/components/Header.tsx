@@ -124,12 +124,20 @@ export default function Header() {
           {session ? (
             <UserDropdown session={session} />
           ) : (
-            <Link
-              href="/login"
-              className="hidden md:block bg-maroon-light text-white text-xs font-light tracking-[0.2em] uppercase px-6 py-2.5 border border-maroon-light hover:bg-transparent hover:border-white transition-all"
-            >
-              INICIAR SESIÓN
-            </Link>
+            <div className="hidden md:flex items-center gap-3">
+              <Link
+                href="/login"
+                className="text-white text-xs font-light tracking-[0.15em] hover:text-gold transition-colors"
+              >
+                Ingreso
+              </Link>
+              <Link
+                href="/registro"
+                className="bg-white text-black text-xs font-medium tracking-[0.1em] px-5 py-2 rounded-full hover:bg-white/80 transition-colors"
+              >
+                Registro
+              </Link>
+            </div>
           )}
         </div>
       </div>
