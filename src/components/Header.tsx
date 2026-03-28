@@ -21,6 +21,7 @@ function UserDropdown({ session }: { session: { user?: { name?: string | null; e
   }, []);
 
   const initial = session.user?.name?.charAt(0).toUpperCase() || "?";
+  const avatarUrl = session.user?.image;
 
   return (
     <div className="relative" ref={ref}>
@@ -28,9 +29,13 @@ function UserDropdown({ session }: { session: { user?: { name?: string | null; e
         onClick={() => setOpen(!open)}
         className="flex items-center gap-2 hover:opacity-80 transition-opacity"
       >
-        <div className="w-8 h-8 bg-maroon-light rounded-full flex items-center justify-center text-xs font-bold text-white">
-          {initial}
-        </div>
+        {avatarUrl ? (
+          <img src={avatarUrl} alt="" className="w-8 h-8 rounded-full bg-white/10" />
+        ) : (
+          <div className="w-8 h-8 bg-maroon-light rounded-full flex items-center justify-center text-xs font-bold text-white">
+            {initial}
+          </div>
+        )}
         <span className="hidden md:inline text-sm text-white">{session.user?.name}</span>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className={`transition-transform ${open ? "rotate-180" : ""}`}>
           <path d="M6 9l6 6 6-6" />

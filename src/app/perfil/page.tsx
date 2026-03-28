@@ -60,9 +60,13 @@ export default function PerfilPage() {
           {/* Profile Header */}
           <div className="bg-white/5 border border-white/10 p-8 mb-8">
             <div className="flex items-center gap-6">
-              <div className="w-16 h-16 bg-maroon-light rounded-full flex items-center justify-center text-2xl font-black">
-                {session.user?.name?.charAt(0).toUpperCase()}
-              </div>
+              {session.user?.image ? (
+                <img src={session.user.image} alt="" className="w-16 h-16 rounded-full bg-white/10" />
+              ) : (
+                <div className="w-16 h-16 bg-maroon-light rounded-full flex items-center justify-center text-2xl font-black">
+                  {session.user?.name?.charAt(0).toUpperCase()}
+                </div>
+              )}
               <div>
                 <h1 className="text-2xl font-black tracking-tight uppercase">
                   {session.user?.name}
