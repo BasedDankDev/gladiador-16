@@ -63,7 +63,8 @@ export default function Header() {
                   <circle cx="12" cy="7" r="4" />
                 </svg>
               </button>
-              <div className="absolute right-0 top-full mt-2 bg-[#111] border border-white/10 py-2 px-4 hidden group-hover:block min-w-[160px]">
+              <div className="absolute right-0 top-full pt-2 hidden group-hover:block min-w-[160px]">
+              <div className="bg-[#111] border border-white/10 py-2 px-4">
                 <p className="text-xs text-white/60 mb-2 truncate">{session.user?.name}</p>
                 <Link href="/perfil" className="block text-xs text-white/80 hover:text-gold py-1 transition-colors">
                   Mi perfil
@@ -77,6 +78,7 @@ export default function Header() {
                 >
                   Cerrar sesión
                 </button>
+              </div>
               </div>
             </div>
           ) : (
