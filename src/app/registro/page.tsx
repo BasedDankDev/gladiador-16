@@ -8,18 +8,30 @@ import Header from "@/components/Header";
 import Image from "next/image";
 
 const AVATARS = [
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=Leo&backgroundColor=f5f0eb",
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=Sophia&backgroundColor=f5f0eb",
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=Marcus&backgroundColor=f5f0eb",
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=Valentina&backgroundColor=f5f0eb",
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=Diego&backgroundColor=f5f0eb",
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=Camila&backgroundColor=f5f0eb",
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=Andres&backgroundColor=f5f0eb",
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=Luna&backgroundColor=f5f0eb",
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=Carlos&backgroundColor=f5f0eb",
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=Isabella&backgroundColor=f5f0eb",
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=Mateo&backgroundColor=f5f0eb",
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=Gabriela&backgroundColor=f5f0eb",
+  // Joven hombre
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=JovenCarlos&backgroundColor=b6e3f4&top=shortCurly&facialHair=blank&clotheColor=3c4f5c",
+  // Joven mujer
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=JovenMaria&backgroundColor=ffd5dc&top=longButNotTooLong&facialHair=blank&clotheColor=e6e6e6",
+  // Adulto hombre
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=AdultoDiego&backgroundColor=c0aede&top=shortFlat&facialHair=beardLight&clotheColor=262e33",
+  // Adulta mujer
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=AdultaLaura&backgroundColor=d1f4d1&top=straight02&facialHair=blank&clotheColor=929598",
+  // Adolescente hombre
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=TeenMateo&backgroundColor=ffdfbf&top=dreads01&facialHair=blank&clotheColor=ff5c5c",
+  // Adolescente mujer
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=TeenValeria&backgroundColor=ffd5dc&top=bob&facialHair=blank&clotheColor=65c9ff",
+  // Señor
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=SenorRoberto&backgroundColor=b6e3f4&top=shortWaved&facialHair=beardMedium&clotheColor=3c4f5c&hairColor=c93305",
+  // Señora
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=SenoraMarta&backgroundColor=c0aede&top=straight01&facialHair=blank&clotheColor=25557c",
+  // Niño
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=NinoLucas&backgroundColor=ffdfbf&top=shortRound&facialHair=blank&clotheColor=ff488e",
+  // Niña
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=NinaSofia&backgroundColor=d1f4d1&top=curly&facialHair=blank&clotheColor=a7ffc4",
+  // Adulto joven hombre
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=JovenAndres&backgroundColor=ffd5dc&top=frizzle&facialHair=blank&clotheColor=262e33",
+  // Adulta joven mujer
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=JovenCamila&backgroundColor=b6e3f4&top=dreads02&facialHair=blank&clotheColor=929598",
 ];
 
 export default function RegisterPage() {
