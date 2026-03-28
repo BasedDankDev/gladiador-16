@@ -102,18 +102,6 @@ export default function Header() {
             </svg>
           </button>
 
-          {/* User */}
-          {session ? (
-            <UserDropdown session={session} />
-          ) : (
-            <Link href="/login" aria-label="Cuenta" className="text-white hover:text-gold transition-colors">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            </Link>
-          )}
-
           {/* Cart */}
           <button
             aria-label="Carrito"
@@ -133,12 +121,21 @@ export default function Header() {
           </button>
 
           {/* CTA Button */}
-          <Link
-            href="/#productos"
-            className="hidden md:block bg-maroon-light text-white text-xs font-light tracking-[0.2em] uppercase px-6 py-2.5 border border-maroon-light hover:bg-transparent hover:border-white transition-all"
-          >
-            IR A TIENDA
-          </Link>
+          {session ? (
+            <Link
+              href="/perfil"
+              className="hidden md:block bg-maroon-light text-white text-xs font-light tracking-[0.2em] uppercase px-6 py-2.5 border border-maroon-light hover:bg-transparent hover:border-white transition-all"
+            >
+              MI PERFIL
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              className="hidden md:block bg-maroon-light text-white text-xs font-light tracking-[0.2em] uppercase px-6 py-2.5 border border-maroon-light hover:bg-transparent hover:border-white transition-all"
+            >
+              INICIAR SESIÓN
+            </Link>
+          )}
         </div>
       </div>
     </header>
