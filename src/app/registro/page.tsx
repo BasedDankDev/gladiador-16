@@ -139,7 +139,7 @@ export default function RegisterPage() {
               </Link>
             </p>
           </div>
-        ) : (
+        ) : step === 2 ? (
           <div className="w-full max-w-2xl">
             <p className="text-[10px] text-white/40 uppercase tracking-wider text-center mb-2">
               Paso 2

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useCart } from "@/context/CartContext";
 
-function UserDropdown({ session }: { session: { user?: { name?: string | null; email?: string | null } } }) {
+function UserDropdown({ session }: { session: { user?: { name?: string | null; email?: string | null; image?: string | null } } }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
