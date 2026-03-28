@@ -61,7 +61,7 @@ export default function PerfilPage() {
           <div className="bg-white/5 border border-white/10 p-8 mb-8">
             <div className="flex items-center gap-6">
               {session.user?.image ? (
-                <img src={session.user.image} alt="" className="w-16 h-16 rounded-full bg-white/10" />
+                <span className="text-5xl leading-none">{session.user.image}</span>
               ) : (
                 <div className="w-16 h-16 bg-maroon-light rounded-full flex items-center justify-center text-2xl font-black">
                   {session.user?.name?.charAt(0).toUpperCase()}

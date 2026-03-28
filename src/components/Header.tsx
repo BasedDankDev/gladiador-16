@@ -30,7 +30,7 @@ function UserDropdown({ session }: { session: { user?: { name?: string | null; e
         className="flex items-center gap-2 hover:opacity-80 transition-opacity"
       >
         {avatarUrl ? (
-          <img src={avatarUrl} alt="" className="w-8 h-8 rounded-full bg-white/10" />
+          <span className="text-2xl leading-none">{avatarUrl}</span>
         ) : (
           <div className="w-8 h-8 bg-maroon-light rounded-full flex items-center justify-center text-xs font-bold text-white">
             {initial}

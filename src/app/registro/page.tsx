@@ -8,30 +8,9 @@ import Header from "@/components/Header";
 import Image from "next/image";
 
 const AVATARS = [
-  // Joven hombre
-  "https://api.dicebear.com/7.x/avataaars/svg?seed=JovenCarlos&backgroundColor=b6e3f4&top=shortCurly&facialHair=blank&clotheColor=3c4f5c",
-  // Joven mujer
-  "https://api.dicebear.com/7.x/avataaars/svg?seed=JovenMaria&backgroundColor=ffd5dc&top=longButNotTooLong&facialHair=blank&clotheColor=e6e6e6",
-  // Adulto hombre
-  "https://api.dicebear.com/7.x/avataaars/svg?seed=AdultoDiego&backgroundColor=c0aede&top=shortFlat&facialHair=beardLight&clotheColor=262e33",
-  // Adulta mujer
-  "https://api.dicebear.com/7.x/avataaars/svg?seed=AdultaLaura&backgroundColor=d1f4d1&top=straight02&facialHair=blank&clotheColor=929598",
-  // Adolescente hombre
-  "https://api.dicebear.com/7.x/avataaars/svg?seed=TeenMateo&backgroundColor=ffdfbf&top=dreads01&facialHair=blank&clotheColor=ff5c5c",
-  // Adolescente mujer
-  "https://api.dicebear.com/7.x/avataaars/svg?seed=TeenValeria&backgroundColor=ffd5dc&top=bob&facialHair=blank&clotheColor=65c9ff",
-  // Señor
-  "https://api.dicebear.com/7.x/avataaars/svg?seed=SenorRoberto&backgroundColor=b6e3f4&top=shortWaved&facialHair=beardMedium&clotheColor=3c4f5c&hairColor=c93305",
-  // Señora
-  "https://api.dicebear.com/7.x/avataaars/svg?seed=SenoraMarta&backgroundColor=c0aede&top=straight01&facialHair=blank&clotheColor=25557c",
-  // Niño
-  "https://api.dicebear.com/7.x/avataaars/svg?seed=NinoLucas&backgroundColor=ffdfbf&top=shortRound&facialHair=blank&clotheColor=ff488e",
-  // Niña
-  "https://api.dicebear.com/7.x/avataaars/svg?seed=NinaSofia&backgroundColor=d1f4d1&top=curly&facialHair=blank&clotheColor=a7ffc4",
-  // Adulto joven hombre
-  "https://api.dicebear.com/7.x/avataaars/svg?seed=JovenAndres&backgroundColor=ffd5dc&top=frizzle&facialHair=blank&clotheColor=262e33",
-  // Adulta joven mujer
-  "https://api.dicebear.com/7.x/avataaars/svg?seed=JovenCamila&backgroundColor=b6e3f4&top=dreads02&facialHair=blank&clotheColor=929598",
+  "🐺", "🦁", "🐯", "🦊",
+  "🐻", "🐼", "🦅", "🐲",
+  "🦈", "🐆", "🦉", "🐸",
 ];
 
 export default function RegisterPage() {
@@ -169,27 +148,20 @@ export default function RegisterPage() {
               </div>
             )}
 
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 mb-10">
-              {AVATARS.map((url, i) => (
+            <div className="grid grid-cols-4 sm:grid-cols-6 gap-4 mb-10">
+              {AVATARS.map((emoji, i) => (
                 <button
                   key={i}
-                  onClick={() => setAvatar(url)}
-                  className={`relative bg-white/5 rounded-xl p-3 transition-all ${
-                    avatar === url
-                      ? "ring-2 ring-gold bg-white/10 scale-105"
-                      : "hover:bg-white/10 border border-white/10"
+                  onClick={() => setAvatar(emoji)}
+                  className={`relative aspect-square rounded-xl flex items-center justify-center text-5xl transition-all ${
+                    avatar === emoji
+                      ? "ring-2 ring-gold bg-white/15 scale-105"
+                      : "bg-white/5 hover:bg-white/10 border border-white/10"
                   }`}
                 >
-                  <Image
-                    src={url}
-                    alt={`Avatar ${i + 1}`}
-                    width={120}
-                    height={120}
-                    className="w-full aspect-square rounded-lg"
-                    unoptimized
-                  />
-                  {avatar === url && (
-                    <div className="absolute top-2 right-2 w-5 h-5 bg-gold rounded-full flex items-center justify-center">
+                  {emoji}
+                  {avatar === emoji && (
+                    <div className="absolute top-1.5 right-1.5 w-5 h-5 bg-gold rounded-full flex items-center justify-center">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="3">
                         <path d="M20 6L9 17l-5-5" />
                       </svg>
