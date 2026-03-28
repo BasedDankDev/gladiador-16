@@ -35,9 +35,10 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ id: user.id, name: user.name, email: user.email });
-  } catch {
+  } catch (err) {
+    console.error("Register error:", err);
     return NextResponse.json(
-      { error: "Error al crear la cuenta" },
+      { error: "Error al crear la cuenta", detail: String(err) },
       { status: 500 }
     );
   }
