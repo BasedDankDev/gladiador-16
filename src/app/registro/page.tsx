@@ -8,9 +8,18 @@ import Header from "@/components/Header";
 import Image from "next/image";
 
 const AVATARS = [
-  "🐺", "🦁", "🐯", "🦊",
-  "🐻", "🐼", "🦅", "🐲",
-  "🦈", "🐆", "🦉", "🐸",
+  "/images/avatars/abby.png",
+  "/images/avatars/oscar.png",
+  "/images/avatars/jessie.png",
+  "/images/avatars/ashley.png",
+  "/images/avatars/ai.png",
+  "/images/avatars/tyrone.png",
+  "/images/avatars/steph.png",
+  "/images/avatars/andy.png",
+  "/images/avatars/keiko.png",
+  "/images/avatars/elisa.png",
+  "/images/avatars/elisa2.png",
+  "/images/avatars/matt.png",
 ];
 
 export default function RegisterPage() {
@@ -148,20 +157,26 @@ export default function RegisterPage() {
               </div>
             )}
 
-            <div className="grid grid-cols-4 sm:grid-cols-6 gap-4 mb-10">
-              {AVATARS.map((emoji, i) => (
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 mb-10">
+              {AVATARS.map((url, i) => (
                 <button
                   key={i}
-                  onClick={() => setAvatar(emoji)}
-                  className={`relative aspect-square rounded-xl flex items-center justify-center text-5xl transition-all ${
-                    avatar === emoji
-                      ? "ring-2 ring-gold bg-white/15 scale-105"
-                      : "bg-white/5 hover:bg-white/10 border border-white/10"
+                  onClick={() => setAvatar(url)}
+                  className={`relative bg-white/5 rounded-xl p-3 transition-all ${
+                    avatar === url
+                      ? "ring-2 ring-gold bg-white/10 scale-105"
+                      : "hover:bg-white/10 border border-white/10"
                   }`}
                 >
-                  {emoji}
-                  {avatar === emoji && (
-                    <div className="absolute top-1.5 right-1.5 w-5 h-5 bg-gold rounded-full flex items-center justify-center">
+                  <Image
+                    src={url}
+                    alt={`Avatar ${i + 1}`}
+                    width={120}
+                    height={120}
+                    className="w-full aspect-square object-contain"
+                  />
+                  {avatar === url && (
+                    <div className="absolute top-2 right-2 w-5 h-5 bg-gold rounded-full flex items-center justify-center">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="3">
                         <path d="M20 6L9 17l-5-5" />
                       </svg>
