@@ -74,81 +74,94 @@ const navLinks = [
 export default function Header() {
   const { data: session } = useSession();
   const { itemCount, setIsOpen } = useCart();
+  const [hovered, setHovered] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10">
-      <div className="flex items-center justify-between px-6 py-3">
-        {/* Logo / Crest */}
-        <Link href="/" className="relative z-10">
-          <Image
-            src="/cool-s-logo.svg"
-            alt="Gladiador 16"
-            width={28}
-            height={38}
-            className="invert"
-          />
-        </Link>
+    <header className="fixed top-0 left-0 right-0 z-50">
+      {/* Announcement bar */}
+      <div className="bg-black text-white text-[10px] md:text-[11px] font-light tracking-[0.15em] uppercase text-center py-2 border-b border-white/10">
+        Envio gratis en pedidos mayores a ₡25 000
+      </div>
 
-        {/* Navigation */}
-        <nav className="hidden md:flex items-center gap-10">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className="text-white text-xs font-light tracking-[0.25em] uppercase hover:text-gold transition-colors"
+      {/* Main nav — transparent by default, solid black on hover */}
+      <div
+        className={`transition-colors duration-300 border-b border-white/10 ${hovered ? "bg-black" : "bg-transparent"}`}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <div className="flex items-center justify-between px-6 md:px-10 py-3">
+          {/* Logo / Crest */}
+          <Link href="/" className="relative z-10">
+            <Image
+              src="/cool-s-logo.svg"
+              alt="Gladiador 16"
+              width={28}
+              height={38}
+              className="invert"
+            />
+          </Link>
+
+          {/* Navigation — centered */}
+          <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="text-white text-[11px] font-light tracking-[0.2em] uppercase hover:text-gold transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Right icons + CTA */}
+          <div className="flex items-center gap-5">
+            {/* Search */}
+            <button aria-label="Buscar" className="text-white hover:text-gold transition-colors">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="11" cy="11" r="8" />
+                <path d="M21 21l-4.35-4.35" />
+              </svg>
+            </button>
+
+            {/* Cart */}
+            <button
+              aria-label="Carrito"
+              onClick={() => setIsOpen(true)}
+              className="text-white hover:text-gold transition-colors relative"
             >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+              </svg>
+              {itemCount > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-gold text-black text-[9px] font-bold rounded-full flex items-center justify-center">
+                  {itemCount}
+                </span>
+              )}
+            </button>
 
-        {/* Right icons + CTA */}
-        <div className="flex items-center gap-5">
-          {/* Search */}
-          <button aria-label="Buscar" className="text-white hover:text-gold transition-colors">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <circle cx="11" cy="11" r="8" />
-              <path d="M21 21l-4.35-4.35" />
-            </svg>
-          </button>
-
-          {/* Cart */}
-          <button
-            aria-label="Carrito"
-            onClick={() => setIsOpen(true)}
-            className="text-white hover:text-gold transition-colors relative"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <path d="M16 10a4 4 0 0 1-8 0" />
-            </svg>
-            {itemCount > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-gold text-black text-[9px] font-bold rounded-full flex items-center justify-center">
-                {itemCount}
-              </span>
+            {/* User / Login */}
+            {session ? (
+              <UserDropdown session={session} />
+            ) : (
+              <div className="hidden md:flex items-center gap-3">
+                <Link
+                  href="/login"
+                  className="text-white text-xs font-light tracking-[0.15em] hover:text-gold transition-colors"
+                >
+                  Ingreso
+                </Link>
+                <Link
+                  href="/registro"
+                  className="bg-white text-black text-xs font-medium tracking-[0.1em] px-5 py-2 rounded-full hover:bg-white/80 transition-colors"
+                >
+                  Registro
+                </Link>
+              </div>
             )}
-          </button>
-
-          {/* User / Login */}
-          {session ? (
-            <UserDropdown session={session} />
-          ) : (
-            <div className="hidden md:flex items-center gap-3">
-              <Link
-                href="/login"
-                className="text-white text-xs font-light tracking-[0.15em] hover:text-gold transition-colors"
-              >
-                Ingreso
-              </Link>
-              <Link
-                href="/registro"
-                className="bg-white text-black text-xs font-medium tracking-[0.1em] px-5 py-2 rounded-full hover:bg-white/80 transition-colors"
-              >
-                Registro
-              </Link>
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </header>

@@ -21,23 +21,25 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/40" />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
-        {/* GLADIADOR - solid white */}
-        <h1 className="text-[8vw] md:text-[10vw] font-black tracking-tighter leading-[0.9] uppercase">
-          GLADIADOR
-        </h1>
-        {/* 16 - outline effect */}
-        <h1 className="text-[8vw] md:text-[10vw] font-black tracking-tighter leading-[0.9] uppercase text-outline">
-          16
-        </h1>
+      <div className="relative z-10 flex flex-col justify-end h-full px-6 md:px-12 pb-8 md:pb-12">
+        {/* Tagline + EST row */}
+        <div className="flex justify-between items-end mb-3">
+          <p className="text-[10px] md:text-xs font-light tracking-[0.25em] uppercase text-white/70 leading-relaxed">
+            Ropa deportiva de elite<br />
+            San Jose, Costa Rica
+          </p>
+          <p className="text-[10px] md:text-xs font-light tracking-[0.25em] uppercase text-white/70">
+            EST. 2024
+          </p>
+        </div>
 
-        {/* Tagline */}
-        <p className="mt-auto mb-8 text-sm font-light tracking-wider text-white/70 absolute bottom-24 left-8">
-          Ropa deportiva de elite — San Jose, Costa Rica
-        </p>
+        {/* Big brand name — bottom, full width */}
+        <h1 className="text-[15vw] md:text-[13vw] font-black tracking-tighter leading-[0.85] uppercase text-white">
+          GLADIADOR <span className="text-outline">16</span>
+        </h1>
 
         {/* CTA Buttons */}
-        <div className="absolute bottom-8 right-8 flex gap-4">
+        <div className="flex gap-4 mt-6">
           <Link
             href="#productos"
             className="bg-maroon-light text-white text-xs font-light tracking-[0.2em] uppercase px-8 py-3 hover:bg-maroon transition-colors"
