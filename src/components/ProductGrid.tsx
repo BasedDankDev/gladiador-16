@@ -3,42 +3,55 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const products = [
+const products: {
+  name: string;
+  brand: string;
+  price: string;
+  variants: string;
+  image: string;
+  hoverImage?: string;
+  badge: string;
+  slug: string;
+}[] = [
   {
-    name: "CAMISETA BASICA NEGRA",
+    name: "SLIM FIT DRAGON S",
     brand: "GLADIADOR 16",
     price: "12 500",
     variants: "2 COLORES, 5 TALLAS",
-    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=600&fit=crop",
+    image: "/images/products/img-15.png",
+    hoverImage: "/images/products/img-16.png",
     badge: "ENVIO RAPIDO",
-    slug: "camiseta-basica-negra",
+    slug: "slim-fit-dragon-s",
   },
   {
-    name: "CAMISETA BASICA BLANCA",
+    name: "SLIM FIT PAPA MORADO",
     brand: "GLADIADOR 16",
     price: "12 500",
     variants: "2 COLORES, 5 TALLAS",
-    image: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&h=600&fit=crop",
+    image: "/images/products/img-18.png",
+    hoverImage: "/images/products/img-14.png",
     badge: "ENVIO RAPIDO",
-    slug: "camiseta-basica-blanca",
+    slug: "slim-fit-papa-morado",
   },
   {
-    name: "HOODIE OVERSIZE",
+    name: "DRY FIT GOKU S",
     brand: "GLADIADOR 16",
     price: "24 500",
     variants: "2 COLORES, 4 TALLAS",
-    image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&h=600&fit=crop",
+    image: "/images/products/img-24.png",
+    hoverImage: "/images/products/img-21.png",
     badge: "ENVIO RAPIDO",
-    slug: "hoodie-oversize",
+    slug: "dry-fit-goku-s",
   },
   {
-    name: "PANTALON CARGO",
+    name: "DRY FIT DRACARYS",
     brand: "GLADIADOR 16",
     price: "19 500",
     variants: "2 COLORES, 5 TALLAS",
-    image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=500&h=600&fit=crop",
+    image: "/images/products/img-25.png",
+    hoverImage: "/images/products/img-26.png",
     badge: "ENVIO RAPIDO",
-    slug: "pantalon-cargo",
+    slug: "dry-fit-dracarys",
   },
   {
     name: "JOGGER DEPORTIVO",
@@ -137,14 +150,25 @@ export default function ProductGrid() {
                 href={`/producto/${product.slug}`}
                 className="group"
               >
-                <div className="relative overflow-hidden bg-gray-50 aspect-square">
+                <div className="relative overflow-hidden bg-gray-50 aspect-[3/4]">
                   <Image
                     src={product.image}
                     alt={product.name}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className={`object-contain transition-all duration-300 ${
+                      product.hoverImage ? "group-hover:opacity-0" : "group-hover:scale-105"
+                    }`}
                     sizes="(max-width: 768px) 50vw, 22vw"
                   />
+                  {product.hoverImage && (
+                    <Image
+                      src={product.hoverImage}
+                      alt={product.name}
+                      fill
+                      className="object-contain opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      sizes="(max-width: 768px) 50vw, 22vw"
+                    />
+                  )}
                   {/* Badge */}
                   <span
                     className={`absolute top-2 left-2 text-[9px] font-normal tracking-wide px-2 py-0.5 ${

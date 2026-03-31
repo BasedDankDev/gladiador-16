@@ -46,6 +46,11 @@ function UserDropdown({ session }: { session: { user?: { name?: string | null; e
           <Link href="/perfil" onClick={() => setOpen(false)} className="block px-4 py-2 text-sm text-black hover:bg-gray-100 transition-colors">
             Mi Perfil
           </Link>
+          {(process.env.NEXT_PUBLIC_ADMIN_EMAILS || "").split(",").map(e => e.trim().toLowerCase()).includes(session.user?.email?.toLowerCase() || "") && (
+            <Link href="/admin" onClick={() => setOpen(false)} className="block px-4 py-2 text-sm text-black hover:bg-gray-100 transition-colors">
+              Panel Admin
+            </Link>
+          )}
           <button
             onClick={() => signOut()}
             className="block w-full text-left px-4 py-2 text-sm text-black hover:bg-gray-100 transition-colors"

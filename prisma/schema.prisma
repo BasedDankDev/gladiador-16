@@ -26,6 +26,7 @@ model Product {
   brand       String      @default("GLADIADOR 16")
   price       Int
   image       String
+  images      String?
   badge       String?
   variants    String?
   category    String      @default("general")

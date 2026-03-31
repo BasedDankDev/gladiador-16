@@ -13,6 +13,7 @@ interface Product {
   brand: string;
   price: number;
   image: string;
+  images: string | null;
   badge: string | null;
   variants: string | null;
   inStock: boolean;
@@ -23,6 +24,7 @@ const SIZES = ["XS", "S", "M", "L", "XL"];
 export default function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   const [product, setProduct] = useState<Product | null>(null);
+  const [lightbox, setLightbox] = useState<number | null>(null);
   const [selectedSize, setSelectedSize] = useState("M");
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
@@ -48,6 +50,12 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
     );
   }
 
+  const allImages: string[] = product
+    ? product.images
+      ? JSON.parse(product.images)
+      : [product.image]
+    : [];
+
   const handleAddToCart = () => {
     addItem({
       productId: product.id,
@@ -66,25 +74,33 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
     <>
       <Header />
       <main className="min-h-screen bg-black pt-24 pb-16">
-        <div className="max-w-5xl mx-auto px-6 md:px-16">
-          <div className="grid md:grid-cols-2 gap-10">
-            {/* Image */}
-            <div className="relative aspect-square bg-white/5">
-              <Image
-                src={product.image}
-                alt={product.name}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority
-              />
-              {product.badge && (
-                <span className={`absolute top-3 left-3 text-[9px] font-medium tracking-wider uppercase px-2.5 py-1 ${
-                  product.badge === "AGOTADO" ? "bg-maroon-light text-white" : "bg-gold/90 text-black"
-                }`}>
-                  {product.badge}
-                </span>
-              )}
+        <div className="max-w-6xl mx-auto px-6 md:px-16">
+          <div className="grid md:grid-cols-[1fr_400px] gap-10">
+            {/* Image Gallery Grid */}
+            <div className="grid grid-cols-2 gap-2">
+              {allImages.map((img, i) => (
+                <button
+                  key={i}
+                  onClick={() => setLightbox(i)}
+                  className="relative aspect-[3/4] bg-white/5 cursor-zoom-in"
+                >
+                  <Image
+                    src={img}
+                    alt={`${product.name} ${i + 1}`}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 50vw, 30vw"
+                    priority={i === 0}
+                  />
+                  {i === 0 && product.badge && (
+                    <span className={`absolute top-3 left-3 text-[9px] font-medium tracking-wider uppercase px-2.5 py-1 ${
+                      product.badge === "AGOTADO" ? "bg-maroon-light text-white" : "bg-gold/90 text-black"
+                    }`}>
+                      {product.badge}
+                    </span>
+                  )}
+                </button>
+              ))}
             </div>
 
             {/* Details */}
@@ -162,6 +178,64 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
           </div>
         </div>
       </main>
+      {/* Fullscreen Lightbox */}
+      {lightbox !== null && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
+          onClick={() => setLightbox(null)}
+        >
+          {/* Close button */}
+          <button
+            onClick={() => setLightbox(null)}
+            className="absolute top-6 right-6 text-white/60 hover:text-white transition-colors z-10"
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+
+          {/* Previous arrow */}
+          {allImages.length > 1 && (
+            <button
+              onClick={(e) => { e.stopPropagation(); setLightbox((lightbox - 1 + allImages.length) % allImages.length); }}
+              className="absolute left-4 md:left-8 text-white/60 hover:text-white transition-colors z-10"
+            >
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+          )}
+
+          {/* Full-size image */}
+          <div className="relative w-[90vw] h-[90vh]" onClick={(e) => e.stopPropagation()}>
+            <Image
+              src={allImages[lightbox]}
+              alt={`${product.name} ${lightbox + 1}`}
+              fill
+              className="object-contain"
+              sizes="90vw"
+              priority
+            />
+          </div>
+
+          {/* Next arrow */}
+          {allImages.length > 1 && (
+            <button
+              onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % allImages.length); }}
+              className="absolute right-4 md:right-8 text-white/60 hover:text-white transition-colors z-10"
+            >
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          )}
+
+          {/* Image counter */}
+          <p className="absolute bottom-6 text-white/40 text-xs tracking-wider">
+            {lightbox + 1} / {allImages.length}
+          </p>
+        </div>
+      )}
       <Footer />
     </>
   );

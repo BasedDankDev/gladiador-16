@@ -18,8 +18,6 @@ const AVATARS = [
   "/images/avatars/andy.png",
   "/images/avatars/keiko.png",
   "/images/avatars/elisa.png",
-  "/images/avatars/elisa2.png",
-  "/images/avatars/matt.png",
 ];
 
 export default function RegisterPage() {
@@ -157,7 +155,7 @@ export default function RegisterPage() {
               </div>
             )}
 
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 mb-10">
+            <div className="grid grid-cols-3 sm:grid-cols-5 gap-4 mb-10">
               {AVATARS.map((url, i) => (
                 <button
                   key={i}
