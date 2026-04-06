@@ -36,19 +36,27 @@ model Product {
 }
 
 model Order {
-  id              String      @id @default(cuid())
-  userId          String
-  user            User        @relation(fields: [userId], references: [id])
-  status          String      @default("pendiente")
-  total           Int
-  shippingName    String
-  shippingPhone   String
-  shippingAddress String
-  paymentMethod   String      @default("sinpe")
-  sinpeRef        String?
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
-  items           OrderItem[]
+  id               String      @id @default(cuid())
+  userId           String
+  user             User        @relation(fields: [userId], references: [id])
+  status           String      @default("pendiente")
+  total            Int
+  shippingName     String
+  shippingLastName String      @default("")
+  shippingPhone    String
+  shippingEmail    String      @default("")
+  shippingAddress  String
+  shippingAddress2 String?
+  shippingCity     String?
+  shippingProvince String?
+  shippingMethod   String      @default("envio")
+  shippingCost     Int         @default(0)
+  paymentMethod    String      @default("transferencia")
+  sinpeRef         String?
+  notes            String?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  items            OrderItem[]
 }
 
 model OrderItem {

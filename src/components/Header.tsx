@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { useCart } from "@/context/CartContext";
 
@@ -66,7 +67,7 @@ function UserDropdown({ session }: { session: { user?: { name?: string | null; e
 const navLinks = [
   { label: "INICIO", href: "/" },
   { label: "TIENDA", href: "/#productos" },
-  { label: "MUJER", href: "/#productos" },
+  { label: "MUJER", href: "/#mujer" },
   { label: "HOMBRE", href: "/#productos" },
   { label: "CONTACTO", href: "/#productos" },
 ];
@@ -74,7 +75,22 @@ const navLinks = [
 export default function Header() {
   const { data: session } = useSession();
   const { itemCount, setIsOpen } = useCart();
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [hovered, setHovered] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 100);
+    }
+    window.addEventListener("scroll", onScroll);
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Only transparent on homepage when at the top and not hovered
+  const showTransparent = isHome && !scrolled && !hovered;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -83,9 +99,9 @@ export default function Header() {
         Envio gratis en pedidos mayores a ₡25 000
       </div>
 
-      {/* Main nav — transparent by default, solid black on hover */}
+      {/* Main nav */}
       <div
-        className={`transition-colors duration-300 border-b border-white/10 ${hovered ? "bg-black" : "bg-transparent"}`}
+        className={`transition-colors duration-300 border-b border-white/10 ${showTransparent ? "bg-transparent" : "bg-black"}`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { sendOrderConfirmationEmail } from "@/lib/email";
 
 export async function POST(req: Request) {
   try {
@@ -9,7 +10,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Debés iniciar sesión" }, { status: 401 });
     }
 
-    const { items, shippingName, shippingPhone, shippingAddress } = await req.json();
+    const body = await req.json();
+    const { items, shippingName, shippingPhone, shippingAddress } = body;
 
     if (!items?.length || !shippingName || !shippingPhone || !shippingAddress) {
       return NextResponse.json({ error: "Datos incompletos" }, { status: 400 });
@@ -35,17 +37,51 @@ export async function POST(req: Request) {
       };
     });
 
+    const shippingCost = Number(body.shippingCost) || 0;
+
     const order = await prisma.order.create({
       data: {
         userId: session.user.id,
-        total,
+        total: total + shippingCost,
         shippingName,
+        shippingLastName: body.shippingLastName || "",
         shippingPhone,
+        shippingEmail: body.shippingEmail || "",
         shippingAddress,
+        shippingAddress2: body.shippingAddress2 || null,
+        shippingCity: body.shippingCity || null,
+        shippingProvince: body.shippingProvince || null,
+        shippingMethod: body.shippingMethod || "envio",
+        shippingCost,
+        notes: body.notes || null,
         items: { create: orderItems },
       },
       include: { items: { include: { product: true } } },
     });
+
+    // Send confirmation email (don't block the response)
+    const customerEmail = body.shippingEmail || session.user.email;
+    if (customerEmail) {
+      sendOrderConfirmationEmail({
+        orderId: order.id,
+        customerName: `${shippingName} ${body.shippingLastName || ""}`.trim(),
+        customerEmail,
+        items: order.items.map((i) => ({
+          name: i.product.name,
+          quantity: i.quantity,
+          price: i.price,
+          size: i.size,
+        })),
+        subtotal: total,
+        shippingCost,
+        total: total + shippingCost,
+        shippingMethod: body.shippingMethod || "envio",
+        shippingAddress,
+        shippingCity: body.shippingCity || null,
+        shippingProvince: body.shippingProvince || null,
+        shippingPhone,
+      }).catch(console.error);
+    }
 
     return NextResponse.json(order);
   } catch {

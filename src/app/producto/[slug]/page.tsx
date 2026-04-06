@@ -2,6 +2,7 @@
 
 import { useState, useEffect, use } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useCart } from "@/context/CartContext";
@@ -16,6 +17,7 @@ interface Product {
   images: string | null;
   badge: string | null;
   variants: string | null;
+  category: string;
   inStock: boolean;
 }
 
@@ -24,6 +26,8 @@ const SIZES = ["XS", "S", "M", "L", "XL"];
 export default function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   const [product, setProduct] = useState<Product | null>(null);
+  const [related, setRelated] = useState<Product[]>([]);
+  const [selectedImage, setSelectedImage] = useState(0);
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [selectedSize, setSelectedSize] = useState("M");
   const [quantity, setQuantity] = useState(1);
@@ -35,7 +39,14 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
       .then((r) => r.json())
       .then((products: Product[]) => {
         const found = products.find((p) => p.slug === slug);
-        if (found) setProduct(found);
+        if (found) {
+          setProduct(found);
+          // Get related products: same category first, then others, excluding current
+          const sameCategory = products.filter((p) => p.slug !== slug && p.category === found.category);
+          const others = products.filter((p) => p.slug !== slug && p.category !== found.category);
+          setRelated([...sameCategory, ...others].slice(0, 5));
+        }
+        setSelectedImage(0);
       });
   }, [slug]);
 
@@ -50,11 +61,9 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
     );
   }
 
-  const allImages: string[] = product
-    ? product.images
-      ? JSON.parse(product.images)
-      : [product.image]
-    : [];
+  const allImages: string[] = product.images
+    ? JSON.parse(product.images)
+    : [product.image];
 
   const handleAddToCart = () => {
     addItem({
@@ -74,36 +83,102 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
     <>
       <Header />
       <main className="min-h-screen bg-black pt-24 pb-16">
-        <div className="max-w-6xl mx-auto px-6 md:px-16">
-          <div className="grid md:grid-cols-[1fr_400px] gap-10">
-            {/* Image Gallery Grid */}
-            <div className="grid grid-cols-2 gap-2">
+        <div className="max-w-7xl mx-auto px-4 md:px-10">
+          <div className="grid grid-cols-1 md:grid-cols-[80px_1fr_380px] gap-4 md:gap-6">
+
+            {/* Left — Thumbnail strip */}
+            <div className="hidden md:flex flex-col gap-2 overflow-y-auto max-h-[600px] pr-1">
               {allImages.map((img, i) => (
                 <button
                   key={i}
-                  onClick={() => setLightbox(i)}
-                  className="relative aspect-[3/4] bg-white/5 cursor-zoom-in"
+                  onClick={() => setSelectedImage(i)}
+                  className={`relative aspect-square w-[72px] shrink-0 border-2 transition-colors overflow-hidden ${
+                    selectedImage === i
+                      ? "border-gold"
+                      : "border-white/10 hover:border-white/30"
+                  }`}
                 >
                   <Image
                     src={img}
                     alt={`${product.name} ${i + 1}`}
                     fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 50vw, 30vw"
-                    priority={i === 0}
+                    className="object-cover"
+                    sizes="72px"
                   />
-                  {i === 0 && product.badge && (
-                    <span className={`absolute top-3 left-3 text-[9px] font-medium tracking-wider uppercase px-2.5 py-1 ${
-                      product.badge === "AGOTADO" ? "bg-maroon-light text-white" : "bg-gold/90 text-black"
-                    }`}>
-                      {product.badge}
-                    </span>
-                  )}
                 </button>
               ))}
             </div>
 
-            {/* Details */}
+            {/* Center — Main image */}
+            <div className="relative">
+              <button
+                onClick={() => setLightbox(selectedImage)}
+                className="relative w-full aspect-[3/4] bg-white/5 cursor-zoom-in block"
+              >
+                <Image
+                  src={allImages[selectedImage]}
+                  alt={product.name}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                />
+                {product.badge && (
+                  <span className={`absolute top-4 left-4 text-[9px] font-medium tracking-wider uppercase px-2.5 py-1 ${
+                    product.badge === "AGOTADO" ? "bg-maroon-light text-white" : "bg-gold/90 text-black"
+                  }`}>
+                    {product.badge}
+                  </span>
+                )}
+              </button>
+
+              {/* Prev / Next arrows on main image */}
+              {allImages.length > 1 && (
+                <>
+                  <button
+                    onClick={() => setSelectedImage((selectedImage - 1 + allImages.length) % allImages.length)}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/40 hover:bg-black/70 text-white/70 hover:text-white flex items-center justify-center transition-colors"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => setSelectedImage((selectedImage + 1) % allImages.length)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/40 hover:bg-black/70 text-white/70 hover:text-white flex items-center justify-center transition-colors"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M9 18l6-6-6-6" />
+                    </svg>
+                  </button>
+                </>
+              )}
+
+              {/* Mobile thumbnail row */}
+              <div className="flex md:hidden gap-2 mt-3 overflow-x-auto pb-2">
+                {allImages.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSelectedImage(i)}
+                    className={`relative w-16 h-16 shrink-0 border-2 transition-colors overflow-hidden ${
+                      selectedImage === i
+                        ? "border-gold"
+                        : "border-white/10 hover:border-white/30"
+                    }`}
+                  >
+                    <Image
+                      src={img}
+                      alt={`${product.name} ${i + 1}`}
+                      fill
+                      className="object-cover"
+                      sizes="64px"
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Right — Product details */}
             <div className="flex flex-col">
               <p className="text-[10px] text-white/40 tracking-[0.2em] uppercase">{product.brand}</p>
               <h1 className="text-2xl font-black tracking-tight uppercase mt-1">{product.name}</h1>
@@ -156,15 +231,20 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
               <button
                 onClick={handleAddToCart}
                 disabled={!product.inStock}
-                className={`mt-8 w-full text-xs font-medium tracking-[0.2em] uppercase py-4 transition-colors ${
+                className={`mt-8 w-full text-xs font-bold tracking-[0.2em] uppercase py-4 rounded-lg flex items-center justify-center gap-2 transition-colors ${
                   !product.inStock
                     ? "bg-white/10 text-white/30 cursor-not-allowed"
                     : added
                     ? "bg-green-600 text-white"
-                    : "bg-maroon-light text-white hover:bg-maroon"
+                    : "bg-gold text-black hover:bg-gold/80"
                 }`}
               >
-                {!product.inStock ? "AGOTADO" : added ? "¡AGREGADO AL CARRITO!" : "AGREGAR AL CARRITO"}
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+                {!product.inStock ? "AGOTADO" : added ? "AGREGADO AL CARRITO!" : "AGREGAR AL CARRITO"}
               </button>
 
               {/* Shipping note */}
@@ -172,19 +252,79 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
-                Envío a todo Costa Rica · Pago por SINPE Móvil
+                Envio a todo Costa Rica · Pago por SINPE Movil
+              </div>
+
+              {/* Divider */}
+              <div className="border-t border-white/10 mt-8 pt-6 space-y-4">
+                <div className="flex items-center gap-3 text-[11px] text-white/40">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  Slim Fit · Hombre y Mujer
+                </div>
+                <div className="flex items-center gap-3 text-[11px] text-white/40">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <rect x="1" y="3" width="15" height="13" rx="2" />
+                    <path d="M16 8h4l3 3v5a2 2 0 01-2 2h-1" />
+                    <circle cx="5.5" cy="18.5" r="2.5" />
+                    <circle cx="18.5" cy="18.5" r="2.5" />
+                  </svg>
+                  Envio gratis en pedidos mayores a ₡25 000
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Podria Interesarte */}
+        {related.length > 0 && (
+          <div className="max-w-7xl mx-auto px-4 md:px-10 mt-20 mb-16">
+            <h2 className="text-2xl md:text-3xl font-black italic text-white tracking-tight mb-8">
+              Podria Interesarte
+            </h2>
+            <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+              {related.map((item) => (
+                <Link
+                  key={item.id}
+                  href={`/producto/${item.slug}`}
+                  className="group shrink-0 w-[60vw] sm:w-[40vw] md:w-[calc(20%-13px)]"
+                >
+                  <div className="relative overflow-hidden bg-white/5 aspect-[3/4]">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      className="object-contain group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 640px) 60vw, (max-width: 768px) 40vw, 20vw"
+                    />
+                    {item.badge && (
+                      <span className={`absolute top-3 left-3 text-[9px] font-medium tracking-wider uppercase px-2.5 py-1 ${
+                        item.badge === "AGOTADO" ? "bg-maroon-light text-white" : "bg-gold/90 text-black"
+                      }`}>
+                        {item.badge}
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-3">
+                    <p className="text-[10px] text-white/30 tracking-[0.15em] uppercase">{item.brand}</p>
+                    <h3 className="text-sm text-white/80 font-medium mt-0.5 group-hover:text-white transition-colors">{item.name}</h3>
+                    <p className="text-sm font-bold text-white mt-1">₡{item.price.toLocaleString()},00</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </main>
+
       {/* Fullscreen Lightbox */}
       {lightbox !== null && (
         <div
           className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
           onClick={() => setLightbox(null)}
         >
-          {/* Close button */}
           <button
             onClick={() => setLightbox(null)}
             className="absolute top-6 right-6 text-white/60 hover:text-white transition-colors z-10"
@@ -194,19 +334,27 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
             </svg>
           </button>
 
-          {/* Previous arrow */}
           {allImages.length > 1 && (
-            <button
-              onClick={(e) => { e.stopPropagation(); setLightbox((lightbox - 1 + allImages.length) % allImages.length); }}
-              className="absolute left-4 md:left-8 text-white/60 hover:text-white transition-colors z-10"
-            >
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-            </button>
+            <>
+              <button
+                onClick={(e) => { e.stopPropagation(); const next = (lightbox - 1 + allImages.length) % allImages.length; setLightbox(next); setSelectedImage(next); }}
+                className="absolute left-4 md:left-8 text-white/60 hover:text-white transition-colors z-10"
+              >
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+              <button
+                onClick={(e) => { e.stopPropagation(); const next = (lightbox + 1) % allImages.length; setLightbox(next); setSelectedImage(next); }}
+                className="absolute right-4 md:right-8 text-white/60 hover:text-white transition-colors z-10"
+              >
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </button>
+            </>
           )}
 
-          {/* Full-size image */}
           <div className="relative w-[90vw] h-[90vh]" onClick={(e) => e.stopPropagation()}>
             <Image
               src={allImages[lightbox]}
@@ -218,19 +366,6 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
             />
           </div>
 
-          {/* Next arrow */}
-          {allImages.length > 1 && (
-            <button
-              onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % allImages.length); }}
-              className="absolute right-4 md:right-8 text-white/60 hover:text-white transition-colors z-10"
-            >
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </button>
-          )}
-
-          {/* Image counter */}
           <p className="absolute bottom-6 text-white/40 text-xs tracking-wider">
             {lightbox + 1} / {allImages.length}
           </p>

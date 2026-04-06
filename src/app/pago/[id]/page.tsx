@@ -4,20 +4,41 @@ import { useState, useEffect, use } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
+import Link from "next/link";
 
-const SINPE_PHONE = "8888-8888";
-const SINPE_NAME = "Gladiador 16 S.A.";
+interface OrderData {
+  id: string;
+  total: number;
+  status: string;
+  shippingName: string;
+  shippingLastName: string;
+  shippingPhone: string;
+  shippingEmail: string;
+  shippingAddress: string;
+  shippingAddress2: string | null;
+  shippingCity: string | null;
+  shippingProvince: string | null;
+  shippingMethod: string;
+  shippingCost: number;
+  paymentMethod: string;
+  notes: string | null;
+  createdAt: string;
+  items: {
+    id: string;
+    quantity: number;
+    price: number;
+    size: string | null;
+    product: { name: string; image: string };
+  }[];
+}
 
 export default function PagoPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const { data: session } = useSession();
   const router = useRouter();
 
-  const [order, setOrder] = useState<{ id: string; total: number; status: string } | null>(null);
-  const [sinpeRef, setSinpeRef] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState("");
+  const [order, setOrder] = useState<OrderData | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("/api/orders")
@@ -25,7 +46,9 @@ export default function PagoPage({ params }: { params: Promise<{ id: string }> }
       .then((orders) => {
         const found = orders.find?.((o: { id: string }) => o.id === id);
         if (found) setOrder(found);
-      });
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, [id]);
 
   if (!session) {
@@ -33,153 +56,175 @@ export default function PagoPage({ params }: { params: Promise<{ id: string }> }
     return null;
   }
 
-  const handleConfirm = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-
-    const res = await fetch(`/api/orders/${id}/sinpe`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sinpeRef }),
-    });
-
-    setLoading(false);
-
-    if (!res.ok) {
-      const data = await res.json();
-      setError(data.error);
-      return;
-    }
-
-    setSuccess(true);
-  };
-
-  if (success) {
+  if (loading) {
     return (
       <>
         <Header />
-        <main className="min-h-screen bg-black flex items-center justify-center px-4 pt-20">
-          <div className="text-center max-w-md">
-            <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>
-            </div>
-            <h1 className="text-2xl font-black uppercase mb-3">¡PAGO CONFIRMADO!</h1>
-            <p className="text-white/50 text-sm mb-2">
-              Tu comprobante SINPE Móvil ha sido recibido.
-            </p>
-            <p className="text-white/50 text-sm mb-6">
-              Referencia: <span className="text-gold">{sinpeRef}</span>
-            </p>
-            <p className="text-white/40 text-xs mb-8">
-              Verificaremos tu pago y te enviaremos una confirmación. Tu pedido será procesado en las próximas 24 horas.
-            </p>
-            <button
-              onClick={() => router.push("/")}
-              className="bg-maroon-light text-white text-xs tracking-[0.2em] uppercase px-8 py-3 hover:bg-maroon transition-colors"
-            >
-              VOLVER AL INICIO
-            </button>
-          </div>
+        <main className="min-h-screen bg-cream text-black flex items-center justify-center pt-20">
+          <p className="text-black/40">Cargando...</p>
         </main>
       </>
     );
   }
 
+  if (!order) {
+    return (
+      <>
+        <Header />
+        <main className="min-h-screen bg-cream text-black flex items-center justify-center pt-20">
+          <p className="text-black/40">Orden no encontrada.</p>
+        </main>
+      </>
+    );
+  }
+
+  const subtotal = order.items.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  const orderDate = new Date(order.createdAt).toLocaleDateString("es-CR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-black pt-24 pb-16 px-4">
-        <div className="max-w-lg mx-auto">
-          <h1 className="text-2xl font-black tracking-tight uppercase mb-2">PAGO SINPE MÓVIL</h1>
-          <p className="text-white/40 text-sm mb-8">Completá tu pago siguiendo estos pasos.</p>
+      <main className="min-h-screen bg-cream text-black pt-20 pb-16">
+        {/* Progress bar */}
+        <div className="bg-black text-white text-center py-3 mb-10">
+          <div className="flex items-center justify-center gap-4 text-[10px] tracking-[0.2em] uppercase">
+            <span className="text-white/50">Shopping Cart</span>
+            <span className="text-white/30">→</span>
+            <span className="text-white/50">Checkout</span>
+            <span className="text-white/30">→</span>
+            <span className="font-bold">Order Complete</span>
+          </div>
+        </div>
 
-          {error && (
-            <div className="bg-red-500/10 border border-red-500/30 text-red-400 text-sm px-4 py-3 mb-6">
-              {error}
+        <div className="max-w-3xl mx-auto px-4 md:px-8">
+          {/* Thank you box */}
+          <div className="border-2 border-dashed border-maroon-light/40 rounded-xl text-center py-6 mb-10">
+            <p className="text-black text-lg md:text-xl font-medium">Gracias. Tu pedido ha sido recibido.</p>
+          </div>
+
+          {/* Order summary row */}
+          <div className="bg-white rounded-2xl border border-black/10 shadow-sm grid grid-cols-2 md:grid-cols-5 divide-x divide-black/10 mb-10 overflow-hidden">
+            <div className="p-4 text-center">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">Numero del pedido:</p>
+              <p className="font-bold text-sm">#{order.id.slice(-5)}</p>
             </div>
-          )}
-
-          {/* SINPE Instructions */}
-          <div className="bg-white/5 border border-white/10 p-6 mb-8 space-y-6">
-            {/* Step 1 */}
-            <div className="flex gap-4">
-              <div className="w-8 h-8 bg-maroon-light rounded-full flex items-center justify-center text-xs font-bold shrink-0">
-                1
-              </div>
-              <div>
-                <p className="text-sm font-medium mb-1">Abrí tu app bancaria</p>
-                <p className="text-xs text-white/40">Ingresá a la sección de SINPE Móvil en tu banco.</p>
-              </div>
+            <div className="p-4 text-center">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">Fecha:</p>
+              <p className="font-bold text-sm">{orderDate}</p>
             </div>
-
-            {/* Step 2 */}
-            <div className="flex gap-4">
-              <div className="w-8 h-8 bg-maroon-light rounded-full flex items-center justify-center text-xs font-bold shrink-0">
-                2
-              </div>
-              <div>
-                <p className="text-sm font-medium mb-1">Enviá el monto a este número</p>
-                <div className="bg-black/50 border border-gold/30 px-4 py-3 mt-2">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-[10px] text-white/40 uppercase tracking-wider">Número SINPE</p>
-                      <p className="text-xl font-bold text-gold">{SINPE_PHONE}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-[10px] text-white/40 uppercase tracking-wider">A nombre de</p>
-                      <p className="text-sm font-medium">{SINPE_NAME}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-black/50 border border-white/10 px-4 py-3 mt-2">
-                  <p className="text-[10px] text-white/40 uppercase tracking-wider">Monto exacto</p>
-                  <p className="text-2xl font-black text-white">
-                    ₡{order?.total?.toLocaleString() || "..."}
-                  </p>
-                </div>
-              </div>
+            <div className="p-4 text-center">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">Email:</p>
+              <p className="font-bold text-xs break-all">{order.shippingEmail || session.user?.email}</p>
             </div>
-
-            {/* Step 3 */}
-            <div className="flex gap-4">
-              <div className="w-8 h-8 bg-maroon-light rounded-full flex items-center justify-center text-xs font-bold shrink-0">
-                3
-              </div>
-              <div>
-                <p className="text-sm font-medium mb-1">Ingresá el número de comprobante</p>
-                <p className="text-xs text-white/40 mb-3">
-                  Después de realizar el SINPE, ingresá el número de referencia que te da tu banco.
-                </p>
-              </div>
+            <div className="p-4 text-center">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">Total:</p>
+              <p className="font-bold text-sm text-black">₡{order.total.toLocaleString()},00</p>
+            </div>
+            <div className="p-4 text-center col-span-2 md:col-span-1">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">Metodo de pago:</p>
+              <p className="font-bold text-xs">Transferencia bancaria</p>
             </div>
           </div>
 
-          {/* Confirmation Form */}
-          <form onSubmit={handleConfirm} className="space-y-4">
-            <div>
-              <label className="text-[10px] uppercase tracking-wider text-white/50 block mb-1">
-                Número de comprobante SINPE
-              </label>
-              <input
-                type="text"
-                value={sinpeRef}
-                onChange={(e) => setSinpeRef(e.target.value)}
-                required
-                placeholder="Ej: 123456789"
-                className="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder:text-white/20 outline-none focus:border-gold transition-colors"
-              />
+          {/* Bank details */}
+          <h2 className="text-lg font-bold uppercase tracking-wider mb-2">Nuestros Detalles Bancarios</h2>
+          <p className="text-black/40 text-sm mb-4">SERIART HOME DIECISEIS S.A.</p>
+
+          <div className="bg-white rounded-2xl border border-black/10 shadow-sm grid grid-cols-2 md:grid-cols-4 divide-x divide-black/10 mb-10 overflow-hidden">
+            <div className="p-4 text-center">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">Banco:</p>
+              <p className="font-bold text-sm">BAC SAN JOSE</p>
             </div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-gold text-black text-xs font-bold tracking-[0.2em] uppercase py-3 hover:bg-gold/80 transition-colors disabled:opacity-50"
+            <div className="p-4 text-center">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">Numero de cuenta:</p>
+              <p className="font-bold text-sm">910716893</p>
+            </div>
+            <div className="p-4 text-center">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">SINPE Movil:</p>
+              <p className="font-bold text-sm">+506 8855 7999</p>
+            </div>
+            <div className="p-4 text-center">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">IBAN:</p>
+              <p className="font-bold text-xs">CR64010200009107168932</p>
+            </div>
+          </div>
+
+          {/* Order details */}
+          <h2 className="text-lg font-bold uppercase tracking-wider mb-4">Detalles del Pedido</h2>
+
+          <div className="bg-white border border-black/10 rounded-2xl shadow-sm overflow-hidden mb-10">
+            {/* Header */}
+            <div className="flex justify-between px-6 py-3 bg-cream border-b border-black/10">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-black/40">Producto</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-black/40">Total</span>
+            </div>
+
+            {/* Items */}
+            {order.items.map((item) => (
+              <div key={item.id} className="flex justify-between px-6 py-3 border-b border-black/[0.05]">
+                <span className="text-sm text-black/70">
+                  {item.product.name}{item.size ? ` (${item.size})` : ""} × {item.quantity}
+                </span>
+                <span className="text-sm font-medium">₡{(item.price * item.quantity).toLocaleString()},00</span>
+              </div>
+            ))}
+
+            {/* Subtotal */}
+            <div className="flex justify-between px-6 py-3 border-b border-black/10">
+              <span className="text-sm text-black/60">Subtotal:</span>
+              <span className="text-sm font-medium">₡{subtotal.toLocaleString()},00</span>
+            </div>
+
+            {/* Shipping */}
+            <div className="flex justify-between px-6 py-3 border-b border-black/10">
+              <span className="text-sm text-black/60">Envio:</span>
+              <span className="text-sm">
+                {order.shippingCost > 0 ? (
+                  <>₡{order.shippingCost.toLocaleString()},00 <span className="text-black/40 text-xs">via Precio fijo</span></>
+                ) : (
+                  "Recogida local"
+                )}
+              </span>
+            </div>
+
+            {/* Total */}
+            <div className="flex justify-between px-6 py-3 border-b border-black/10">
+              <span className="text-sm font-bold">Total:</span>
+              <span className="text-lg font-black text-black">₡{order.total.toLocaleString()},00</span>
+            </div>
+
+            {/* Payment method */}
+            <div className="flex justify-between px-6 py-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-black/50">Metodo de Pago:</span>
+              <span className="text-sm text-black/60">Transferencia bancaria directa</span>
+            </div>
+          </div>
+
+          {/* Billing address */}
+          <h2 className="text-lg font-bold uppercase tracking-wider mb-4">Direccion de Facturacion</h2>
+          <div className="text-sm text-black/50 space-y-1 mb-10">
+            <p className="text-black/70 font-medium">{order.shippingName} {order.shippingLastName}</p>
+            <p>{order.shippingAddress}</p>
+            {order.shippingAddress2 && <p>{order.shippingAddress2}</p>}
+            {order.shippingCity && <p>{order.shippingCity}</p>}
+            {order.shippingProvince && <p>{order.shippingProvince}</p>}
+            <p>{order.shippingPhone}</p>
+            <p>{order.shippingEmail || session.user?.email}</p>
+          </div>
+
+          {/* Back to shop */}
+          <div className="text-center">
+            <Link
+              href="/"
+              className="inline-block bg-black text-white text-xs font-bold uppercase tracking-[0.2em] px-10 py-4 rounded-xl hover:bg-black/80 transition-colors"
             >
-              {loading ? "VERIFICANDO..." : "CONFIRMAR PAGO"}
-            </button>
-          </form>
+              Volver al Inicio
+            </Link>
+          </div>
         </div>
       </main>
     </>
