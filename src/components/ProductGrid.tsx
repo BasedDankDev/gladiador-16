@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -153,23 +153,15 @@ const tabs = [
 
 export default function ProductGrid() {
   const [activeTab, setActiveTab] = useState("nuevo");
-  const [scrollProgress, setScrollProgress] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const filtered = activeTab === "todos" ? products : products.filter((p) => p.category === activeTab);
 
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    function onScroll() {
-      if (!el) return;
-      const maxScroll = el.scrollWidth - el.clientWidth;
-      setScrollProgress(maxScroll > 0 ? el.scrollLeft / maxScroll : 0);
-    }
-    el.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => el.removeEventListener("scroll", onScroll);
-  }, [filtered]);
+  const scroll = (direction: "left" | "right") => {
+    if (!scrollRef.current) return;
+    const amount = scrollRef.current.clientWidth * 0.75;
+    scrollRef.current.scrollBy({ left: direction === "right" ? amount : -amount, behavior: "smooth" });
+  };
 
   return (
     <section id="productos" className="bg-cream text-black py-16 md:py-24">
@@ -194,62 +186,74 @@ export default function ProductGrid() {
       </div>
 
       {/* Scrollable Product Row */}
-      <div
-        ref={scrollRef}
-        className="flex gap-4 overflow-x-auto px-6 md:px-16 pb-4 snap-x snap-mandatory scrollbar-hide"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-      >
-        {filtered.map((product, i) => (
-          <Link
-            key={`${activeTab}-${i}`}
-            href={`/producto/${product.slug}`}
-            className="group shrink-0 w-[70vw] sm:w-[45vw] md:w-[calc(25%-12px)] snap-start"
-          >
-            <div className="relative overflow-hidden bg-gray-100 aspect-[3/4]">
-              <Image
-                src={product.image}
-                alt={product.name}
-                fill
-                className={`object-contain transition-all duration-300 ${
-                  product.hoverImage ? "group-hover:opacity-0" : "group-hover:scale-105"
-                }`}
-                sizes="(max-width: 640px) 70vw, (max-width: 768px) 45vw, 25vw"
-              />
-              {product.hoverImage && (
+      <div className="relative">
+        {/* Left arrow */}
+        <button
+          onClick={() => scroll("left")}
+          className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white border border-black/10 rounded-full flex items-center justify-center shadow-md hover:bg-black hover:text-white transition-colors"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+
+        {/* Right arrow */}
+        <button
+          onClick={() => scroll("right")}
+          className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white border border-black/10 rounded-full flex items-center justify-center shadow-md hover:bg-black hover:text-white transition-colors"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+
+        <div
+          ref={scrollRef}
+          className="flex gap-4 overflow-x-auto px-6 md:px-16 pb-4 snap-x snap-mandatory scrollbar-hide"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {filtered.map((product, i) => (
+            <Link
+              key={`${activeTab}-${i}`}
+              href={`/producto/${product.slug}`}
+              className="group shrink-0 w-[70vw] sm:w-[45vw] md:w-[calc(25%-12px)] snap-start"
+            >
+              <div className="relative overflow-hidden bg-gray-100 aspect-[3/4]">
                 <Image
-                  src={product.hoverImage}
+                  src={product.image}
                   alt={product.name}
                   fill
-                  className="object-contain opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className={`object-cover transition-all duration-300 ${
+                    product.hoverImage ? "group-hover:opacity-0" : "group-hover:scale-105"
+                  }`}
                   sizes="(max-width: 640px) 70vw, (max-width: 768px) 45vw, 25vw"
                 />
-              )}
-              {/* Badge */}
-              <span
-                className={`absolute top-3 left-3 text-[9px] font-medium tracking-wide px-2.5 py-1 ${
-                  product.badge === "AGOTADO"
-                    ? "bg-maroon-light text-white"
-                    : "bg-gold/90 text-black"
-                }`}
-              >
-                {product.badge}
-              </span>
-            </div>
-            <div className="mt-3 space-y-0.5">
-              <h3 className="text-sm font-normal leading-tight">{product.name}</h3>
-              <p className="text-sm font-medium">₡ {product.price},00</p>
-            </div>
-          </Link>
-        ))}
-      </div>
-
-      {/* Progress Bar */}
-      <div className="mx-6 md:mx-16 mt-8">
-        <div className="h-[2px] bg-gray-200 relative">
-          <div
-            className="absolute top-0 left-0 h-full bg-maroon-light transition-all duration-150"
-            style={{ width: "40%", left: `${scrollProgress * 60}%` }}
-          />
+                {product.hoverImage && (
+                  <Image
+                    src={product.hoverImage}
+                    alt={product.name}
+                    fill
+                    className="object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    sizes="(max-width: 640px) 70vw, (max-width: 768px) 45vw, 25vw"
+                  />
+                )}
+                {/* Badge */}
+                <span
+                  className={`absolute top-3 left-3 text-[9px] font-medium tracking-wide px-2.5 py-1 ${
+                    product.badge === "AGOTADO"
+                      ? "bg-maroon-light text-white"
+                      : "bg-gold/90 text-black"
+                  }`}
+                >
+                  {product.badge}
+                </span>
+              </div>
+              <div className="mt-3 space-y-0.5">
+                <h3 className="text-sm font-normal leading-tight">{product.name}</h3>
+                <p className="text-sm font-medium">₡ {product.price},00</p>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
 

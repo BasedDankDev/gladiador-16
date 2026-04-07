@@ -11,7 +11,7 @@ export default function NewArrivals() {
         {/* Blurred stadium background */}
         <div className="absolute inset-0">
           <Image
-            src="/hombre/polo-retro/1.png"
+            src="/hombre/retro-2008/1.png"
             alt=""
             fill
             className="object-cover scale-110 blur-2xl brightness-[0.2]"
@@ -24,7 +24,7 @@ export default function NewArrivals() {
         <div className="relative z-10 px-6 md:px-16 py-12 md:py-16">
           {/* Title — left-aligned, large italic bold like reference */}
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black italic text-white tracking-tight leading-none mb-8 md:mb-10">
-            Bring Back 2026
+            Vuelven los Clasicos del 2008
           </h2>
 
           {/* Two-part layout: cards (left ~half) + hero photo (right ~half) */}
@@ -54,7 +54,7 @@ export default function NewArrivals() {
                     <h3 className="text-xs md:text-[13px] font-semibold text-[#1a1f36] leading-snug group-hover:underline decoration-[#1a1f36]">
                       Retro Saprissa 2005
                       <br />
-                      Hombre Bring Back 2026
+                      Edicion Retro Hombre
                     </h3>
                     <p className="text-xs md:text-sm font-bold text-black mt-3">
                       ₡15 500,00
@@ -86,7 +86,7 @@ export default function NewArrivals() {
                     <h3 className="text-xs md:text-[13px] font-semibold text-[#1a1f36] leading-snug group-hover:underline decoration-[#1a1f36]">
                       Retro Saprissa 2008
                       <br />
-                      Hombre Bring Back 2026
+                      Edicion Retro Hombre
                     </h3>
                     <p className="text-xs md:text-sm font-bold text-black mt-3">
                       ₡15 500,00
@@ -99,7 +99,7 @@ export default function NewArrivals() {
             {/* Right side — hero action photo */}
             <div className="relative rounded-2xl overflow-hidden min-h-[300px] md:min-h-0">
               <Image
-                src="/hombre/polo-retro/1.png"
+                src="/hombre/retro-2008/1.png"
                 alt="Bring Back 2026"
                 fill
                 className="object-cover"

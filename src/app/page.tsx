@@ -4,7 +4,6 @@ import HistoryReveal from "@/components/HistoryReveal";
 import Exclusivas from "@/components/Exclusivas";
 import ProductGrid from "@/components/ProductGrid";
 import ShopByCategory from "@/components/ShopByCategory";
-import FeaturedCollection from "@/components/FeaturedCollection";
 import NewArrivals from "@/components/NewArrivals";
 import MujerSection from "@/components/MujerSection";
 import Footer from "@/components/Footer";
@@ -16,7 +15,6 @@ export default function Home() {
       <main>
         <Hero />
         <ProductGrid />
-        <FeaturedCollection />
         <NewArrivals />
         <MujerSection />
         <HistoryReveal />

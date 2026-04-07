@@ -42,8 +42,8 @@ export default function MujerSection() {
             {/* Left — hero model photo */}
             <div className="relative rounded-2xl overflow-hidden min-h-[400px] md:min-h-0">
               <Image
-                src="/mujer/atemporal-morada/1.png"
-                alt="Coleccion Mujer - Saprissa"
+                src="/mujer/saprissa-mujer-front.png"
+                alt="Camiseta Atemporal Blanca Saprissa - Mujer"
                 fill
                 className="object-cover object-top"
                 sizes="(max-width: 768px) 100vw, 55vw"
