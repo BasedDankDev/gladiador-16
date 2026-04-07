@@ -12,7 +12,7 @@ export default function BrandStory() {
           {/* Image */}
           <div className="relative aspect-[4/3] overflow-hidden">
             <Image
-              src="/images/products/img-14.png"
+              src="/hombre/polo-modernista/1.png"
               alt="Gladiador 16"
               fill
               className="object-cover"

@@ -4,10 +4,10 @@ import { useState } from "react";
 import Image from "next/image";
 
 const designs = [
-  { name: "Dragon S", image: "/images/products/img-15.png", closeup: "/images/products/img-6b.png" },
-  { name: "Papa Morado", image: "/images/products/img-14.png", closeup: "/images/products/img-8.png" },
-  { name: "Goku S", image: "/images/products/img-21.png", closeup: "/images/products/img-24.png" },
-  { name: "Dracarys", image: "/images/products/img-25.png", closeup: "/images/products/img-6.png" },
+  { name: "El Papa", image: "/hombre/camiseta-papa/3.png", closeup: "/hombre/camiseta-papa/4.png" },
+  { name: "Goku S", image: "/hombre/camiseta-goku/4.png", closeup: "/hombre/camiseta-goku/3.png" },
+  { name: "Retro 2005", image: "/hombre/retro-2005/3.png", closeup: "/hombre/retro-2005/1.png" },
+  { name: "Retro 2008", image: "/hombre/retro-2008/2.png", closeup: "/hombre/retro-2008/1.png" },
 ];
 
 const qualities = ["Slim Fit", "Dry Fit"];
