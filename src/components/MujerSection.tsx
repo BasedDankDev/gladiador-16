@@ -6,8 +6,8 @@ import Link from "next/link";
 const mujerProducts = [
   { name: "Camiseta Atemporal Blanca", slug: "saprissa-mujer-retro", image: "/mujer/saprissa-mujer-front.png", price: "12 500" },
   { name: "Camiseta Atemporal Morada", slug: "atemporal-morada-mujer", image: "/mujer/atemporal-morada/1.png", price: "12 500" },
-  { name: "Polo Modernista Crop", slug: "polo-modernista-crop-mujer", image: "/mujer/polo-modernista-crop/2.png", price: "15 500" },
-  { name: "Polo Retro Crop", slug: "polo-retro-crop-mujer", image: "/mujer/polo-retro-crop/4.png", price: "15 500" },
+  { name: "Polo Modernista Crop", slug: "polo-modernista-crop-mujer", image: "/mujer/polo-modernista-crop/2.png", price: "19 900" },
+  { name: "Polo Retro Crop", slug: "polo-retro-crop-mujer", image: "/mujer/polo-retro-crop/4.png", price: "19 900" },
 ];
 
 export default function MujerSection() {

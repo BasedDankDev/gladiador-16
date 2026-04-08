@@ -34,7 +34,7 @@ const products: {
   },
   {
     name: "Polo Modernista Oversize",
-    price: "15 500",
+    price: "19 900",
     image: "/hombre/polo-modernista/1.png",
     hoverImage: "/hombre/polo-modernista/3.png",
     badge: "NUEVO",
@@ -43,7 +43,7 @@ const products: {
   },
   {
     name: "Polo Retro Crop Mujer",
-    price: "15 500",
+    price: "19 900",
     image: "/mujer/polo-retro-crop/4.png",
     hoverImage: "/mujer/polo-retro-crop/2.png",
     badge: "NUEVO",
@@ -80,7 +80,7 @@ const products: {
   },
   {
     name: "Polo Modernista Oversize",
-    price: "15 500",
+    price: "19 900",
     image: "/hombre/polo-modernista/1.png",
     hoverImage: "/hombre/polo-modernista/3.png",
     badge: "NUEVO",
@@ -89,7 +89,7 @@ const products: {
   },
   {
     name: "Polo Retro Oversize",
-    price: "15 500",
+    price: "19 900",
     image: "/hombre/polo-retro/1.png",
     hoverImage: "/hombre/polo-retro/3.png",
     badge: "NUEVO",
@@ -126,7 +126,7 @@ const products: {
   },
   {
     name: "Polo Modernista Crop",
-    price: "15 500",
+    price: "19 900",
     image: "/mujer/polo-modernista-crop/2.png",
     hoverImage: "/mujer/polo-modernista-crop/3.png",
     badge: "NUEVO",
@@ -135,7 +135,7 @@ const products: {
   },
   {
     name: "Polo Retro Crop",
-    price: "15 500",
+    price: "19 900",
     image: "/mujer/polo-retro-crop/4.png",
     hoverImage: "/mujer/polo-retro-crop/2.png",
     badge: "NUEVO",
