@@ -37,6 +37,11 @@ export default function Reglamentos() {
               Las fotografias, textos y disenos publicados en este sitio son propiedad de Gladiador 16. Queda prohibida su reproduccion total o parcial sin autorizacion previa por escrito.
             </p>
 
+            <h2 className="text-xl font-bold text-black pt-2">Propiedad intelectual y originalidad</h2>
+            <p>
+              Todos nuestros disenos son originales y creados internamente. No utilizamos logos protegidos ni producimos replicas de uniformes oficiales. Nuestra propuesta es ropa casual y retro, para hombres y mujeres, inspirada en la aficion pero con identidad propia.
+            </p>
+
             <h2 className="text-xl font-bold text-black pt-2">Modificaciones</h2>
             <p>
               Nos reservamos el derecho de actualizar estos reglamentos en cualquier momento. Los cambios se publicaran en esta pagina y entraran en vigencia de forma inmediata.
