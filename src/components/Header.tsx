@@ -69,7 +69,7 @@ const navLinks = [
   { label: "TIENDA", href: "/#productos" },
   { label: "MUJER", href: "/#mujer" },
   { label: "HOMBRE", href: "/#productos" },
-  { label: "CONTACTO", href: "/#productos" },
+  { label: "EDITORIAL", href: "/#editorial" },
 ];
 
 export default function Header() {

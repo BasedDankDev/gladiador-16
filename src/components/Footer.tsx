@@ -2,18 +2,22 @@
 
 import Image from "next/image";
 
-const helpLinks = ["+506 8888-8888", "Lun-Vie 9am-5pm", "info@gladiador16.cr", "Terminos de servicio", "Politica de privacidad"];
-const orderLinks = ["Devoluciones", "Opciones de pago", "Opciones de envio", "Envio gratis"];
-const aboutLinks = ["Nuestros valores", "Contacto", "Tienda fisica"];
-const socialLinks = ["Instagram", "TikTok", "Facebook"];
+const helpLinks = ["+506 8855 7999", "Lun-Vie 9am-5pm", "info@gladiador16.cr"];
+const generalLinks = [
+  { label: "Nuestra Historia", href: "/nuestra-historia" },
+  { label: "Contacto", href: "/contacto" },
+  { label: "Terminos y Condiciones", href: "/terminos" },
+  { label: "Politica de Privacidad", href: "/privacidad" },
+  { label: "Reglamentos", href: "/reglamentos" },
+];
 
 export default function Footer() {
   return (
     <footer className="bg-black border-t border-white/10 pt-16 pb-10">
       <div className="px-6 md:px-16">
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-10">
+        <div className="flex flex-col md:flex-row gap-10 md:gap-16">
           {/* Brand */}
-          <div className="md:col-span-2">
+          <div>
             <div className="w-16 h-16 bg-maroon-light flex items-center justify-center mb-6 relative">
               <Image
                 src="/escudo-logo.svg"
@@ -52,68 +56,19 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Orders */}
+          {/* General */}
           <div>
-            <h4 className="text-sm font-bold tracking-wider uppercase mb-6">PEDIDOS</h4>
+            <h4 className="text-sm font-bold tracking-wider uppercase mb-6">GENERAL</h4>
             <ul className="space-y-3">
-              {orderLinks.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-sm text-white/50 hover:text-white transition-colors font-light">
-                    {link}
+              {generalLinks.map((link) => (
+                <li key={link.label}>
+                  <a href={link.href} className="text-sm text-white/50 hover:text-white transition-colors font-light">
+                    {link.label}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
-
-          {/* About */}
-          <div>
-            <h4 className="text-sm font-bold tracking-wider uppercase mb-6">NOSOTROS</h4>
-            <ul className="space-y-3">
-              {aboutLinks.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-sm text-white/50 hover:text-white transition-colors font-light">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Social */}
-          <div>
-            <h4 className="text-sm font-bold tracking-wider uppercase mb-6">REDES</h4>
-            <ul className="space-y-3">
-              {socialLinks.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-sm text-white/50 hover:text-white transition-colors font-light">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Newsletter */}
-        <div className="mt-16">
-          <h4 className="text-sm font-bold tracking-wider uppercase mb-4">SUSCRIBITE</h4>
-          <form className="flex max-w-md" onSubmit={(e) => e.preventDefault()}>
-            <input
-              type="email"
-              placeholder="Tu email"
-              className="flex-1 bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-gold transition-colors"
-            />
-            <button
-              type="submit"
-              className="bg-maroon-light px-4 py-3 hover:bg-maroon transition-colors"
-              aria-label="Suscribirse"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </button>
-          </form>
         </div>
       </div>
     </footer>

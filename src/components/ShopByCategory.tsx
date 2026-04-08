@@ -32,7 +32,7 @@ export default function BrandStory() {
               Lo expresamos a traves del arte y el diseno. Es una gran responsabilidad, por eso nuestros productos son de la mas alta calidad, elevando la ropa deportiva al nivel que los fanaticos merecen, hecha a nuestra medida, con la aficion en el corazon del proceso.
             </p>
             <Link
-              href="/#productos"
+              href="/nuestra-historia"
               className="inline-block border border-black text-black text-sm font-medium px-8 py-3 hover:bg-black hover:text-white transition-colors"
             >
               Nuestra Historia
