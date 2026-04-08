@@ -16,7 +16,7 @@ const products: {
   // NUEVO — mix of best sellers from both
   {
     name: "Camiseta El Papa Sublimada",
-    price: "19 500",
+    price: "12 500",
     image: "/hombre/camiseta-papa/1.png",
     hoverImage: "/hombre/camiseta-papa/4.png",
     badge: "NUEVO",
@@ -53,7 +53,7 @@ const products: {
   // HOMBRE
   {
     name: "Camiseta El Papa Sublimada",
-    price: "19 500",
+    price: "12 500",
     image: "/hombre/camiseta-papa/1.png",
     hoverImage: "/hombre/camiseta-papa/4.png",
     badge: "NUEVO",
@@ -62,7 +62,7 @@ const products: {
   },
   {
     name: "Camiseta Goku Sublimada",
-    price: "19 500",
+    price: "12 500",
     image: "/hombre/camiseta-goku/1.png",
     hoverImage: "/hombre/camiseta-goku/3.png",
     badge: "NUEVO",
