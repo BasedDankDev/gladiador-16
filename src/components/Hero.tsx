@@ -64,7 +64,7 @@ export default function Hero() {
             San Jose, Costa Rica
           </p>
           <p className="text-[10px] md:text-xs font-light tracking-[0.25em] uppercase text-white/70">
-            EST. 2024
+            EST. 2026
           </p>
         </div>
 
