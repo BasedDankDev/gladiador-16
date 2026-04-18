@@ -140,16 +140,85 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
     </div>
   `;
 
+  const adminEmails = (process.env.ADMIN_EMAILS || "")
+    .split(",")
+    .map((e) => e.trim())
+    .filter(Boolean);
+
   try {
     await resend.emails.send({
       from: process.env.EMAIL_FROM || "onboarding@resend.dev",
       to: data.customerEmail,
+      replyTo: adminEmails[0] || undefined,
       subject: `Pedido #${orderNumber} - Gladiador 16`,
       html,
     });
+
+    if (adminEmails.length > 0) {
+      await resend.emails.send({
+        from: process.env.EMAIL_FROM || "onboarding@resend.dev",
+        to: adminEmails,
+        replyTo: data.customerEmail,
+        subject: `🛒 Nuevo pedido #${orderNumber} - ₡${data.total.toLocaleString()}`,
+        html: buildAdminEmail(data, orderNumber, date),
+      });
+    }
+
     return { success: true };
   } catch (error) {
     console.error("Email send error:", error);
     return { success: false, error };
   }
+}
+
+function buildAdminEmail(data: OrderEmailData, orderNumber: string, date: string) {
+  const itemsRows = data.items
+    .map(
+      (item) =>
+        `<tr>
+          <td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;">
+            ${item.name}${item.size ? ` (${item.size})` : ""}
+          </td>
+          <td style="padding:10px 0;border-bottom:1px solid #eee;text-align:center;font-size:14px;">${item.quantity}</td>
+          <td style="padding:10px 0;border-bottom:1px solid #eee;text-align:right;font-size:14px;">₡${(item.price * item.quantity).toLocaleString()},00</td>
+        </tr>`
+    )
+    .join("");
+
+  return `
+    <div style="max-width:600px;margin:0 auto;font-family:Arial,sans-serif;color:#333;">
+      <div style="background:#1a3a2a;padding:24px;text-align:center;">
+        <h1 style="color:white;margin:0;font-size:18px;letter-spacing:2px;">GLADIADOR 16 — ADMIN</h1>
+      </div>
+
+      <div style="padding:30px 24px;">
+        <h2 style="margin:0 0 8px;font-size:20px;color:#1a3a2a;">🛒 Nuevo pedido recibido</h2>
+        <p style="font-size:14px;color:#666;margin:0 0 20px;">Pedido #${orderNumber} — ${date}</p>
+
+        <div style="background:#f5f5f0;padding:16px;border-radius:8px;margin-bottom:20px;">
+          <p style="margin:0 0 8px;font-size:13px;"><strong>Cliente:</strong> ${data.customerName}</p>
+          <p style="margin:0 0 8px;font-size:13px;"><strong>Email:</strong> ${data.customerEmail}</p>
+          <p style="margin:0 0 8px;font-size:13px;"><strong>Teléfono:</strong> ${data.shippingPhone}</p>
+          <p style="margin:0;font-size:13px;"><strong>Dirección:</strong> ${data.shippingAddress}${data.shippingCity ? ", " + data.shippingCity : ""}${data.shippingProvince ? ", " + data.shippingProvince : ""}</p>
+        </div>
+
+        <table style="width:100%;border-collapse:collapse;margin-bottom:16px;">
+          <thead>
+            <tr style="border-bottom:2px solid #1a3a2a;">
+              <th style="text-align:left;padding:8px 0;font-size:12px;text-transform:uppercase;">Producto</th>
+              <th style="text-align:center;padding:8px 0;font-size:12px;text-transform:uppercase;">Cant.</th>
+              <th style="text-align:right;padding:8px 0;font-size:12px;text-transform:uppercase;">Total</th>
+            </tr>
+          </thead>
+          <tbody>${itemsRows}</tbody>
+        </table>
+
+        <div style="border-top:2px solid #333;padding-top:12px;font-size:16px;font-weight:bold;text-align:right;">
+          Total: ₡${data.total.toLocaleString()},00
+        </div>
+
+        <p style="margin-top:24px;font-size:12px;color:#999;">Esperá el comprobante de pago del cliente por WhatsApp antes de procesar el pedido.</p>
+      </div>
+    </div>
+  `;
 }
