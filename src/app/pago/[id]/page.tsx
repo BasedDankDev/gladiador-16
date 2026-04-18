@@ -242,7 +242,7 @@ export default function PagoPage({ params }: { params: Promise<{ id: string }> }
                 {order.shippingCost > 0 ? (
                   <>₡{order.shippingCost.toLocaleString()},00 <span className="text-black/40 text-xs">via Precio fijo</span></>
                 ) : (
-                  "Recogida local"
+                  <span className="font-bold text-green-700 uppercase tracking-wider">GRATIS</span>
                 )}
               </span>
             </div>

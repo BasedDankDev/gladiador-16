@@ -91,8 +91,8 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
             <td style="padding:6px 0;text-align:right;font-size:14px;">Subtotal: ₡${data.subtotal.toLocaleString()},00</td>
           </tr>
           <tr>
-            <td style="padding:6px 0;font-size:14px;">Envio via ${data.shippingMethod === "recogida" ? "Recogida local" : "Precio fijo"}</td>
-            <td style="padding:6px 0;text-align:right;font-size:14px;">Envio: ₡${data.shippingCost.toLocaleString()},00</td>
+            <td style="padding:6px 0;font-size:14px;">Envio${data.shippingCost === 0 ? "" : " via Precio fijo"}</td>
+            <td style="padding:6px 0;text-align:right;font-size:14px;">Envio: ${data.shippingCost === 0 ? "GRATIS" : `₡${data.shippingCost.toLocaleString()},00`}</td>
           </tr>
           <tr style="border-top:2px solid #333;">
             <td style="padding:10px 0;font-size:16px;font-weight:bold;"></td>
