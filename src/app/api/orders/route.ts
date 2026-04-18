@@ -37,7 +37,9 @@ export async function POST(req: Request) {
       };
     });
 
-    const shippingCost = Number(body.shippingCost) || 0;
+    const SHIPPING_COST = 1950;
+    const FREE_SHIPPING_THRESHOLD = 25000;
+    const shippingCost = total >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
 
     const order = await prisma.order.create({
       data: {

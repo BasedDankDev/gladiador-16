@@ -18,6 +18,7 @@ const PROVINCIAS = [
 ];
 
 const SHIPPING_COST = 1950;
+const FREE_SHIPPING_THRESHOLD = 25000;
 
 export default function CheckoutPage() {
   const { data: session, status } = useSession();
@@ -35,11 +36,10 @@ export default function CheckoutPage() {
     email: "",
     notas: "",
   });
-  const [shippingMethod, setShippingMethod] = useState<"envio" | "recogida">("envio");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const shippingCost = shippingMethod === "envio" ? SHIPPING_COST : 0;
+  const shippingCost = total >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
   const orderTotal = total + shippingCost;
 
   function updateForm(field: string, value: string) {
@@ -110,7 +110,7 @@ export default function CheckoutPage() {
           shippingAddress2: form.direccion2,
           shippingCity: form.ciudad,
           shippingProvince: form.provincia,
-          shippingMethod,
+          shippingMethod: "envio",
           shippingCost,
           notes: form.notas,
         }),
@@ -139,11 +139,11 @@ export default function CheckoutPage() {
         {/* Progress bar */}
         <div className="bg-black text-white text-center py-3 mb-10">
           <div className="flex items-center justify-center gap-4 text-[10px] tracking-[0.2em] uppercase">
-            <span className="text-white/50">Shopping Cart</span>
+            <span className="text-white/50">Carrito</span>
             <span className="text-white/30">→</span>
-            <span className="font-bold">Checkout</span>
+            <span className="font-bold">Facturacion</span>
             <span className="text-white/30">→</span>
-            <span className="text-white/50">Order Complete</span>
+            <span className="text-white/50">Pedido Completado</span>
           </div>
         </div>
 
@@ -318,31 +318,29 @@ export default function CheckoutPage() {
                   </div>
 
                   {/* Shipping */}
-                  <div className="flex justify-between items-start py-3 border-b border-black/10">
+                  <div className="flex justify-between py-3 border-b border-black/10">
                     <span className="text-sm text-black/60">Envio</span>
-                    <div className="text-right space-y-2">
-                      <label className="flex items-center justify-end gap-2 cursor-pointer">
-                        <span className="text-sm">Precio fijo: <span className="text-black font-medium">₡{SHIPPING_COST.toLocaleString()},00</span></span>
-                        <input
-                          type="radio"
-                          name="shipping"
-                          checked={shippingMethod === "envio"}
-                          onChange={() => setShippingMethod("envio")}
-                          className="accent-black"
-                        />
-                      </label>
-                      <label className="flex items-center justify-end gap-2 cursor-pointer">
-                        <span className="text-sm text-black/60">Recogida local</span>
-                        <input
-                          type="radio"
-                          name="shipping"
-                          checked={shippingMethod === "recogida"}
-                          onChange={() => setShippingMethod("recogida")}
-                          className="accent-black"
-                        />
-                      </label>
-                    </div>
+                    {shippingCost === 0 ? (
+                      <span className="text-sm font-bold text-green-700 uppercase tracking-wider">GRATIS</span>
+                    ) : (
+                      <span className="text-sm">Precio fijo: <span className="text-black font-medium">₡{SHIPPING_COST.toLocaleString()},00</span></span>
+                    )}
                   </div>
+
+                  {/* Free shipping progress */}
+                  {shippingCost > 0 && (
+                    <div className="py-3 border-b border-black/10 space-y-2">
+                      <p className="text-[11px] text-black/60 text-center leading-relaxed">
+                        Te faltan <span className="font-bold text-black">₡{(FREE_SHIPPING_THRESHOLD - total).toLocaleString()}</span> para envío <span className="font-bold text-black">GRATIS</span>
+                      </p>
+                      <div className="h-1 bg-black/10 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-maroon-light transition-all duration-500"
+                          style={{ width: `${Math.min(100, (total / FREE_SHIPPING_THRESHOLD) * 100)}%` }}
+                        />
+                      </div>
+                    </div>
+                  )}
 
                   {/* Total */}
                   <div className="flex justify-between py-3 border-b border-black/10">

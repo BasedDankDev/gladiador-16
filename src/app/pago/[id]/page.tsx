@@ -6,6 +6,46 @@ import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import Link from "next/link";
 
+function CopyButton({ value, label }: { value: string; label?: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      // ignore
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleCopy}
+      aria-label={label ? `Copiar ${label}` : "Copiar"}
+      className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-black/50 hover:text-black transition-colors px-2 py-1 rounded-md hover:bg-black/5"
+    >
+      {copied ? (
+        <>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path d="M5 13l4 4L19 7" />
+          </svg>
+          Copiado
+        </>
+      ) : (
+        <>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+          Copiar
+        </>
+      )}
+    </button>
+  );
+}
+
 interface OrderData {
   id: string;
   total: number;
@@ -92,11 +132,11 @@ export default function PagoPage({ params }: { params: Promise<{ id: string }> }
         {/* Progress bar */}
         <div className="bg-black text-white text-center py-3 mb-10">
           <div className="flex items-center justify-center gap-4 text-[10px] tracking-[0.2em] uppercase">
-            <span className="text-white/50">Shopping Cart</span>
+            <span className="text-white/50">Carrito</span>
             <span className="text-white/30">→</span>
-            <span className="text-white/50">Checkout</span>
+            <span className="text-white/50">Facturacion</span>
             <span className="text-white/30">→</span>
-            <span className="font-bold">Order Complete</span>
+            <span className="font-bold">Pedido Completado</span>
           </div>
         </div>
 
@@ -107,26 +147,26 @@ export default function PagoPage({ params }: { params: Promise<{ id: string }> }
           </div>
 
           {/* Order summary row */}
-          <div className="bg-white rounded-2xl border border-black/10 shadow-sm grid grid-cols-2 md:grid-cols-5 divide-x divide-black/10 mb-10 overflow-hidden">
-            <div className="p-4 text-center">
-              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">Numero del pedido:</p>
-              <p className="font-bold text-sm">#{order.id.slice(-5)}</p>
+          <div className="bg-white rounded-2xl border border-black/10 shadow-sm grid grid-cols-2 md:grid-cols-5 md:divide-x divide-black/10 mb-10 overflow-hidden">
+            <div className="p-5 text-center border-b md:border-b-0 border-black/10">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-2">Numero del pedido</p>
+              <p className="font-bold text-base">#{order.id.slice(-5)}</p>
             </div>
-            <div className="p-4 text-center">
-              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">Fecha:</p>
-              <p className="font-bold text-sm">{orderDate}</p>
+            <div className="p-5 text-center border-b md:border-b-0 border-black/10">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-2">Fecha</p>
+              <p className="font-bold text-base">{orderDate}</p>
             </div>
-            <div className="p-4 text-center">
-              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">Email:</p>
-              <p className="font-bold text-xs break-all">{order.shippingEmail || session.user?.email}</p>
+            <div className="p-5 text-center border-b md:border-b-0 border-black/10 col-span-2 md:col-span-1">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-2">Email</p>
+              <p className="font-bold text-sm break-all">{order.shippingEmail || session.user?.email}</p>
             </div>
-            <div className="p-4 text-center">
-              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">Total:</p>
-              <p className="font-bold text-sm text-black">₡{order.total.toLocaleString()},00</p>
+            <div className="p-5 text-center">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-2">Total</p>
+              <p className="font-bold text-base text-black">₡{order.total.toLocaleString()},00</p>
             </div>
-            <div className="p-4 text-center col-span-2 md:col-span-1">
-              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">Metodo de pago:</p>
-              <p className="font-bold text-xs">Transferencia bancaria</p>
+            <div className="p-5 text-center col-span-2 md:col-span-1">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-2">Metodo de pago</p>
+              <p className="font-bold text-sm">Transferencia bancaria</p>
             </div>
           </div>
 
@@ -134,22 +174,38 @@ export default function PagoPage({ params }: { params: Promise<{ id: string }> }
           <h2 className="text-lg font-bold uppercase tracking-wider mb-2">Nuestros Detalles Bancarios</h2>
           <p className="text-black/40 text-sm mb-4">SERIART HOME DIECISEIS S.A.</p>
 
-          <div className="bg-white rounded-2xl border border-black/10 shadow-sm grid grid-cols-2 md:grid-cols-4 divide-x divide-black/10 mb-10 overflow-hidden">
-            <div className="p-4 text-center">
-              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">Banco:</p>
+          <div className="bg-white rounded-2xl border border-black/10 shadow-sm mb-10 overflow-hidden">
+            {/* Banco */}
+            <div className="flex items-center justify-between px-5 py-4 border-b border-black/10">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider">Banco</p>
               <p className="font-bold text-sm">BAC SAN JOSE</p>
             </div>
-            <div className="p-4 text-center">
-              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">Numero de cuenta:</p>
-              <p className="font-bold text-sm">910716893</p>
+
+            {/* Numero de cuenta */}
+            <div className="flex items-center justify-between gap-3 px-5 py-4 border-b border-black/10">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider shrink-0">Numero de cuenta</p>
+              <div className="flex items-center gap-2 min-w-0">
+                <p className="font-bold text-sm tabular-nums truncate">910716893</p>
+                <CopyButton value="910716893" label="numero de cuenta" />
+              </div>
             </div>
-            <div className="p-4 text-center">
-              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">SINPE Movil:</p>
-              <p className="font-bold text-sm">+506 8855 7999</p>
+
+            {/* SINPE */}
+            <div className="flex items-center justify-between gap-3 px-5 py-4 border-b border-black/10">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider shrink-0">SINPE Movil</p>
+              <div className="flex items-center gap-2 min-w-0">
+                <p className="font-bold text-sm tabular-nums truncate">8855 7999</p>
+                <CopyButton value="88557999" label="SINPE" />
+              </div>
             </div>
-            <div className="p-4 text-center">
-              <p className="text-[10px] text-black/40 uppercase tracking-wider mb-1">IBAN:</p>
-              <p className="font-bold text-xs">CR64010200009107168932</p>
+
+            {/* IBAN */}
+            <div className="flex items-center justify-between gap-3 px-5 py-4">
+              <p className="text-[10px] text-black/40 uppercase tracking-wider shrink-0">IBAN</p>
+              <div className="flex items-center gap-2 min-w-0">
+                <p className="font-bold text-xs md:text-sm tabular-nums truncate">CR64010200009107168932</p>
+                <CopyButton value="CR64010200009107168932" label="IBAN" />
+              </div>
             </div>
           </div>
 

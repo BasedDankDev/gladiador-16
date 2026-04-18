@@ -4,10 +4,16 @@ import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 
+const FREE_SHIPPING_THRESHOLD = 25000;
+
 export default function CartDrawer() {
   const { items, removeItem, updateQuantity, total, itemCount, isOpen, setIsOpen } = useCart();
 
   if (!isOpen) return null;
+
+  const amountToFreeShipping = Math.max(0, FREE_SHIPPING_THRESHOLD - total);
+  const freeShippingProgress = Math.min(100, (total / FREE_SHIPPING_THRESHOLD) * 100);
+  const qualifiesForFreeShipping = total >= FREE_SHIPPING_THRESHOLD;
 
   return (
     <>
@@ -72,6 +78,25 @@ export default function CartDrawer() {
         {/* Footer */}
         {items.length > 0 && (
           <div className="px-6 py-4 border-t border-white/10 space-y-3">
+            {/* Free shipping progress */}
+            <div className="space-y-2">
+              {qualifiesForFreeShipping ? (
+                <p className="text-xs text-center text-green-400 font-bold uppercase tracking-wider">
+                  🎉 ¡Tenés envío GRATIS!
+                </p>
+              ) : (
+                <p className="text-[11px] text-center text-white/70 leading-relaxed">
+                  Te faltan <span className="font-bold text-white">₡{amountToFreeShipping.toLocaleString()}</span> para envío <span className="font-bold text-white">GRATIS</span>
+                </p>
+              )}
+              <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                <div
+                  className={`h-full transition-all duration-500 ${qualifiesForFreeShipping ? "bg-green-400" : "bg-maroon-light"}`}
+                  style={{ width: `${freeShippingProgress}%` }}
+                />
+              </div>
+            </div>
+
             <div className="flex justify-between text-sm">
               <span className="text-white/60">Subtotal</span>
               <span className="font-bold">₡{total.toLocaleString()}</span>
