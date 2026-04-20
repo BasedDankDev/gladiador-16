@@ -109,11 +109,10 @@ export default function Header() {
           {/* Logo / Crest */}
           <Link href="/" className="relative z-10">
             <Image
-              src="/cool-s-logo.svg"
+              src="/gladiador-logo.png"
               alt="Gladiador 16"
-              width={28}
-              height={38}
-              className="invert"
+              width={36}
+              height={36}
             />
           </Link>
 

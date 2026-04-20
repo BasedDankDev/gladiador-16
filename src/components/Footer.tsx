@@ -20,11 +20,10 @@ export default function Footer() {
           <div>
             <div className="w-16 h-16 bg-maroon-light flex items-center justify-center mb-6 relative">
               <Image
-                src="/escudo-logo.svg"
+                src="/gladiador-logo.png"
                 alt="Gladiador 16"
-                width={28}
-                height={35}
-                className="invert"
+                width={40}
+                height={40}
               />
               <div className="absolute bottom-0 right-0 w-2 h-2 bg-gold" />
             </div>
