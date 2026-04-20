@@ -18,14 +18,13 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row gap-10 md:gap-16">
           {/* Brand */}
           <div>
-            <div className="w-16 h-16 bg-maroon-light flex items-center justify-center mb-6 relative">
+            <div className="mb-6">
               <Image
                 src="/gladiador-logo.png"
                 alt="Gladiador 16"
-                width={40}
-                height={40}
+                width={64}
+                height={64}
               />
-              <div className="absolute bottom-0 right-0 w-2 h-2 bg-gold" />
             </div>
             <h3 className="text-4xl font-black tracking-tight uppercase leading-none">
               <span className="text-white">GLADI</span>

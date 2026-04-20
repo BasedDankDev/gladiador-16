@@ -111,8 +111,8 @@ export default function Header() {
             <Image
               src="/gladiador-logo.png"
               alt="Gladiador 16"
-              width={36}
-              height={36}
+              width={52}
+              height={52}
             />
           </Link>
 
