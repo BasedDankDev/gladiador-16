@@ -41,7 +41,8 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
   const html = `
     <div style="max-width:600px;margin:0 auto;font-family:Arial,sans-serif;color:#333;">
       <!-- Header -->
-      <div style="background:#1a3a2a;padding:24px;text-align:center;">
+      <div style="background:#560319;padding:24px;text-align:center;">
+        <img src="https://gladiador16.com/gladiador-logo.png" alt="Gladiador 16" width="48" height="48" style="display:block;margin:0 auto 10px;" />
         <h1 style="color:white;margin:0;font-size:18px;letter-spacing:2px;">GLADIADOR 16</h1>
       </div>
 
@@ -71,7 +72,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
       <div style="padding:0 24px 20px;">
         <table style="width:100%;border-collapse:collapse;">
           <thead>
-            <tr style="border-bottom:2px solid #1a3a2a;">
+            <tr style="border-bottom:2px solid #560319;">
               <th style="text-align:left;padding:8px 0;font-size:12px;text-transform:uppercase;letter-spacing:1px;">Producto</th>
               <th style="text-align:center;padding:8px 0;font-size:12px;text-transform:uppercase;letter-spacing:1px;">Cantidad</th>
               <th style="text-align:right;padding:8px 0;font-size:12px;text-transform:uppercase;letter-spacing:1px;">Precio</th>
@@ -133,7 +134,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
       </div>
 
       <!-- Footer -->
-      <div style="background:#1a3a2a;padding:20px;text-align:center;">
+      <div style="background:#560319;padding:20px;text-align:center;">
         <p style="color:white;font-size:11px;margin:0;letter-spacing:1px;">GLADIADOR 16 — Ropa Deportiva de Elite</p>
         <p style="color:rgba(255,255,255,0.5);font-size:10px;margin:4px 0 0;">San Jose, Costa Rica</p>
       </div>
@@ -187,12 +188,13 @@ function buildAdminEmail(data: OrderEmailData, orderNumber: string, date: string
 
   return `
     <div style="max-width:600px;margin:0 auto;font-family:Arial,sans-serif;color:#333;">
-      <div style="background:#1a3a2a;padding:24px;text-align:center;">
+      <div style="background:#560319;padding:24px;text-align:center;">
+        <img src="https://gladiador16.com/gladiador-logo.png" alt="Gladiador 16" width="48" height="48" style="display:block;margin:0 auto 10px;" />
         <h1 style="color:white;margin:0;font-size:18px;letter-spacing:2px;">GLADIADOR 16 — ADMIN</h1>
       </div>
 
       <div style="padding:30px 24px;">
-        <h2 style="margin:0 0 8px;font-size:20px;color:#1a3a2a;">🛒 Nuevo pedido recibido</h2>
+        <h2 style="margin:0 0 8px;font-size:20px;color:#560319;">🛒 Nuevo pedido recibido</h2>
         <p style="font-size:14px;color:#666;margin:0 0 20px;">Pedido #${orderNumber} — ${date}</p>
 
         <div style="background:#f5f5f0;padding:16px;border-radius:8px;margin-bottom:20px;">
@@ -204,7 +206,7 @@ function buildAdminEmail(data: OrderEmailData, orderNumber: string, date: string
 
         <table style="width:100%;border-collapse:collapse;margin-bottom:16px;">
           <thead>
-            <tr style="border-bottom:2px solid #1a3a2a;">
+            <tr style="border-bottom:2px solid #560319;">
               <th style="text-align:left;padding:8px 0;font-size:12px;text-transform:uppercase;">Producto</th>
               <th style="text-align:center;padding:8px 0;font-size:12px;text-transform:uppercase;">Cant.</th>
               <th style="text-align:right;padding:8px 0;font-size:12px;text-transform:uppercase;">Total</th>
