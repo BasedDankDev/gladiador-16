@@ -101,7 +101,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                 <button
                   key={i}
                   onClick={() => setSelectedImage(i)}
-                  className={`relative aspect-square w-[72px] shrink-0 border-2 transition-colors overflow-hidden ${
+                  className={`relative aspect-[3/4] w-[72px] shrink-0 border-2 transition-colors overflow-hidden ${
                     selectedImage === i
                       ? "border-gold"
                       : "border-white/10 hover:border-white/30"
@@ -169,7 +169,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                   <button
                     key={i}
                     onClick={() => setSelectedImage(i)}
-                    className={`relative w-16 h-16 shrink-0 border-2 transition-colors overflow-hidden ${
+                    className={`relative w-14 h-[74px] shrink-0 border-2 transition-colors overflow-hidden ${
                       selectedImage === i
                         ? "border-gold"
                         : "border-white/10 hover:border-white/30"
