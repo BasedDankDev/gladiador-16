@@ -6,6 +6,11 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useCart } from "@/context/CartContext";
+import {
+  PRODUCT_DESCRIPTIONS,
+  DELIVERY_TIME,
+  type ProductType,
+} from "@/lib/product-descriptions";
 
 interface Product {
   id: string;
@@ -18,10 +23,13 @@ interface Product {
   badge: string | null;
   variants: string | null;
   category: string;
+  productType: string | null;
   inStock: boolean;
 }
 
 const SIZES = ["XS", "S", "M", "L", "XL"];
+
+type AccordionKey = "description" | "composition" | "sizing";
 
 export default function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
@@ -32,6 +40,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
   const [selectedSize, setSelectedSize] = useState("M");
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
+  const [openAccordion, setOpenAccordion] = useState<AccordionKey | null>("description");
   const { addItem } = useCart();
 
   useEffect(() => {
@@ -255,15 +264,92 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                 Envio a todo Costa Rica · Pago por SINPE Movil
               </div>
 
-              {/* Divider */}
-              <div className="border-t border-white/10 mt-8 pt-6 space-y-4">
-                <div className="flex items-center gap-3 text-[11px] text-white/40">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
+              {/* Accordions */}
+              {(() => {
+                const type = product.productType as ProductType | null;
+                const copy = type ? PRODUCT_DESCRIPTIONS[type] : null;
+                if (!copy) return null;
+
+                const toggle = (key: AccordionKey) =>
+                  setOpenAccordion(openAccordion === key ? null : key);
+
+                const Chevron = ({ open }: { open: boolean }) => (
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    className={`transition-transform ${open ? "rotate-180" : ""}`}
+                  >
+                    <path d="M6 9l6 6 6-6" />
                   </svg>
-                  Slim Fit · Hombre y Mujer
-                </div>
+                );
+
+                return (
+                  <div className="mt-8 border-t border-white/10">
+                    {/* Descripción del producto */}
+                    <div className="border-b border-white/10">
+                      <button
+                        onClick={() => toggle("description")}
+                        className="w-full flex items-center justify-between py-4 text-[11px] font-medium tracking-[0.15em] uppercase text-white/80 hover:text-white transition-colors"
+                      >
+                        Descripción del producto
+                        <Chevron open={openAccordion === "description"} />
+                      </button>
+                      {openAccordion === "description" && (
+                        <div className="pb-5 space-y-3 text-[12px] leading-relaxed text-white/60">
+                          <p>{copy.description}</p>
+                          <ul className="list-disc pl-5 space-y-1">
+                            {copy.bullets.map((b) => (
+                              <li key={b}>{b}</li>
+                            ))}
+                          </ul>
+                          <p className="text-white/40 text-[11px] pt-2">
+                            *El plazo de entrega es de {DELIVERY_TIME}.
+                          </p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Composición y cuidados */}
+                    <div className="border-b border-white/10">
+                      <button
+                        onClick={() => toggle("composition")}
+                        className="w-full flex items-center justify-between py-4 text-[11px] font-medium tracking-[0.15em] uppercase text-white/80 hover:text-white transition-colors"
+                      >
+                        Composición y cuidados
+                        <Chevron open={openAccordion === "composition"} />
+                      </button>
+                      {openAccordion === "composition" && (
+                        <p className="pb-5 text-[12px] leading-relaxed text-white/60">
+                          {copy.composition}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Talla y ajustes */}
+                    <div className="border-b border-white/10">
+                      <button
+                        onClick={() => toggle("sizing")}
+                        className="w-full flex items-center justify-between py-4 text-[11px] font-medium tracking-[0.15em] uppercase text-white/80 hover:text-white transition-colors"
+                      >
+                        Talla y ajustes
+                        <Chevron open={openAccordion === "sizing"} />
+                      </button>
+                      {openAccordion === "sizing" && (
+                        <p className="pb-5 text-[12px] leading-relaxed text-white/60">
+                          {copy.sizing}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                );
+              })()}
+
+              {/* Shipping info */}
+              <div className="mt-6 space-y-3">
                 <div className="flex items-center gap-3 text-[11px] text-white/40">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <rect x="1" y="3" width="15" height="13" rx="2" />
