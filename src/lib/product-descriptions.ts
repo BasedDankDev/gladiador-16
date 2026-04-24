@@ -14,7 +14,7 @@ export const PRODUCT_DESCRIPTIONS: Record<ProductType, ProductDescription> = {
     bullets: [
       "100% poliéster interlock",
       "Sublimación total (el diseño no se despinta ni se agrieta)",
-      "Escudo bordado termoadherido",
+      "Escudo sublimado en alta definición",
       "Lavable a máquina en agua fría",
     ],
     composition:
@@ -37,12 +37,12 @@ export const PRODUCT_DESCRIPTIONS: Record<ProductType, ProductDescription> = {
   },
   polo: {
     description:
-      "Polo con corte moderno que mezcla el ADN futbolero con una silueta streetwear. Confeccionado en tela piqué suave, con detalles bordados que le dan terminación premium.",
+      "Polo con corte moderno que mezcla el ADN futbolero con una silueta streetwear. Confeccionado en tela piqué suave, con sublimación de alta definición que le da terminación premium.",
     bullets: [
       "Tela piqué 100% poliéster",
-      "Detalles bordados (no sublimados)",
+      "Sublimación en alta definición",
       "Corte oversize (hombre) / crop (mujer)",
-      "Cuello polo con botones",
+      "Cuello polo",
     ],
     composition:
       "100% poliéster piqué. Lavar en agua fría, no usar secadora, planchar al revés.",
