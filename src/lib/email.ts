@@ -146,30 +146,45 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
     .map((e) => e.trim())
     .filter(Boolean);
 
+  const from = process.env.EMAIL_FROM || "onboarding@resend.dev";
+  let customerOk = false;
+  let adminOk = false;
+
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_FROM || "onboarding@resend.dev",
+      from,
       to: data.customerEmail,
       replyTo: adminEmails[0] || undefined,
       subject: `Pedido #${orderNumber} - Gladiador 16`,
       html,
     });
-
-    if (adminEmails.length > 0) {
-      await resend.emails.send({
-        from: process.env.EMAIL_FROM || "onboarding@resend.dev",
-        to: adminEmails,
-        replyTo: data.customerEmail,
-        subject: `🛒 Nuevo pedido #${orderNumber} - ₡${data.total.toLocaleString()}`,
-        html: buildAdminEmail(data, orderNumber, date),
-      });
-    }
-
-    return { success: true };
+    customerOk = true;
   } catch (error) {
-    console.error("Email send error:", error);
-    return { success: false, error };
+    console.error(`[email] customer send failed for #${orderNumber} → ${data.customerEmail}:`, error);
   }
+
+  if (adminEmails.length > 0) {
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        await resend.emails.send({
+          from,
+          to: adminEmails,
+          replyTo: data.customerEmail,
+          subject: `🛒 Nuevo pedido #${orderNumber} - ₡${data.total.toLocaleString()}`,
+          html: buildAdminEmail(data, orderNumber, date),
+        });
+        adminOk = true;
+        break;
+      } catch (error) {
+        console.error(`[email] admin send attempt ${attempt} failed for #${orderNumber}:`, error);
+        if (attempt < 3) await new Promise((r) => setTimeout(r, 600 * attempt));
+      }
+    }
+  } else {
+    adminOk = true;
+  }
+
+  return { success: customerOk && adminOk, customerOk, adminOk };
 }
 
 function buildAdminEmail(data: OrderEmailData, orderNumber: string, date: string) {
