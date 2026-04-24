@@ -1,10 +1,22 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const products: {
+interface ApiProduct {
+  id: string;
+  name: string;
+  slug: string;
+  price: number;
+  image: string;
+  images: string | null;
+  badge: string | null;
+  category: string;
+  inStock: boolean;
+}
+
+type DisplayProduct = {
   name: string;
   price: string;
   image: string;
@@ -12,137 +24,33 @@ const products: {
   badge: string;
   slug: string;
   category: string;
-}[] = [
-  // NUEVO — mix of best sellers from both
-  {
-    name: "Camiseta El Papa Sublimada",
-    price: "12 500",
-    image: "/hombre/camiseta-papa/1.png",
-    hoverImage: "/hombre/camiseta-papa/4.png",
-    badge: "NUEVO",
-    slug: "camiseta-papa-hombre",
-    category: "nuevo",
-  },
-  {
-    name: "Camiseta Atemporal Morada",
-    price: "12 500",
-    image: "/mujer/atemporal-morada/1.png",
-    hoverImage: "/mujer/atemporal-morada/3.png",
-    badge: "NUEVO",
-    slug: "atemporal-morada-mujer",
-    category: "nuevo",
-  },
-  {
-    name: "Polo Modernista Oversize",
-    price: "19 900",
-    image: "/hombre/polo-modernista/1.png",
-    hoverImage: "/hombre/polo-modernista/3.png",
-    badge: "NUEVO",
-    slug: "polo-modernista-hombre",
-    category: "nuevo",
-  },
-  {
-    name: "Polo Retro Crop Mujer",
-    price: "19 900",
-    image: "/mujer/polo-retro-crop/4.png",
-    hoverImage: "/mujer/polo-retro-crop/2.png",
-    badge: "NUEVO",
-    slug: "polo-retro-crop-mujer",
-    category: "nuevo",
-  },
-  // HOMBRE
-  {
-    name: "Camiseta El Papa Sublimada",
-    price: "12 500",
-    image: "/hombre/camiseta-papa/1.png",
-    hoverImage: "/hombre/camiseta-papa/4.png",
-    badge: "NUEVO",
-    slug: "camiseta-papa-hombre",
-    category: "hombre",
-  },
-  {
-    name: "Camiseta Goku Sublimada",
-    price: "12 500",
-    image: "/hombre/camiseta-goku/1.png",
-    hoverImage: "/hombre/camiseta-goku/3.png",
-    badge: "NUEVO",
-    slug: "camiseta-goku-hombre",
-    category: "hombre",
-  },
-  {
-    name: "Retro Saprissa 2005",
-    price: "15 500",
-    image: "/hombre/retro-2005/1.png",
-    hoverImage: "/hombre/retro-2005/3.png",
-    badge: "NUEVO",
-    slug: "retro-2005-hombre",
-    category: "hombre",
-  },
-  {
-    name: "Polo Modernista Oversize",
-    price: "19 900",
-    image: "/hombre/polo-modernista/1.png",
-    hoverImage: "/hombre/polo-modernista/3.png",
-    badge: "NUEVO",
-    slug: "polo-modernista-hombre",
-    category: "hombre",
-  },
-  {
-    name: "Polo Retro Oversize",
-    price: "19 900",
-    image: "/hombre/polo-retro/1.png",
-    hoverImage: "/hombre/polo-retro/3.png",
-    badge: "NUEVO",
-    slug: "polo-retro-hombre",
-    category: "hombre",
-  },
-  {
-    name: "Retro Saprissa 2008",
-    price: "15 500",
-    image: "/hombre/retro-2008/1.png",
-    hoverImage: "/hombre/retro-2008/2.png",
-    badge: "NUEVO",
-    slug: "retro-2008-hombre",
-    category: "hombre",
-  },
-  // MUJER
-  {
-    name: "Camiseta Atemporal Blanca",
-    price: "12 500",
-    image: "/mujer/saprissa-mujer-front.png",
-    hoverImage: "/mujer/saprissa-mujer-closeup.png",
-    badge: "NUEVO",
-    slug: "saprissa-mujer-retro",
-    category: "mujer",
-  },
-  {
-    name: "Camiseta Atemporal Morada",
-    price: "12 500",
-    image: "/mujer/atemporal-morada/1.png",
-    hoverImage: "/mujer/atemporal-morada/3.png",
-    badge: "NUEVO",
-    slug: "atemporal-morada-mujer",
-    category: "mujer",
-  },
-  {
-    name: "Polo Modernista Crop",
-    price: "19 900",
-    image: "/mujer/polo-modernista-crop/2.png",
-    hoverImage: "/mujer/polo-modernista-crop/3.png",
-    badge: "NUEVO",
-    slug: "polo-modernista-crop-mujer",
-    category: "mujer",
-  },
-  {
-    name: "Polo Retro Crop",
-    price: "19 900",
-    image: "/mujer/polo-retro-crop/4.png",
-    hoverImage: "/mujer/polo-retro-crop/2.png",
-    badge: "NUEVO",
-    slug: "polo-retro-crop-mujer",
-    category: "mujer",
-  },
+};
+
+const HOVER_IMAGES: Record<string, string> = {
+  "camiseta-papa-hombre": "/hombre/camiseta-papa/4.png",
+  "camiseta-goku-hombre": "/hombre/camiseta-goku/3.png",
+  "retro-2005-hombre": "/hombre/retro-2005/3.png",
+  "polo-modernista-hombre": "/hombre/polo-modernista/3.png",
+  "polo-retro-hombre": "/hombre/polo-retro/3.png",
+  "retro-2008-hombre": "/hombre/retro-2008/2.png",
+  "saprissa-mujer-retro": "/mujer/saprissa-mujer-closeup.png",
+  "atemporal-morada-mujer": "/mujer/atemporal-morada/3.png",
+  "polo-modernista-crop-mujer": "/mujer/polo-modernista-crop/3.png",
+  "polo-retro-crop-mujer": "/mujer/polo-retro-crop/2.png",
+};
+
+const NUEVO_SLUGS = [
+  "camiseta-papa-hombre",
+  "atemporal-morada-mujer",
+  "polo-modernista-hombre",
+  "polo-retro-crop-mujer",
 ];
+
+const formatPrice = (price: number) => {
+  const whole = Math.floor(price / 1000);
+  const rest = price % 1000;
+  return `${whole} ${rest.toString().padStart(3, "0")}`;
+};
 
 const tabs = [
   { key: "nuevo", label: "LO NUEVO" },
@@ -153,7 +61,32 @@ const tabs = [
 
 export default function ProductGrid() {
   const [activeTab, setActiveTab] = useState("nuevo");
+  const [apiProducts, setApiProducts] = useState<ApiProduct[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    fetch("/api/products")
+      .then((r) => r.json())
+      .then((data: ApiProduct[]) => setApiProducts(data))
+      .catch(() => setApiProducts([]));
+  }, []);
+
+  const toDisplay = (p: ApiProduct, category: string): DisplayProduct => ({
+    name: p.name,
+    price: formatPrice(p.price),
+    image: p.image,
+    hoverImage: HOVER_IMAGES[p.slug],
+    badge: p.inStock ? p.badge || "NUEVO" : "AGOTADO",
+    slug: p.slug,
+    category,
+  });
+
+  const products: DisplayProduct[] = [
+    ...NUEVO_SLUGS.map((slug) => apiProducts.find((p) => p.slug === slug))
+      .filter((p): p is ApiProduct => !!p)
+      .map((p) => toDisplay(p, "nuevo")),
+    ...apiProducts.map((p) => toDisplay(p, p.category)),
+  ];
 
   const filtered = activeTab === "todos" ? products : products.filter((p) => p.category === activeTab);
 

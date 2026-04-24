@@ -1,16 +1,50 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const mujerProducts = [
-  { name: "Camiseta Atemporal Blanca", slug: "saprissa-mujer-retro", image: "/mujer/saprissa-mujer-front.png", price: "12 500" },
-  { name: "Camiseta Atemporal Morada", slug: "atemporal-morada-mujer", image: "/mujer/atemporal-morada/1.png", price: "12 500" },
-  { name: "Polo Modernista Crop", slug: "polo-modernista-crop-mujer", image: "/mujer/polo-modernista-crop/2.png", price: "19 900" },
-  { name: "Polo Retro Crop", slug: "polo-retro-crop-mujer", image: "/mujer/polo-retro-crop/4.png", price: "19 900" },
+interface ApiProduct {
+  id: string;
+  name: string;
+  slug: string;
+  price: number;
+  image: string;
+  category: string;
+}
+
+const MUJER_ORDER = [
+  { slug: "saprissa-mujer-retro", displayName: "Camiseta Atemporal Blanca", image: "/mujer/saprissa-mujer-front.png" },
+  { slug: "atemporal-morada-mujer", displayName: "Camiseta Atemporal Morada", image: "/mujer/atemporal-morada/1.png" },
+  { slug: "polo-modernista-crop-mujer", displayName: "Polo Modernista Crop", image: "/mujer/polo-modernista-crop/2.png" },
+  { slug: "polo-retro-crop-mujer", displayName: "Polo Retro Crop", image: "/mujer/polo-retro-crop/4.png" },
 ];
 
+const formatPrice = (price: number) => {
+  const whole = Math.floor(price / 1000);
+  const rest = price % 1000;
+  return `${whole} ${rest.toString().padStart(3, "0")}`;
+};
+
 export default function MujerSection() {
+  const [priceBySlug, setPriceBySlug] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    fetch("/api/products")
+      .then((r) => r.json())
+      .then((data: ApiProduct[]) => {
+        const map: Record<string, number> = {};
+        for (const p of data) map[p.slug] = p.price;
+        setPriceBySlug(map);
+      })
+      .catch(() => setPriceBySlug({}));
+  }, []);
+
+  const mujerProducts = MUJER_ORDER.map((p) => ({
+    ...p,
+    name: p.displayName,
+    price: priceBySlug[p.slug] ? formatPrice(priceBySlug[p.slug]) : "—",
+  }));
   return (
     <section id="mujer" className="py-16 md:py-24">
       <div className="relative overflow-hidden">
