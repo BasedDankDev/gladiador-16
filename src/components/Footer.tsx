@@ -13,25 +13,29 @@ const generalLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-black border-t border-white/10 pt-16 pb-10">
-      <div className="px-6 md:px-16">
-        <div className="flex flex-col md:flex-row gap-10 md:gap-16">
-          {/* Brand */}
-          <div>
-            <div className="mb-6">
+    <footer className="bg-black border-t border-white/10 pt-12 md:pt-16 pb-10">
+      <div className="px-5 sm:px-6 md:px-16">
+        <div className="grid grid-cols-2 md:flex md:flex-row gap-8 sm:gap-10 md:gap-16">
+          {/* Brand — full width on mobile */}
+          <div className="col-span-2 md:col-span-1">
+            <div className="mb-5">
               <Image
                 src="/gladiador-logo.png"
                 alt="Gladiador 16"
-                width={64}
-                height={64}
+                width={56}
+                height={56}
+                className="md:w-16 md:h-16"
               />
             </div>
-            <h3 className="text-4xl font-black tracking-tight uppercase leading-none">
+            <h3 className="text-3xl md:text-4xl font-black tracking-tight uppercase leading-none">
               <span className="text-white">GLADI</span>
-              <br />
-              <span className="text-maroon-light">ADOR</span>
-              <br />
-              <span className="text-maroon-light">16</span>
+              <span className="text-maroon-light md:hidden">ADOR 16</span>
+              <span className="hidden md:inline">
+                <br />
+                <span className="text-maroon-light">ADOR</span>
+                <br />
+                <span className="text-maroon-light">16</span>
+              </span>
             </h3>
             <p className="text-[10px] text-white/40 tracking-[0.2em] uppercase mt-4 leading-relaxed">
               ROPA DEPORTIVA DE ELITE
@@ -42,8 +46,8 @@ export default function Footer() {
 
           {/* Help */}
           <div>
-            <h4 className="text-sm font-bold tracking-wider uppercase mb-6">AYUDA</h4>
-            <ul className="space-y-3">
+            <h4 className="text-sm font-bold tracking-wider uppercase mb-4 md:mb-6">AYUDA</h4>
+            <ul className="space-y-2.5 md:space-y-3">
               {helpLinks.map((link) => (
                 <li key={link}>
                   <a href="#" className="text-sm text-white/50 hover:text-white transition-colors font-light">
@@ -56,8 +60,8 @@ export default function Footer() {
 
           {/* General */}
           <div>
-            <h4 className="text-sm font-bold tracking-wider uppercase mb-6">GENERAL</h4>
-            <ul className="space-y-3">
+            <h4 className="text-sm font-bold tracking-wider uppercase mb-4 md:mb-6">GENERAL</h4>
+            <ul className="space-y-2.5 md:space-y-3">
               {generalLinks.map((link) => (
                 <li key={link.label}>
                   <a href={link.href} className="text-sm text-white/50 hover:text-white transition-colors font-light">
@@ -69,9 +73,9 @@ export default function Footer() {
           </div>
 
           {/* Follow */}
-          <div>
-            <h4 className="text-sm font-bold tracking-wider uppercase mb-6">SÍGUENOS</h4>
-            <ul className="space-y-3">
+          <div className="col-span-2 md:col-span-1">
+            <h4 className="text-sm font-bold tracking-wider uppercase mb-4 md:mb-6">SÍGUENOS</h4>
+            <ul className="space-y-2.5 md:space-y-3">
               <li>
                 <a
                   href="https://www.instagram.com/gladiador16cr/"

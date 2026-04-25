@@ -52,14 +52,14 @@ export default function MujerSection() {
         <div className="absolute inset-0 bg-gradient-to-br from-[#f5f0eb] via-[#ede4dc] to-[#e8ddd4]" />
 
         {/* Content */}
-        <div className="relative z-10 px-6 md:px-16 py-12 md:py-16">
+        <div className="relative z-10 px-4 sm:px-6 md:px-16 py-12 md:py-16">
           {/* Title */}
-          <div className="flex items-end justify-between mb-8 md:mb-10">
+          <div className="flex items-end justify-between mb-6 sm:mb-8 md:mb-10">
             <div>
-              <p className="text-[11px] font-bold text-black/40 uppercase tracking-[0.3em] mb-2">
+              <p className="text-[10px] sm:text-[11px] font-bold text-black/40 uppercase tracking-[0.3em] mb-2">
                 Coleccion Femenina
               </p>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black italic text-[#1a1f36] tracking-tight leading-none">
+              <h2 className="text-3xl sm:text-5xl md:text-6xl font-black italic text-[#1a1f36] tracking-tight leading-none">
                 Para Ella
               </h2>
             </div>
@@ -74,7 +74,7 @@ export default function MujerSection() {
           {/* Layout: hero model (left) + product cards (right) */}
           <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-4 md:gap-5 items-stretch">
             {/* Left — hero model photo */}
-            <div className="relative rounded-2xl overflow-hidden min-h-[400px] md:min-h-0">
+            <div className="relative rounded-2xl overflow-hidden min-h-[320px] sm:min-h-[400px] md:min-h-0">
               <Image
                 src="/mujer/saprissa-mujer-front.png"
                 alt="Camiseta Atemporal Blanca Saprissa - Mujer"
@@ -91,7 +91,7 @@ export default function MujerSection() {
             </div>
 
             {/* Right — product cards grid */}
-            <div className="grid grid-cols-2 gap-4 md:gap-5">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-5">
               {mujerProducts.map((product) => (
                 <Link key={product.slug} href={`/producto/${product.slug}`} className="group">
                   <div className="bg-white rounded-2xl overflow-hidden h-full flex flex-col shadow-sm">

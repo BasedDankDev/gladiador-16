@@ -79,6 +79,7 @@ export default function Header() {
   const isHome = pathname === "/";
   const [hovered, setHovered] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     function onScroll() {
@@ -89,8 +90,17 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Only transparent on homepage when at the top and not hovered
-  const showTransparent = isHome && !scrolled && !hovered;
+  useEffect(() => {
+    if (mobileOpen) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  const showTransparent = isHome && !scrolled && !hovered && !mobileOpen;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -105,18 +115,32 @@ export default function Header() {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        <div className="flex items-center justify-between px-6 md:px-10 py-3">
-          {/* Logo / Crest */}
-          <Link href="/" className="relative z-10">
+        <div className="flex items-center justify-between px-4 md:px-10 py-3">
+          {/* Mobile hamburger */}
+          <button
+            aria-label="Menu"
+            onClick={() => setMobileOpen(true)}
+            className="md:hidden text-white hover:text-gold transition-colors -ml-1 p-1"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+
+          {/* Logo / Crest — centered on mobile, left on desktop */}
+          <Link href="/" className="absolute left-1/2 -translate-x-1/2 md:relative md:left-auto md:translate-x-0 z-10">
             <Image
               src="/gladiador-logo.png"
               alt="Gladiador 16"
-              width={52}
-              height={52}
+              width={44}
+              height={44}
+              className="md:w-[52px] md:h-[52px] w-11 h-11"
             />
           </Link>
 
-          {/* Navigation — centered */}
+          {/* Navigation — centered desktop only */}
           <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => (
               <Link
@@ -130,9 +154,9 @@ export default function Header() {
           </nav>
 
           {/* Right icons + CTA */}
-          <div className="flex items-center gap-5">
-            {/* Search */}
-            <button aria-label="Buscar" className="text-white hover:text-gold transition-colors">
+          <div className="flex items-center gap-4 md:gap-5">
+            {/* Search — desktop only to keep mobile bar clean */}
+            <button aria-label="Buscar" className="hidden md:block text-white hover:text-gold transition-colors">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <circle cx="11" cy="11" r="8" />
                 <path d="M21 21l-4.35-4.35" />
@@ -145,7 +169,7 @@ export default function Header() {
               onClick={() => setIsOpen(true)}
               className="text-white hover:text-gold transition-colors relative"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <path d="M16 10a4 4 0 0 1-8 0" />
@@ -179,6 +203,62 @@ export default function Header() {
           </div>
         </div>
       </div>
+
+      {/* Mobile drawer */}
+      {mobileOpen && (
+        <div className="md:hidden fixed inset-0 z-[60]">
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setMobileOpen(false)}
+          />
+          <div className="absolute left-0 top-0 bottom-0 w-[82%] max-w-sm bg-black border-r border-white/10 flex flex-col">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
+              <Image src="/gladiador-logo.png" alt="Gladiador 16" width={36} height={36} />
+              <button
+                aria-label="Cerrar menu"
+                onClick={() => setMobileOpen(false)}
+                className="text-white/70 hover:text-white transition-colors p-1"
+              >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <nav className="flex flex-col py-2">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="px-5 py-3.5 text-white text-sm font-light tracking-[0.2em] uppercase hover:bg-white/5 hover:text-gold transition-colors border-b border-white/5"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+
+            {!session && (
+              <div className="px-5 py-5 mt-auto border-t border-white/10 flex flex-col gap-3">
+                <Link
+                  href="/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="border border-white/30 text-white text-xs font-medium tracking-[0.15em] uppercase text-center py-3 rounded-full hover:bg-white/10 transition-colors"
+                >
+                  Ingresar
+                </Link>
+                <Link
+                  href="/registro"
+                  onClick={() => setMobileOpen(false)}
+                  className="bg-white text-black text-xs font-medium tracking-[0.15em] uppercase text-center py-3 rounded-full hover:bg-white/80 transition-colors"
+                >
+                  Crear Cuenta
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   );
 }

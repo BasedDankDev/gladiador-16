@@ -92,8 +92,8 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
     <>
       <Header />
       <main className="min-h-screen bg-black pt-24 pb-16">
-        <div className="max-w-7xl mx-auto px-4 md:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-[80px_1fr_380px] gap-4 md:gap-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
+          <div className="grid grid-cols-1 md:grid-cols-[80px_1fr_380px] gap-5 md:gap-6">
 
             {/* Left — Thumbnail strip */}
             <div className="hidden md:flex flex-col gap-2 overflow-y-auto max-h-[600px] pr-1">
@@ -190,21 +190,21 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
             {/* Right — Product details */}
             <div className="flex flex-col">
               <p className="text-[10px] text-white/40 tracking-[0.2em] uppercase">{product.brand}</p>
-              <h1 className="text-2xl font-black tracking-tight uppercase mt-1">{product.name}</h1>
-              <p className="text-2xl font-bold mt-3">₡{product.price.toLocaleString()}</p>
+              <h1 className="text-xl sm:text-2xl font-black tracking-tight uppercase mt-1">{product.name}</h1>
+              <p className="text-xl sm:text-2xl font-bold mt-2 sm:mt-3">₡{product.price.toLocaleString()}</p>
               {product.variants && (
                 <p className="text-[11px] text-white/40 mt-1">{product.variants}</p>
               )}
 
               {/* Size Selector */}
-              <div className="mt-8">
+              <div className="mt-6 sm:mt-8">
                 <p className="text-[10px] uppercase tracking-wider text-white/50 mb-3">Talla</p>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   {SIZES.map((size) => (
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`w-10 h-10 border text-xs font-medium transition-colors ${
+                      className={`w-11 h-11 sm:w-10 sm:h-10 border text-xs font-medium transition-colors ${
                         selectedSize === size
                           ? "border-gold text-gold"
                           : "border-white/20 text-white/60 hover:border-white/40"
@@ -217,19 +217,19 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
               </div>
 
               {/* Quantity */}
-              <div className="mt-6">
+              <div className="mt-5 sm:mt-6">
                 <p className="text-[10px] uppercase tracking-wider text-white/50 mb-3">Cantidad</p>
                 <div className="flex items-center gap-4">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-10 h-10 border border-white/20 flex items-center justify-center hover:border-white transition-colors"
+                    className="w-11 h-11 sm:w-10 sm:h-10 border border-white/20 flex items-center justify-center hover:border-white transition-colors"
                   >
                     −
                   </button>
                   <span className="text-sm font-medium w-6 text-center">{quantity}</span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="w-10 h-10 border border-white/20 flex items-center justify-center hover:border-white transition-colors"
+                    className="w-11 h-11 sm:w-10 sm:h-10 border border-white/20 flex items-center justify-center hover:border-white transition-colors"
                   >
                     +
                   </button>
@@ -240,7 +240,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
               <button
                 onClick={handleAddToCart}
                 disabled={!product.inStock}
-                className={`mt-8 w-full text-xs font-bold tracking-[0.2em] uppercase py-4 rounded-lg flex items-center justify-center gap-2 transition-colors ${
+                className={`mt-6 sm:mt-8 w-full text-xs font-bold tracking-[0.2em] uppercase py-4 rounded-lg flex items-center justify-center gap-2 transition-colors ${
                   !product.inStock
                     ? "bg-white/10 text-white/30 cursor-not-allowed"
                     : added

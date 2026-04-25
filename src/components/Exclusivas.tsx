@@ -25,21 +25,21 @@ export default function Exclusivas() {
 
   return (
     <section id="editorial" className="bg-[#0d1117] text-white py-16 md:py-24">
-      <div className="px-6 md:px-16">
+      <div className="px-4 sm:px-6 md:px-16">
         {/* Header */}
-        <div className="mb-10 md:mb-14">
-          <p className="text-[11px] font-bold text-white/30 uppercase tracking-[0.3em] mb-2">
+        <div className="mb-8 sm:mb-10 md:mb-14">
+          <p className="text-[10px] sm:text-[11px] font-bold text-white/30 uppercase tracking-[0.3em] mb-2">
             Editorial
           </p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black italic tracking-tight leading-none">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black italic tracking-tight leading-none">
             EXCLUSIVAS
           </h2>
         </div>
 
         {/* Magazine layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
           {/* Featured — large card */}
-          <Link href={`/editorial/${featured.slug}`} className="group relative rounded-2xl overflow-hidden min-h-[400px] md:min-h-[520px]">
+          <Link href={`/editorial/${featured.slug}`} className="group relative rounded-2xl overflow-hidden min-h-[320px] sm:min-h-[400px] md:min-h-[520px]">
             <Image
               src={featured.coverImage}
               alt={featured.title}
@@ -60,15 +60,15 @@ export default function Exclusivas() {
           </Link>
 
           {/* Right side — stacked list */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3 sm:gap-4">
             {rest.map((card, i) => (
               <Link
                 key={i}
                 href={`/editorial/${card.slug}`}
-                className="group flex gap-4 items-stretch bg-white/[0.03] hover:bg-white/[0.07] rounded-xl overflow-hidden transition-colors duration-300"
+                className="group flex gap-3 sm:gap-4 items-stretch bg-white/[0.03] hover:bg-white/[0.07] rounded-xl overflow-hidden transition-colors duration-300"
               >
                 {/* Thumbnail */}
-                <div className="relative w-28 md:w-36 shrink-0 aspect-[4/3] self-stretch">
+                <div className="relative w-24 sm:w-28 md:w-36 shrink-0 aspect-[4/3] self-stretch">
                   <Image
                     src={card.coverImage}
                     alt={card.title}
@@ -78,7 +78,7 @@ export default function Exclusivas() {
                   />
                 </div>
                 {/* Text */}
-                <div className="py-3 md:py-4 pr-4 flex flex-col justify-center">
+                <div className="py-3 md:py-4 pr-3 sm:pr-4 flex flex-col justify-center min-w-0">
                   <span className={`text-[9px] font-bold tracking-[0.15em] uppercase ${categoryColors[card.category] || "text-white/40"}`}>
                     {card.category}
                   </span>

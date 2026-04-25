@@ -21,16 +21,16 @@ export default function NewArrivals() {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 px-6 md:px-16 py-12 md:py-16">
+        <div className="relative z-10 px-4 sm:px-6 md:px-16 py-12 md:py-16">
           {/* Title — left-aligned, large italic bold like reference */}
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black italic text-white tracking-tight leading-none mb-8 md:mb-10">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black italic text-white tracking-tight leading-none mb-6 sm:mb-8 md:mb-10">
             Vuelven los Clasicos del 2008
           </h2>
 
-          {/* Two-part layout: cards (left ~half) + hero photo (right ~half) */}
+          {/* Two-part layout: hero photo first on mobile, cards below */}
           <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-4 md:gap-5 items-stretch">
-            {/* Left side — two product cards side by side */}
-            <div className="grid grid-cols-2 gap-4 md:gap-5">
+            {/* Cards — order-2 on mobile (below hero), order-1 desktop */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-5 order-2 md:order-1">
               {/* Card 1 */}
               <Link href="/producto/retro-2005-hombre" className="group">
                 <div className="bg-white rounded-2xl overflow-hidden h-full flex flex-col">
@@ -96,8 +96,8 @@ export default function NewArrivals() {
               </Link>
             </div>
 
-            {/* Right side — hero action photo */}
-            <div className="relative rounded-2xl overflow-hidden min-h-[300px] md:min-h-0">
+            {/* Right side — hero action photo (first on mobile) */}
+            <div className="relative rounded-2xl overflow-hidden min-h-[260px] sm:min-h-[320px] md:min-h-0 order-1 md:order-2">
               <Image
                 src="/hombre/retro-2008/1.png"
                 alt="Bring Back 2026"

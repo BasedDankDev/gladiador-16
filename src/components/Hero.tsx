@@ -56,34 +56,34 @@ export default function Hero() {
       </button>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col justify-end h-full px-6 md:px-12 pb-8 md:pb-12">
+      <div className="relative z-10 flex flex-col justify-end h-full px-5 md:px-12 pb-8 md:pb-12">
         {/* Tagline + EST row */}
-        <div className="flex justify-between items-end mb-3">
-          <p className="text-[10px] md:text-xs font-light tracking-[0.25em] uppercase text-white/70 leading-relaxed">
+        <div className="flex justify-between items-end mb-3 gap-3">
+          <p className="text-[9px] md:text-xs font-light tracking-[0.2em] md:tracking-[0.25em] uppercase text-white/70 leading-relaxed">
             Ropa deportiva de elite<br />
             San Jose, Costa Rica
           </p>
-          <p className="text-[10px] md:text-xs font-light tracking-[0.25em] uppercase text-white/70">
+          <p className="text-[9px] md:text-xs font-light tracking-[0.2em] md:tracking-[0.25em] uppercase text-white/70 whitespace-nowrap">
             EST. 2026
           </p>
         </div>
 
         {/* Big brand name — bottom, full width */}
-        <h1 className="text-[15vw] md:text-[13vw] font-black tracking-tighter leading-[0.85] uppercase text-white">
+        <h1 className="text-[14vw] md:text-[13vw] font-black tracking-tighter leading-[0.85] uppercase text-white">
           GLADIADOR <span className="text-outline">16</span>
         </h1>
 
         {/* CTA Buttons */}
-        <div className="flex gap-4 mt-6">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 max-w-sm sm:max-w-none">
           <Link
             href="#productos"
-            className="bg-maroon-light text-white text-xs font-light tracking-[0.2em] uppercase px-8 py-3 hover:bg-maroon transition-colors"
+            className="bg-maroon-light text-white text-xs font-light tracking-[0.2em] uppercase px-6 sm:px-8 py-3.5 sm:py-3 text-center hover:bg-maroon transition-colors"
           >
             IR A TIENDA
           </Link>
           <Link
             href="#nuevo"
-            className="border border-white/50 text-white text-xs font-light tracking-[0.2em] uppercase px-8 py-3 hover:bg-white/10 transition-colors"
+            className="border border-white/50 text-white text-xs font-light tracking-[0.2em] uppercase px-6 sm:px-8 py-3.5 sm:py-3 text-center hover:bg-white/10 transition-colors"
           >
             LO NUEVO
           </Link>

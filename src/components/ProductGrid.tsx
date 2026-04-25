@@ -102,12 +102,12 @@ export default function ProductGrid() {
       <div className="border-t border-gray-300/60 mx-6 md:mx-16 mb-12" />
 
       {/* Category Tabs */}
-      <div className="flex justify-center gap-6 mb-10">
+      <div className="flex justify-start md:justify-center gap-2 sm:gap-4 md:gap-6 mb-8 md:mb-10 px-4 md:px-6 overflow-x-auto scrollbar-hide">
         {tabs.map((tab) => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`text-xs tracking-[0.2em] uppercase px-4 py-2 transition-colors ${
+            className={`text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase px-3 sm:px-4 py-2 whitespace-nowrap transition-colors shrink-0 ${
               activeTab === tab.key
                 ? "border border-black text-black font-medium"
                 : "text-gray-400 hover:text-black"
@@ -121,7 +121,7 @@ export default function ProductGrid() {
       {/* Product Display */}
       {activeTab === "todos" ? (
         /* Grid layout for VER TODO */
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-6 md:px-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 px-4 sm:px-6 md:px-16">
           {filtered.map((product, i) => (
             <Link
               key={`${activeTab}-${i}`}
@@ -170,7 +170,7 @@ export default function ProductGrid() {
         <div className="relative">
           <button
             onClick={() => scroll("left")}
-            className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white border border-black/10 rounded-full flex items-center justify-center shadow-md hover:bg-black hover:text-white transition-colors"
+            className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white border border-black/10 rounded-full items-center justify-center shadow-md hover:bg-black hover:text-white transition-colors"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M15 18l-6-6 6-6" />
@@ -178,7 +178,7 @@ export default function ProductGrid() {
           </button>
           <button
             onClick={() => scroll("right")}
-            className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white border border-black/10 rounded-full flex items-center justify-center shadow-md hover:bg-black hover:text-white transition-colors"
+            className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white border border-black/10 rounded-full items-center justify-center shadow-md hover:bg-black hover:text-white transition-colors"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M9 18l6-6-6-6" />
@@ -186,14 +186,14 @@ export default function ProductGrid() {
           </button>
           <div
             ref={scrollRef}
-            className="flex gap-4 overflow-x-auto px-6 md:px-16 pb-4 snap-x snap-mandatory scrollbar-hide"
+            className="flex gap-3 sm:gap-4 overflow-x-auto px-4 sm:px-6 md:px-16 pb-4 snap-x snap-mandatory scrollbar-hide"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {filtered.map((product, i) => (
               <Link
                 key={`${activeTab}-${i}`}
                 href={`/producto/${product.slug}`}
-                className="group shrink-0 w-[70vw] sm:w-[45vw] md:w-[calc(25%-12px)] snap-start"
+                className="group shrink-0 w-[65vw] sm:w-[45vw] md:w-[calc(25%-12px)] snap-start"
               >
                 <div className="relative overflow-hidden bg-gray-100 aspect-[3/4]">
                   <Image
