@@ -15,23 +15,34 @@ export async function GET() {
   weekStart.setDate(weekStart.getDate() - weekStart.getDay());
   const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
 
+  const confirmedStatuses = ["pago_enviado", "confirmado", "enviado", "entregado"];
+  const pendingStatuses = ["pendiente"];
+
   const [
     totalOrders,
     ordersByStatus,
-    revenueTotal,
-    revenueToday,
-    revenueWeek,
-    revenueMonth,
+    revConfirmedTotal,
+    revConfirmedToday,
+    revConfirmedWeek,
+    revConfirmedMonth,
+    revPendingTotal,
+    revPendingToday,
+    revPendingWeek,
+    revPendingMonth,
     recentOrders,
     totalCustomers,
     totalProducts,
   ] = await Promise.all([
     prisma.order.count(),
     prisma.order.groupBy({ by: ["status"], _count: true }),
-    prisma.order.aggregate({ _sum: { total: true } }),
-    prisma.order.aggregate({ _sum: { total: true }, where: { createdAt: { gte: todayStart } } }),
-    prisma.order.aggregate({ _sum: { total: true }, where: { createdAt: { gte: weekStart } } }),
-    prisma.order.aggregate({ _sum: { total: true }, where: { createdAt: { gte: monthStart } } }),
+    prisma.order.aggregate({ _sum: { total: true }, where: { status: { in: confirmedStatuses } } }),
+    prisma.order.aggregate({ _sum: { total: true }, where: { status: { in: confirmedStatuses }, createdAt: { gte: todayStart } } }),
+    prisma.order.aggregate({ _sum: { total: true }, where: { status: { in: confirmedStatuses }, createdAt: { gte: weekStart } } }),
+    prisma.order.aggregate({ _sum: { total: true }, where: { status: { in: confirmedStatuses }, createdAt: { gte: monthStart } } }),
+    prisma.order.aggregate({ _sum: { total: true }, where: { status: { in: pendingStatuses } } }),
+    prisma.order.aggregate({ _sum: { total: true }, where: { status: { in: pendingStatuses }, createdAt: { gte: todayStart } } }),
+    prisma.order.aggregate({ _sum: { total: true }, where: { status: { in: pendingStatuses }, createdAt: { gte: weekStart } } }),
+    prisma.order.aggregate({ _sum: { total: true }, where: { status: { in: pendingStatuses }, createdAt: { gte: monthStart } } }),
     prisma.order.findMany({
       take: 10,
       orderBy: { createdAt: "desc" },
@@ -52,10 +63,18 @@ export async function GET() {
     totalProducts,
     ordersByStatus: statusCounts,
     revenue: {
-      total: revenueTotal._sum.total || 0,
-      today: revenueToday._sum.total || 0,
-      week: revenueWeek._sum.total || 0,
-      month: revenueMonth._sum.total || 0,
+      confirmed: {
+        total: revConfirmedTotal._sum.total || 0,
+        today: revConfirmedToday._sum.total || 0,
+        week: revConfirmedWeek._sum.total || 0,
+        month: revConfirmedMonth._sum.total || 0,
+      },
+      pending: {
+        total: revPendingTotal._sum.total || 0,
+        today: revPendingToday._sum.total || 0,
+        week: revPendingWeek._sum.total || 0,
+        month: revPendingMonth._sum.total || 0,
+      },
     },
     recentOrders,
   });

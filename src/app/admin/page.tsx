@@ -4,12 +4,19 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { statusLabels } from "@/lib/admin-types";
 
+interface RevenueBucket {
+  total: number;
+  today: number;
+  week: number;
+  month: number;
+}
+
 interface Stats {
   totalOrders: number;
   totalCustomers: number;
   totalProducts: number;
   ordersByStatus: Record<string, number>;
-  revenue: { total: number; today: number; week: number; month: number };
+  revenue: { confirmed: RevenueBucket; pending: RevenueBucket };
   recentOrders: {
     id: string;
     status: string;
@@ -42,23 +49,45 @@ export default function AdminDashboard() {
         <h1 className="text-2xl font-bold tracking-tight">Panel de Administracion</h1>
       </div>
 
-      {/* Revenue cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5">
-          <p className="text-[10px] text-white/30 uppercase tracking-wider">Ingresos Totales</p>
-          <p className="text-2xl font-bold text-green-400 mt-2">₡{stats.revenue.total.toLocaleString()}</p>
+      {/* Revenue — Confirmed (pago enviado o más) */}
+      <p className="text-[10px] text-green-400/70 uppercase tracking-[0.2em] mb-3">Ingresos Confirmados · pago enviado</p>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="bg-white/[0.03] border border-green-400/20 rounded-xl p-5">
+          <p className="text-[10px] text-white/30 uppercase tracking-wider">Total</p>
+          <p className="text-2xl font-bold text-green-400 mt-2">₡{stats.revenue.confirmed.total.toLocaleString()}</p>
         </div>
         <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5">
           <p className="text-[10px] text-white/30 uppercase tracking-wider">Hoy</p>
-          <p className="text-2xl font-bold mt-2">₡{stats.revenue.today.toLocaleString()}</p>
+          <p className="text-2xl font-bold mt-2">₡{stats.revenue.confirmed.today.toLocaleString()}</p>
         </div>
         <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5">
           <p className="text-[10px] text-white/30 uppercase tracking-wider">Esta Semana</p>
-          <p className="text-2xl font-bold mt-2">₡{stats.revenue.week.toLocaleString()}</p>
+          <p className="text-2xl font-bold mt-2">₡{stats.revenue.confirmed.week.toLocaleString()}</p>
         </div>
         <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5">
           <p className="text-[10px] text-white/30 uppercase tracking-wider">Este Mes</p>
-          <p className="text-2xl font-bold mt-2">₡{stats.revenue.month.toLocaleString()}</p>
+          <p className="text-2xl font-bold mt-2">₡{stats.revenue.confirmed.month.toLocaleString()}</p>
+        </div>
+      </div>
+
+      {/* Revenue — Pending (status pendiente) */}
+      <p className="text-[10px] text-yellow-400/70 uppercase tracking-[0.2em] mb-3">Ingresos Pendientes · sin pago</p>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="bg-white/[0.03] border border-yellow-400/20 rounded-xl p-5">
+          <p className="text-[10px] text-white/30 uppercase tracking-wider">Total</p>
+          <p className="text-2xl font-bold text-yellow-400 mt-2">₡{stats.revenue.pending.total.toLocaleString()}</p>
+        </div>
+        <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5">
+          <p className="text-[10px] text-white/30 uppercase tracking-wider">Hoy</p>
+          <p className="text-2xl font-bold mt-2">₡{stats.revenue.pending.today.toLocaleString()}</p>
+        </div>
+        <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5">
+          <p className="text-[10px] text-white/30 uppercase tracking-wider">Esta Semana</p>
+          <p className="text-2xl font-bold mt-2">₡{stats.revenue.pending.week.toLocaleString()}</p>
+        </div>
+        <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5">
+          <p className="text-[10px] text-white/30 uppercase tracking-wider">Este Mes</p>
+          <p className="text-2xl font-bold mt-2">₡{stats.revenue.pending.month.toLocaleString()}</p>
         </div>
       </div>
 
