@@ -17,7 +17,7 @@ const MUJER_ORDER = [
   { slug: "saprissa-mujer-retro", displayName: "Camiseta Atemporal Blanca", image: "/mujer/saprissa-mujer-front.png" },
   { slug: "atemporal-morada-mujer", displayName: "Camiseta Atemporal Morada", image: "/mujer/atemporal-morada/1.png" },
   { slug: "polo-modernista-crop-mujer", displayName: "Polo Modernista Crop", image: "/mujer/polo-modernista-crop/2.png" },
-  { slug: "polo-retro-crop-mujer", displayName: "Polo Retro Crop", image: "/mujer/polo-retro-crop/4.png" },
+  { slug: "polo-retro-crop-mujer", displayName: "Polo Retro Crop", image: "/mujer/polo-retro-crop/2.png" },
 ];
 
 const formatPrice = (price: number) => {

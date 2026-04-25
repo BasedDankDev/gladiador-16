@@ -36,7 +36,7 @@ const HOVER_IMAGES: Record<string, string> = {
   "saprissa-mujer-retro": "/mujer/saprissa-mujer-closeup.png",
   "atemporal-morada-mujer": "/mujer/atemporal-morada/3.png",
   "polo-modernista-crop-mujer": "/mujer/polo-modernista-crop/3.png",
-  "polo-retro-crop-mujer": "/mujer/polo-retro-crop/2.png",
+  "polo-retro-crop-mujer": "/mujer/polo-retro-crop/3.png",
 };
 
 const NUEVO_SLUGS = [
