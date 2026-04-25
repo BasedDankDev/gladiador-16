@@ -8,6 +8,7 @@ export default function AdminOrders() {
   const [loading, setLoading] = useState(true);
   const [expandedOrder, setExpandedOrder] = useState<string | null>(null);
   const [updating, setUpdating] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState<string | null>(null);
   const [filter, setFilter] = useState("todos");
   const [search, setSearch] = useState("");
   const [sortField, setSortField] = useState<"date" | "total" | "status">("date");
@@ -31,6 +32,20 @@ export default function AdminOrders() {
       setOrders((prev) => prev.map((o) => (o.id === orderId ? { ...o, status: newStatus } : o)));
     }
     setUpdating(null);
+  }
+
+  async function deleteOrder(orderId: string) {
+    const short = orderId.slice(-8);
+    if (!confirm(`¿Eliminar la orden #${short}? Esta accion no se puede deshacer.`)) return;
+    setDeleting(orderId);
+    const res = await fetch(`/api/admin/orders/${orderId}`, { method: "DELETE" });
+    if (res.ok) {
+      setOrders((prev) => prev.filter((o) => o.id !== orderId));
+      if (expandedOrder === orderId) setExpandedOrder(null);
+    } else {
+      alert("No se pudo eliminar la orden.");
+    }
+    setDeleting(null);
   }
 
   const filtered = useMemo(() => {
@@ -229,6 +244,20 @@ export default function AdminOrders() {
                           </button>
                         );
                       })}
+                    </div>
+
+                    {/* Danger zone */}
+                    <div className="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+                      <p className="text-[10px] text-white/30 uppercase tracking-wider">Zona peligrosa</p>
+                      <button
+                        onClick={() => deleteOrder(order.id)}
+                        disabled={deleting === order.id}
+                        className={`text-[10px] font-medium tracking-wider uppercase px-3 py-1.5 border rounded transition-colors border-red-500/30 text-red-400 hover:bg-red-500/10 hover:border-red-500/60 ${
+                          deleting === order.id ? "opacity-50" : ""
+                        }`}
+                      >
+                        {deleting === order.id ? "Eliminando..." : "Eliminar orden"}
+                      </button>
                     </div>
                   </div>
                 )}

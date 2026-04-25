@@ -32,3 +32,22 @@ export async function PATCH(
 
   return NextResponse.json(order);
 }
+
+export async function DELETE(
+  _request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const session = await auth();
+  if (!session?.user?.email || !isAdmin(session.user.email)) {
+    return NextResponse.json({ error: "No autorizado" }, { status: 403 });
+  }
+
+  const { id } = await params;
+
+  await prisma.$transaction([
+    prisma.orderItem.deleteMany({ where: { orderId: id } }),
+    prisma.order.delete({ where: { id } }),
+  ]);
+
+  return NextResponse.json({ ok: true });
+}
