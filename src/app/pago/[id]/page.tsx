@@ -177,7 +177,7 @@ export default function PagoPage({ params }: { params: Promise<{ id: string }> }
           <div className="bg-white rounded-2xl border border-black/10 shadow-sm mb-5 overflow-hidden">
             <div className="px-5 pt-4 pb-3 border-b border-black/10">
               <p className="text-[10px] text-black/40 uppercase tracking-wider">SINPE Movil</p>
-              <p className="font-bold text-sm mt-1">Jose Brenes Guevara</p>
+              <p className="font-bold text-sm mt-1">Brenes Guevara Jose</p>
             </div>
 
             {/* Numero SINPE */}

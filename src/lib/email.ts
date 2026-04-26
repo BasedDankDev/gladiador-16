@@ -118,7 +118,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
             <td style="padding:4px 10px 10px;text-align:center;font-weight:bold;font-size:11px;">CR64010200009107168932</td>
           </tr>
         </table>
-        <p style="font-size:13px;color:#666;margin:14px 0 6px;"><strong style="color:#000;">SINPE Movil:</strong> 8971 4343 — Jose Brenes Guevara</p>
+        <p style="font-size:13px;color:#666;margin:14px 0 6px;"><strong style="color:#000;">SINPE Movil:</strong> 8971 4343 — Brenes Guevara Jose</p>
       </div>
 
       <!-- Shipping address -->
