@@ -60,7 +60,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
         <div style="background:#fff3f3;border-left:4px solid #c00;padding:16px;margin-bottom:20px;">
           <p style="margin:0 0 8px;font-weight:bold;color:#c00;font-size:14px;">ATENCION</p>
           <p style="margin:0 0 8px;font-weight:bold;font-size:13px;">Antes de realizar tu pago, espera la confirmacion de nuestro equipo.</p>
-          <p style="margin:0 0 8px;font-size:13px;"><strong>Envíanos el comprobante al:</strong> WhatsApp: ${process.env.WHATSAPP_NUMBER || "+506 8855 7999"}</p>
+          <p style="margin:0 0 8px;font-size:13px;"><strong>Envíanos el comprobante al:</strong> WhatsApp: ${process.env.WHATSAPP_NUMBER || "+506 8971 4343"}</p>
           <p style="margin:0;font-size:13px;"><strong>Detalle del deposito:</strong> Pedido #${orderNumber} / ${data.customerName}</p>
         </div>
 
@@ -110,16 +110,15 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
           <tr>
             <td style="padding:10px;text-align:center;border-right:1px solid #eee;font-size:12px;color:#999;">Banco:</td>
             <td style="padding:10px;text-align:center;border-right:1px solid #eee;font-size:12px;color:#999;">Cuenta:</td>
-            <td style="padding:10px;text-align:center;border-right:1px solid #eee;font-size:12px;color:#999;">SINPE:</td>
             <td style="padding:10px;text-align:center;font-size:12px;color:#999;">IBAN:</td>
           </tr>
           <tr>
             <td style="padding:4px 10px 10px;text-align:center;border-right:1px solid #eee;font-weight:bold;font-size:13px;">BAC SAN JOSE</td>
             <td style="padding:4px 10px 10px;text-align:center;border-right:1px solid #eee;font-weight:bold;font-size:13px;">910716893</td>
-            <td style="padding:4px 10px 10px;text-align:center;border-right:1px solid #eee;font-weight:bold;font-size:13px;">8855 7999</td>
             <td style="padding:4px 10px 10px;text-align:center;font-weight:bold;font-size:11px;">CR64010200009107168932</td>
           </tr>
         </table>
+        <p style="font-size:13px;color:#666;margin:14px 0 6px;"><strong style="color:#000;">SINPE Movil:</strong> 8971 4343 — Jose Brenes Guevara</p>
       </div>
 
       <!-- Shipping address -->
