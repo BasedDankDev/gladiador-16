@@ -60,7 +60,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
         <div style="background:#fff3f3;border-left:4px solid #c00;padding:16px;margin-bottom:20px;">
           <p style="margin:0 0 8px;font-weight:bold;color:#c00;font-size:14px;">ATENCION</p>
           <p style="margin:0 0 8px;font-weight:bold;font-size:13px;">Antes de realizar tu pago, espera la confirmacion de nuestro equipo.</p>
-          <p style="margin:0 0 8px;font-size:13px;"><strong>Envíanos el comprobante al:</strong> WhatsApp: ${process.env.WHATSAPP_NUMBER || "+506 8971 4343"}</p>
+          <p style="margin:0 0 8px;font-size:13px;"><strong>Envíanos el comprobante a nuestro WhatsApp de negocios:</strong> ${process.env.WHATSAPP_NUMBER || "+506 8855 7999"}</p>
           <p style="margin:0;font-size:13px;"><strong>Detalle del deposito:</strong> Pedido #${orderNumber} / ${data.customerName}</p>
         </div>
 
