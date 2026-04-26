@@ -64,7 +64,7 @@ export default function MujerSection() {
               </h2>
             </div>
             <Link
-              href="/#productos"
+              href="/tienda?cat=mujer"
               className="hidden md:inline-block text-[11px] font-bold text-black/50 uppercase tracking-[0.2em] hover:text-black transition-colors border-b border-black/20 hover:border-black pb-1"
             >
               Ver Todo

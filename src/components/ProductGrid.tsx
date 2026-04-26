@@ -59,8 +59,8 @@ const tabs = [
   { key: "todos", label: "VER TODO" },
 ];
 
-export default function ProductGrid() {
-  const [activeTab, setActiveTab] = useState("nuevo");
+export default function ProductGrid({ initialTab = "nuevo" }: { initialTab?: string }) {
+  const [activeTab, setActiveTab] = useState(initialTab);
   const [apiProducts, setApiProducts] = useState<ApiProduct[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
 

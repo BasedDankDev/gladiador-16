@@ -76,13 +76,13 @@ export default function Hero() {
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 max-w-sm sm:max-w-none">
           <Link
-            href="#productos"
+            href="/tienda"
             className="bg-maroon-light text-white text-xs font-light tracking-[0.2em] uppercase px-6 sm:px-8 py-3.5 sm:py-3 text-center hover:bg-maroon transition-colors"
           >
             IR A TIENDA
           </Link>
           <Link
-            href="#nuevo"
+            href="/tienda?cat=nuevo"
             className="border border-white/50 text-white text-xs font-light tracking-[0.2em] uppercase px-6 sm:px-8 py-3.5 sm:py-3 text-center hover:bg-white/10 transition-colors"
           >
             LO NUEVO

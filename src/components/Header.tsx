@@ -66,9 +66,9 @@ function UserDropdown({ session }: { session: { user?: { name?: string | null; e
 
 const navLinks = [
   { label: "INICIO", href: "/" },
-  { label: "TIENDA", href: "/#productos" },
-  { label: "MUJER", href: "/#mujer" },
-  { label: "HOMBRE", href: "/#productos" },
+  { label: "TIENDA", href: "/tienda" },
+  { label: "MUJER", href: "/tienda?cat=mujer" },
+  { label: "HOMBRE", href: "/tienda?cat=hombre" },
   { label: "EDITORIAL", href: "/#editorial" },
 ];
 

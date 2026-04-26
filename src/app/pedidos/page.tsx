@@ -60,7 +60,7 @@ export default function PedidosPage() {
           {orders.length === 0 ? (
             <div className="text-center py-16">
               <p className="text-white/40 text-sm mb-4">No tenés pedidos aún.</p>
-              <Link href="/#productos" className="text-gold text-sm hover:text-white transition-colors">
+              <Link href="/tienda" className="text-gold text-sm hover:text-white transition-colors">
                 Ir a la tienda
               </Link>
             </div>

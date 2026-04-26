@@ -103,7 +103,7 @@ export default function PerfilPage() {
             <div className="text-center py-16 bg-white/5 border border-white/10">
               <p className="text-white/40 text-sm mb-4">No tenés pedidos aún.</p>
               <Link
-                href="/#productos"
+                href="/tienda"
                 className="text-gold text-sm hover:text-white transition-colors"
               >
                 Ir a la tienda

@@ -77,7 +77,7 @@ export default function CheckoutPage() {
         <main className="min-h-screen bg-cream text-black flex items-center justify-center px-4 pt-20">
           <div className="text-center">
             <h1 className="text-2xl font-black uppercase mb-4">Carrito vacio</h1>
-            <Link href="/#productos" className="text-black text-sm underline hover:text-maroon transition-colors">
+            <Link href="/tienda" className="text-black text-sm underline hover:text-maroon transition-colors">
               Ir a la tienda
             </Link>
           </div>
