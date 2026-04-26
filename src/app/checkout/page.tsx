@@ -355,10 +355,10 @@ export default function CheckoutPage() {
                     <div className="bg-cream border border-black/10 rounded-xl p-4 text-sm space-y-3">
                       <p className="font-bold text-black">ATENCION</p>
                       <p className="font-bold text-black/80 leading-relaxed">
-                        Antes de realizar tu pago, espera la confirmacion de nuestro equipo.
+                        Realiza tu pago, envianos el comprobante y espera la confirmacion de nuestro equipo.
                       </p>
                       <p className="text-black/50 leading-relaxed">
-                        Realiza tu pago directamente en nuestra cuenta bancaria o SINPE Movil (<strong className="text-black">+506 8971 4343 — Jose Brenes Guevara</strong>). Por favor, usa el numero del pedido como detalle de pago. Envia el comprobante a nuestro WhatsApp de negocios: <strong className="text-black">+506 8855 7999</strong>. Tu pedido no se procesara hasta que se haya recibido el importe en nuestra cuenta.
+                        Puedes pagar en nuestra cuenta bancaria (los detalles apareceran al darle <strong className="text-black">Realizar Pedido</strong>) o por SINPE Movil al <strong className="text-black">+506 8971 4343 — Jose Brenes Guevara</strong>. Usa el numero del pedido como detalle de pago y envia el comprobante a nuestro WhatsApp de negocios: <strong className="text-black">+506 8855 7999</strong>. Tu pedido no se procesara hasta que se haya recibido el importe en nuestra cuenta.
                       </p>
                     </div>
                   </div>
