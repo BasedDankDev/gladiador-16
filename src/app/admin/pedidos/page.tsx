@@ -62,7 +62,7 @@ export default function AdminOrders() {
       );
     }
 
-    const priorityOrder = ["pago_enviado", "pendiente", "confirmado", "enviado", "entregado"];
+    const priorityOrder = ["pendiente", "pago_enviado", "confirmado", "enviado", "entregado"];
     const priority = (status: string) => {
       const i = priorityOrder.indexOf(status);
       return i === -1 ? priorityOrder.length : i;

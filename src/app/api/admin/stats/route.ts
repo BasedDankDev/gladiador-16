@@ -44,7 +44,7 @@ export async function GET() {
     prisma.order.aggregate({ _sum: { total: true }, where: { status: { in: pendingStatuses }, createdAt: { gte: weekStart } } }),
     prisma.order.aggregate({ _sum: { total: true }, where: { status: { in: pendingStatuses }, createdAt: { gte: monthStart } } }),
     prisma.order.findMany({
-      take: 10,
+      take: 50,
       orderBy: { createdAt: "desc" },
       include: { user: { select: { name: true, email: true } } },
     }),
@@ -59,6 +59,19 @@ export async function GET() {
   for (const s of ordersByStatus) {
     statusCounts[s.status] = s._count;
   }
+
+  const priorityOrder = ["pendiente", "pago_enviado", "confirmado", "enviado", "entregado"];
+  const priority = (status: string) => {
+    const i = priorityOrder.indexOf(status);
+    return i === -1 ? priorityOrder.length : i;
+  };
+  const sortedRecent = [...recentOrders]
+    .sort((a, b) => {
+      const p = priority(a.status) - priority(b.status);
+      if (p !== 0) return p;
+      return b.createdAt.getTime() - a.createdAt.getTime();
+    })
+    .slice(0, 10);
 
   return NextResponse.json({
     totalOrders,
@@ -79,6 +92,6 @@ export async function GET() {
         month: revPendingMonth._sum.total || 0,
       },
     },
-    recentOrders,
+    recentOrders: sortedRecent,
   });
 }
