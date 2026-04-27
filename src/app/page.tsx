@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import TiendaNav from "@/components/TiendaNav";
+import ProductGrid from "@/components/ProductGrid";
 import Exclusivas from "@/components/Exclusivas";
 import ShopByCategory from "@/components/ShopByCategory";
 import HombreSection from "@/components/HombreSection";
@@ -13,7 +13,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <TiendaNav />
+        <ProductGrid />
         <HombreSection />
         <MujerSection />
         <Exclusivas />
