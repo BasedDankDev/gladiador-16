@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import ColeccionesSaprissa from "@/components/ColeccionesSaprissa";
 import Exclusivas from "@/components/Exclusivas";
 import ShopByCategory from "@/components/ShopByCategory";
 import HombreSection from "@/components/HombreSection";
@@ -12,6 +13,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <ColeccionesSaprissa />
         <HombreSection />
         <MujerSection />
         <Exclusivas />
