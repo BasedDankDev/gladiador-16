@@ -76,7 +76,7 @@ export default function HombreSection() {
             {/* Left — hero model photo */}
             <div className="relative rounded-2xl overflow-hidden min-h-[320px] sm:min-h-[400px] md:min-h-0">
               <Image
-                src="/hombre/retro-2008/1.png"
+                src="/hombre/polo-retro/1.png"
                 alt="Coleccion Hombre Saprissa"
                 fill
                 className="object-cover"
