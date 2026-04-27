@@ -36,9 +36,9 @@ export default function RelatedResources() {
   }
 
   return (
-    <section className="bg-white pt-2 pb-12">
-      <div className="pl-4 md:pl-10 pr-0">
-        <h2 className="text-base md:text-lg font-black uppercase tracking-tight text-black mb-6 pr-4 md:pr-10">
+    <section className="bg-white pt-2 pb-8 md:pb-12">
+      <div className="pl-3 md:pl-10 pr-0">
+        <h2 className="text-base md:text-lg font-black uppercase tracking-tight text-black mb-4 md:mb-6 pr-3 md:pr-10">
           Recursos Relacionados
         </h2>
       </div>
@@ -46,13 +46,13 @@ export default function RelatedResources() {
       <div className="relative">
         <div
           ref={scrollRef}
-          className="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory pl-4 md:pl-10 pr-4 md:pr-10 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex gap-2 md:gap-4 overflow-x-auto snap-x snap-mandatory pl-3 md:pl-10 pr-3 md:pr-10 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {articles.map((article) => (
             <Link
               key={article.slug}
               href={`/editorial/${article.slug}`}
-              className="group block flex-shrink-0 snap-start w-[72%] sm:w-[44%] md:w-[calc((100%-3rem)/4.15)]"
+              className="group block flex-shrink-0 snap-start w-[80%] sm:w-[44%] md:w-[calc((100%-3rem)/4.15)]"
             >
               <div className="relative aspect-[4/3] bg-gray-100 overflow-hidden">
                 <Image

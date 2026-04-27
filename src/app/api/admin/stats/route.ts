@@ -31,7 +31,7 @@ export async function GET() {
     revPendingMonth,
     recentOrders,
     totalCustomers,
-    totalProducts,
+    soldUnits,
   ] = await Promise.all([
     prisma.order.count(),
     prisma.order.groupBy({ by: ["status"], _count: true }),
@@ -49,7 +49,10 @@ export async function GET() {
       include: { user: { select: { name: true, email: true } } },
     }),
     prisma.user.count(),
-    prisma.product.count(),
+    prisma.orderItem.aggregate({
+      _sum: { quantity: true },
+      where: { order: { status: { in: confirmedStatuses } } },
+    }),
   ]);
 
   const statusCounts: Record<string, number> = {};
@@ -60,7 +63,7 @@ export async function GET() {
   return NextResponse.json({
     totalOrders,
     totalCustomers,
-    totalProducts,
+    productsSold: soldUnits._sum.quantity || 0,
     ordersByStatus: statusCounts,
     revenue: {
       confirmed: {

@@ -14,7 +14,7 @@ interface RevenueBucket {
 interface Stats {
   totalOrders: number;
   totalCustomers: number;
-  totalProducts: number;
+  productsSold: number;
   ordersByStatus: Record<string, number>;
   revenue: { confirmed: RevenueBucket; pending: RevenueBucket };
   recentOrders: {
@@ -106,8 +106,8 @@ export default function AdminDashboard() {
           <p className="text-2xl font-bold mt-2">{stats.totalCustomers}</p>
         </div>
         <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5">
-          <p className="text-[10px] text-white/30 uppercase tracking-wider">Total Productos</p>
-          <p className="text-2xl font-bold mt-2">{stats.totalProducts}</p>
+          <p className="text-[10px] text-white/30 uppercase tracking-wider">Productos Vendidos</p>
+          <p className="text-2xl font-bold mt-2">{stats.productsSold}</p>
         </div>
       </div>
 

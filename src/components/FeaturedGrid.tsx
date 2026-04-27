@@ -112,20 +112,20 @@ function CardImage({
         />
       ))}
       {locked && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 text-white text-center px-4">
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 text-white text-center px-2">
           <svg
-            width="32"
-            height="32"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
-            className="mb-3"
+            className="mb-2 md:w-8 md:h-8 md:mb-3"
           >
             <rect x="3" y="11" width="18" height="11" rx="2" />
             <path d="M7 11V7a5 5 0 0 1 10 0v4" />
           </svg>
-          <span className="text-xs font-bold uppercase tracking-[0.25em]">
+          <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] md:tracking-[0.25em]">
             Próximamente
           </span>
         </div>
@@ -136,24 +136,24 @@ function CardImage({
 
 export default function FeaturedGrid() {
   return (
-    <section className="bg-white py-10">
-      <div className="px-4 md:px-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+    <section className="bg-white py-6 md:py-10">
+      <div className="px-3 md:px-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3">
           {cards.map((card) => {
             const inner = (
               <>
                 <CardMedia card={card} />
-                <div className="pt-4 pb-2">
-                  <h3 className="text-base font-bold uppercase tracking-wide text-black mb-2">
+                <div className="pt-3 md:pt-4 pb-2">
+                  <h3 className="text-xs md:text-base font-bold uppercase tracking-wide text-black mb-1.5 md:mb-2 leading-snug">
                     {card.title}
                   </h3>
                   {card.description && (
-                    <p className="text-sm text-black/70 mb-4 leading-relaxed">
+                    <p className="text-[11px] md:text-sm text-black/70 mb-2 md:mb-4 leading-relaxed">
                       {card.description}
                     </p>
                   )}
                   {!card.locked && (
-                    <span className="inline-block text-xs font-bold uppercase tracking-wider text-black border-b-2 border-black pb-0.5">
+                    <span className="inline-block text-[10px] md:text-xs font-bold uppercase tracking-wider text-black border-b-2 border-black pb-0.5">
                       {card.cta}
                     </span>
                   )}
@@ -165,7 +165,7 @@ export default function FeaturedGrid() {
               return (
                 <div
                   key={card.title}
-                  className="block border border-transparent p-2 cursor-not-allowed"
+                  className="block border border-transparent p-1 md:p-2 cursor-not-allowed"
                   aria-disabled="true"
                 >
                   {inner}
@@ -177,7 +177,7 @@ export default function FeaturedGrid() {
               <Link
                 key={card.title}
                 href={card.href}
-                className="group block border border-transparent hover:border-black transition-colors p-2"
+                className="group block border border-transparent hover:border-black transition-colors p-1 md:p-2"
               >
                 {inner}
               </Link>

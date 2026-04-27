@@ -62,7 +62,16 @@ export default function AdminOrders() {
       );
     }
 
+    const priorityOrder = ["pago_enviado", "pendiente", "confirmado", "enviado", "entregado"];
+    const priority = (status: string) => {
+      const i = priorityOrder.indexOf(status);
+      return i === -1 ? priorityOrder.length : i;
+    };
+
     result.sort((a, b) => {
+      const pCmp = priority(a.status) - priority(b.status);
+      if (pCmp !== 0) return pCmp;
+
       let cmp = 0;
       if (sortField === "date") cmp = new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
       else if (sortField === "total") cmp = a.total - b.total;
