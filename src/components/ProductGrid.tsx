@@ -27,12 +27,9 @@ type DisplayProduct = {
 };
 
 const HOVER_IMAGES: Record<string, string> = {
-  "camiseta-papa-hombre": "/hombre/camiseta-papa/4.png",
   "camiseta-goku-hombre": "/hombre/camiseta-goku/3.png",
-  "retro-2005-hombre": "/hombre/retro-2005/3.png",
   "polo-modernista-hombre": "/hombre/polo-modernista/3.png",
   "polo-retro-hombre": "/hombre/polo-retro/3.png",
-  "retro-2008-hombre": "/hombre/retro-2008/2.png",
   "saprissa-mujer-retro": "/mujer/saprissa-mujer-closeup.png",
   "atemporal-morada-mujer": "/mujer/atemporal-morada/3.png",
   "polo-modernista-crop-mujer": "/mujer/polo-modernista-crop/3.png",
@@ -40,7 +37,7 @@ const HOVER_IMAGES: Record<string, string> = {
 };
 
 const NUEVO_SLUGS = [
-  "camiseta-papa-hombre",
+  "camiseta-goku-hombre",
   "atemporal-morada-mujer",
   "polo-modernista-hombre",
   "polo-retro-crop-mujer",

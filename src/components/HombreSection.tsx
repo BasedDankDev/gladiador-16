@@ -14,10 +14,9 @@ interface ApiProduct {
 }
 
 const HOMBRE_ORDER = [
-  { slug: "camiseta-papa-hombre", displayName: "Camiseta El Papa", image: "/hombre/camiseta-papa/1.png" },
-  { slug: "retro-2008-hombre", displayName: "Retro Saprissa 2008", image: "/hombre/retro-2008/2.png" },
-  { slug: "polo-modernista-hombre", displayName: "Polo Modernista", image: "/hombre/polo-modernista/1.png" },
-  { slug: "polo-retro-hombre", displayName: "Polo Retro Saprissa", image: "/hombre/polo-retro/1.png" },
+  { slug: "camiseta-goku-hombre", displayName: "Camiseta Goku Sublimada", image: "/hombre/camiseta-goku/1.png" },
+  { slug: "polo-modernista-hombre", displayName: "Polo Modernista Oversize", image: "/hombre/polo-modernista/1.png" },
+  { slug: "polo-retro-hombre", displayName: "Polo Retro Oversize", image: "/hombre/polo-retro/1.png" },
 ];
 
 const formatPrice = (price: number) => {
@@ -124,6 +123,25 @@ export default function HombreSection() {
                   </div>
                 </Link>
               ))}
+
+              {/* Ver Toda la Colección — CTA card to fill 4th slot */}
+              <Link
+                href="/tienda?cat=hombre"
+                className="group bg-[#1a1f36] rounded-2xl overflow-hidden h-full flex flex-col items-center justify-center p-6 text-center shadow-sm hover:bg-[#252b48] transition-colors"
+              >
+                <p className="text-[10px] font-bold text-white/50 uppercase tracking-[0.3em] mb-3">
+                  Coleccion Hombre
+                </p>
+                <h3 className="text-xl md:text-2xl font-black italic text-white tracking-tight leading-tight mb-4">
+                  Ver toda<br/>la coleccion
+                </h3>
+                <span className="inline-flex items-center gap-2 text-[11px] font-bold text-gold uppercase tracking-[0.2em]">
+                  Comprar
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="group-hover:translate-x-1 transition-transform">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </Link>
             </div>
           </div>
         </div>
