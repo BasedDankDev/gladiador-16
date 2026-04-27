@@ -6,6 +6,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useCart } from "@/context/CartContext";
+import { addViewedProduct, clearViewedProduct } from "@/hooks/useViewedProducts";
 import {
   PRODUCT_DESCRIPTIONS,
   DELIVERY_TIME,
@@ -50,6 +51,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         const found = products.find((p) => p.slug === slug);
         if (found) {
           setProduct(found);
+          addViewedProduct(slug);
           // Get related products: same category first, then others, excluding current
           const sameCategory = products.filter((p) => p.slug !== slug && p.category === found.category);
           const others = products.filter((p) => p.slug !== slug && p.category !== found.category);

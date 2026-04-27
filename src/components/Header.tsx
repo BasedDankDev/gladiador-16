@@ -65,12 +65,96 @@ function UserDropdown({ session }: { session: { user?: { name?: string | null; e
 }
 
 const navLinks = [
-  { label: "INICIO", href: "/" },
-  { label: "TIENDA", href: "/tienda" },
-  { label: "MUJER", href: "/tienda?cat=mujer" },
   { label: "HOMBRE", href: "/tienda?cat=hombre" },
-  { label: "EDITORIAL", href: "/#editorial" },
+  { label: "MUJER", href: "/tienda?cat=mujer" },
+  { label: "NIÑOS", href: "/tienda?cat=ninos" },
+  { label: "NUEVO Y EN TENDENCIA", href: "/tienda?cat=nuevo" },
 ];
+
+type MenuColumn = { title: string; items: { label: string; href: string }[] };
+type MenuContent = { columns: MenuColumn[]; ctaLabel: string; ctaHref: string } | { empty: true; message: string };
+
+const megaMenus: Record<string, MenuContent> = {
+  HOMBRE: {
+    columns: [
+      {
+        title: "Camisetas",
+        items: [
+          { label: "Camiseta Goku Saprissa", href: "/producto/camiseta-goku-hombre" },
+        ],
+      },
+      {
+        title: "Polos",
+        items: [
+          { label: "Polo Retro Saprissa", href: "/producto/polo-retro-hombre" },
+          { label: "Polo Modernista Saprissa", href: "/producto/polo-modernista-hombre" },
+        ],
+      },
+      {
+        title: "Estilo",
+        items: [
+          { label: "Sublimadas", href: "/tienda?cat=hombre" },
+          { label: "Oversize", href: "/tienda?cat=hombre" },
+        ],
+      },
+    ],
+    ctaLabel: "Ver Todo Hombre",
+    ctaHref: "/tienda?cat=hombre",
+  },
+  MUJER: {
+    columns: [
+      {
+        title: "Camisetas",
+        items: [
+          { label: "Camiseta Atemporal Blanca", href: "/producto/saprissa-mujer-retro" },
+          { label: "Camiseta Atemporal Morada", href: "/producto/atemporal-morada-mujer" },
+        ],
+      },
+      {
+        title: "Polos Crop",
+        items: [
+          { label: "Polo Modernista Crop", href: "/producto/polo-modernista-crop-mujer" },
+          { label: "Polo Retro Crop", href: "/producto/polo-retro-crop-mujer" },
+        ],
+      },
+      {
+        title: "Estilo",
+        items: [
+          { label: "Atemporales", href: "/tienda?cat=mujer" },
+          { label: "Crop", href: "/tienda?cat=mujer" },
+        ],
+      },
+    ],
+    ctaLabel: "Ver Todo Mujer",
+    ctaHref: "/tienda?cat=mujer",
+  },
+  "NIÑOS": {
+    empty: true,
+    message: "La colección para los más pequeños llega pronto.",
+  },
+  "NUEVO Y EN TENDENCIA": {
+    columns: [
+      {
+        title: "Lo Más Nuevo",
+        items: [
+          { label: "Camiseta Goku Saprissa", href: "/producto/camiseta-goku-hombre" },
+          { label: "Camiseta Atemporal Morada", href: "/producto/atemporal-morada-mujer" },
+          { label: "Polo Modernista Saprissa", href: "/producto/polo-modernista-hombre" },
+          { label: "Polo Retro Crop Mujer", href: "/producto/polo-retro-crop-mujer" },
+        ],
+      },
+      {
+        title: "Por Categoría",
+        items: [
+          { label: "Hombre", href: "/tienda?cat=hombre" },
+          { label: "Mujer", href: "/tienda?cat=mujer" },
+        ],
+      },
+    ],
+    ctaLabel: "Ver Toda la Tienda",
+    ctaHref: "/tienda",
+  },
+};
 
 export default function Header() {
   const { data: session } = useSession();
@@ -80,6 +164,7 @@ export default function Header() {
   const [hovered, setHovered] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
   useEffect(() => {
     function onScroll() {
@@ -100,7 +185,7 @@ export default function Header() {
     setMobileOpen(false);
   }, [pathname]);
 
-  const showTransparent = isHome && !scrolled && !hovered && !mobileOpen;
+  const showTransparent = isHome && !scrolled && !hovered && !mobileOpen && !activeMenu;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -109,11 +194,11 @@ export default function Header() {
         Envio gratis en pedidos mayores a ₡25 000
       </div>
 
-      {/* Main nav */}
+      {/* Main nav + mega menu wrapper */}
       <div
         className={`transition-colors duration-300 border-b border-white/10 ${showTransparent ? "bg-transparent" : "bg-black"}`}
         onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+        onMouseLeave={() => { setHovered(false); setActiveMenu(null); }}
       >
         <div className="flex items-center justify-between px-4 md:px-10 py-3">
           {/* Mobile hamburger */}
@@ -136,17 +221,22 @@ export default function Header() {
               alt="Gladiador 16"
               width={44}
               height={44}
-              className="md:w-[52px] md:h-[52px] w-11 h-11"
+              className="md:w-[56px] md:h-[56px] w-11 h-11"
             />
           </Link>
 
-          {/* Navigation — centered desktop only */}
-          <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+          {/* Navigation — Adidas-style: bold, wider, centered desktop */}
+          <nav className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-white text-[11px] font-light tracking-[0.2em] uppercase hover:text-gold transition-colors"
+                onMouseEnter={() => setActiveMenu(link.label)}
+                className={`text-[13px] font-bold tracking-wide uppercase whitespace-nowrap transition-colors py-1 border-b-2 ${
+                  activeMenu === link.label
+                    ? "text-white border-gold"
+                    : "text-white border-transparent hover:text-gold"
+                }`}
               >
                 {link.label}
               </Link>
@@ -202,6 +292,57 @@ export default function Header() {
             )}
           </div>
         </div>
+
+        {/* Mega menu panel — desktop only, slides under the nav */}
+        {activeMenu && megaMenus[activeMenu] && (
+          <div className="hidden md:block bg-white text-black border-t border-black/10 shadow-xl">
+            <div className="max-w-7xl mx-auto px-10 py-10">
+              {"empty" in megaMenus[activeMenu] ? (
+                <div className="py-6">
+                  <p className="text-[11px] font-bold tracking-[0.3em] uppercase text-black/40 mb-3">Próximamente</p>
+                  <p className="text-base text-black/70">{(megaMenus[activeMenu] as { message: string }).message}</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-12 gap-10">
+                  <div className="col-span-9 grid grid-cols-3 gap-10">
+                    {(megaMenus[activeMenu] as { columns: MenuColumn[] }).columns.map((col) => (
+                      <div key={col.title}>
+                        <h3 className="text-[11px] font-bold tracking-[0.25em] uppercase text-black mb-4">
+                          {col.title}
+                        </h3>
+                        <ul className="space-y-2.5">
+                          {col.items.map((item) => (
+                            <li key={item.label}>
+                              <Link
+                                href={item.href}
+                                onClick={() => setActiveMenu(null)}
+                                className="text-sm text-black/70 hover:text-black hover:underline transition-colors"
+                              >
+                                {item.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="col-span-3 flex items-end">
+                    <Link
+                      href={(megaMenus[activeMenu] as { ctaHref: string }).ctaHref}
+                      onClick={() => setActiveMenu(null)}
+                      className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-black border-b-2 border-black pb-1 hover:text-maroon-light hover:border-maroon-light transition-colors"
+                    >
+                      {(megaMenus[activeMenu] as { ctaLabel: string }).ctaLabel}
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Mobile drawer */}
