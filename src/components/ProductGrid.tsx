@@ -43,6 +43,12 @@ const NUEVO_SLUGS = [
   "polo-retro-crop-mujer",
 ];
 
+const HOMBRE_ORDER = [
+  "polo-retro-hombre",
+  "polo-modernista-hombre",
+  "camiseta-goku-hombre",
+];
+
 const formatPrice = (price: number) => {
   const whole = Math.floor(price / 1000);
   const rest = price % 1000;
@@ -85,7 +91,15 @@ export default function ProductGrid({ initialTab = "nuevo" }: { initialTab?: str
     ...apiProducts.map((p) => toDisplay(p, p.category)),
   ];
 
-  const filtered = activeTab === "todos" ? products : products.filter((p) => p.category === activeTab);
+  const filtered = (() => {
+    if (activeTab === "todos") return products;
+    if (activeTab === "hombre") {
+      return HOMBRE_ORDER
+        .map((slug) => products.find((p) => p.slug === slug && p.category === "hombre"))
+        .filter((p): p is DisplayProduct => !!p);
+    }
+    return products.filter((p) => p.category === activeTab);
+  })();
 
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;

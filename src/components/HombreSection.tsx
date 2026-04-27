@@ -14,9 +14,9 @@ interface ApiProduct {
 }
 
 const HOMBRE_ORDER = [
-  { slug: "camiseta-goku-hombre", displayName: "Camiseta Goku Sublimada", image: "/hombre/camiseta-goku/1.png" },
-  { slug: "polo-modernista-hombre", displayName: "Polo Modernista Oversize", image: "/hombre/polo-modernista/1.png" },
-  { slug: "polo-retro-hombre", displayName: "Polo Retro Oversize", image: "/hombre/polo-retro/1.png" },
+  { slug: "polo-retro-hombre", displayName: "Polo Retro Saprissa", image: "/hombre/polo-retro/1.png" },
+  { slug: "polo-modernista-hombre", displayName: "Polo Modernista Saprissa", image: "/hombre/polo-modernista/1.png" },
+  { slug: "camiseta-goku-hombre", displayName: "Camiseta Goku Saprissa", image: "/hombre/camiseta-goku/1.png" },
 ];
 
 const formatPrice = (price: number) => {
