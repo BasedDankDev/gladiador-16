@@ -1,10 +1,9 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import ProductGrid from "@/components/ProductGrid";
-import Exclusivas from "@/components/Exclusivas";
-import ShopByCategory from "@/components/ShopByCategory";
-import HombreSection from "@/components/HombreSection";
-import MujerSection from "@/components/MujerSection";
+import FeaturedGrid from "@/components/FeaturedGrid";
+import DeliveryBanner from "@/components/DeliveryBanner";
+import RelatedResources from "@/components/RelatedResources";
+import StillInterested from "@/components/StillInterested";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -13,11 +12,10 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <ProductGrid />
-        <HombreSection />
-        <MujerSection />
-        <Exclusivas />
-        <ShopByCategory />
+        <FeaturedGrid />
+        <StillInterested />
+        <DeliveryBanner />
+        <RelatedResources />
       </main>
       <Footer />
     </>
