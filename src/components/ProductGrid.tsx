@@ -94,9 +94,14 @@ export default function ProductGrid({ initialTab = "nuevo" }: { initialTab?: str
   const filtered = (() => {
     if (activeTab === "todos") return products;
     if (activeTab === "hombre") {
-      return HOMBRE_ORDER
+      const ordered = HOMBRE_ORDER
         .map((slug) => products.find((p) => p.slug === slug && p.category === "hombre"))
         .filter((p): p is DisplayProduct => !!p);
+      const unisex = products.filter((p) => p.category === "unisex");
+      return [...ordered, ...unisex];
+    }
+    if (activeTab === "mujer") {
+      return products.filter((p) => p.category === "mujer" || p.category === "unisex");
     }
     return products.filter((p) => p.category === activeTab);
   })();
