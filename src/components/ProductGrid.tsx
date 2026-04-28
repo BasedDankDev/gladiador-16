@@ -40,6 +40,7 @@ const NUEVO_SLUGS = [
   "visitante-1986-mujer",
   "adidas-local-hombre",
   "adidas-local-mujer",
+  "polo-modernista-ninos",
   "visitante-1986-nino",
   "visitante-1986-nina",
 ];

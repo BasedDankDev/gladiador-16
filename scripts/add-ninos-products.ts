@@ -55,6 +55,18 @@ const PRODUCTS = [
     ],
     productType: "retro",
   },
+  {
+    slug: "polo-modernista-ninos",
+    name: "Polo Modernista Saprissa Niños",
+    image: "/ninos/polo-modernista/1.png",
+    images: [
+      "/ninos/polo-modernista/1.png",
+      "/ninos/polo-modernista/2.png",
+      "/ninos/polo-modernista/3.png",
+      "/ninos/polo-modernista/4.png",
+    ],
+    productType: "retro",
+  },
 ];
 
 async function main() {

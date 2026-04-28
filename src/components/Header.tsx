@@ -145,6 +145,7 @@ const megaMenus: Record<string, MenuContent> = {
         title: "Estilo",
         items: [
           { label: "Adidas Local Niños", href: "/producto/adidas-local-ninos" },
+          { label: "Polo Modernista Saprissa Niños", href: "/producto/polo-modernista-ninos" },
         ],
       },
       {
