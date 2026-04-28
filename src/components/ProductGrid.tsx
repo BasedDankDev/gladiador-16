@@ -45,10 +45,10 @@ const NUEVO_SLUGS = [
 ];
 
 const HOMBRE_ORDER = [
-  "polo-retro-hombre",
-  "polo-modernista-hombre",
   "visitante-1986-hombre",
   "adidas-local-hombre",
+  "polo-retro-hombre",
+  "polo-modernista-hombre",
 ];
 
 const MUJER_ORDER = [
