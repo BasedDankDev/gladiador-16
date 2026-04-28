@@ -35,13 +35,14 @@ const cards: Card[] = [
     video: "/featured/atemporal-mujer.mp4",
   },
   {
-    title: "Visitante 1986 Retro",
-    description: "Disponible a partir del 1 de mayo",
-    cta: "Pronto",
-    href: "#",
-    images: ["/featured/visitante-1986.png", "/featured/visitante-1986-hombre.png"],
-    locked: true,
-    lockedLabel: "Próximamente",
+    title: "Coleccion Niños",
+    cta: "Comprar",
+    href: "/tienda?cat=ninos",
+    images: [
+      "/ninos/retro-crema/1.png",
+      "/ninos/visitante-1986-nino/1.png",
+      "/ninos/visitante-1986-nina/1.png",
+    ],
   },
   {
     title: "Aftermatch",
