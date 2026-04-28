@@ -38,8 +38,10 @@ const HOVER_IMAGES: Record<string, string> = {
 const NUEVO_SLUGS = [
   "visitante-1986-hombre",
   "visitante-1986-mujer",
-  "atemporal-morada-mujer",
-  "polo-modernista-hombre",
+  "adidas-local-hombre",
+  "adidas-local-mujer",
+  "visitante-1986-nino",
+  "visitante-1986-nina",
 ];
 
 const HOMBRE_ORDER = [
