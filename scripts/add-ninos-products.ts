@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const PRICE = 14900;
+const PRICE = 15900;
 
 const PRODUCTS = [
   {
