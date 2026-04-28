@@ -51,6 +51,15 @@ const HOMBRE_ORDER = [
   "adidas-local-hombre",
 ];
 
+const MUJER_ORDER = [
+  "visitante-1986-mujer",
+  "adidas-local-mujer",
+  "polo-modernista-crop-mujer",
+  "atemporal-morada-mujer",
+  "polo-retro-crop-mujer",
+  "saprissa-mujer-retro",
+];
+
 const formatPrice = (price: number) => {
   const whole = Math.floor(price / 1000);
   const rest = price % 1000;
@@ -99,6 +108,11 @@ export default function ProductGrid({ initialTab = "nuevo" }: { initialTab?: str
     if (activeTab === "hombre") {
       return HOMBRE_ORDER
         .map((slug) => products.find((p) => p.slug === slug && p.category === "hombre"))
+        .filter((p): p is DisplayProduct => !!p);
+    }
+    if (activeTab === "mujer") {
+      return MUJER_ORDER
+        .map((slug) => products.find((p) => p.slug === slug && p.category === "mujer"))
         .filter((p): p is DisplayProduct => !!p);
     }
     return products.filter((p) => p.category === activeTab);
