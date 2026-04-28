@@ -18,14 +18,14 @@ interface Card {
 
 const cards: Card[] = [
   {
-    title: "Coleccion Retro",
+    title: "Coleccion Retro Unisex",
     cta: "Comprar",
     href: "/tienda?cat=hombre",
     images: [
-      "/featured/retro-1.png",
-      "/featured/retro-2.png",
       "/featured/retro-3.png",
       "/featured/retro-4.png",
+      "/featured/retro-1.png",
+      "/featured/retro-2.png",
     ],
   },
   {
