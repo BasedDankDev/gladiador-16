@@ -29,6 +29,7 @@ interface Product {
 }
 
 const SIZES = ["XS", "S", "M", "L", "XL"];
+const KIDS_SIZES = ["4", "6", "8", "10", "12"];
 
 type AccordionKey = "description" | "composition" | "sizing";
 
@@ -43,6 +44,15 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
   const [added, setAdded] = useState(false);
   const [openAccordion, setOpenAccordion] = useState<AccordionKey | null>("description");
   const { addItem } = useCart();
+
+  const isKids = product?.category === "ninos";
+  const sizeOptions = isKids ? KIDS_SIZES : SIZES;
+  const sizeLabel = isKids ? "Edad" : "Talla";
+
+  useEffect(() => {
+    if (product?.category === "ninos") setSelectedSize("8");
+    else setSelectedSize("M");
+  }, [product?.category]);
 
   useEffect(() => {
     fetch("/api/products")
@@ -200,9 +210,9 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
 
               {/* Size Selector */}
               <div className="mt-6 sm:mt-8">
-                <p className="text-[10px] uppercase tracking-wider text-white/50 mb-3">Talla</p>
+                <p className="text-[10px] uppercase tracking-wider text-white/50 mb-3">{sizeLabel}</p>
                 <div className="flex flex-wrap gap-2">
-                  {SIZES.map((size) => (
+                  {sizeOptions.map((size) => (
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}

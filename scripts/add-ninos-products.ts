@@ -78,7 +78,7 @@ async function main() {
       image: p.image,
       images: JSON.stringify(p.images),
       badge: "NUEVO",
-      variants: "5 Tallas",
+      variants: "5 Edades",
       category: "ninos",
       productType: p.productType,
       inStock: true,
