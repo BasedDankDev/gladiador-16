@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import ProductGrid from "@/components/ProductGrid";
 import Footer from "@/components/Footer";
 
-const VALID_TABS = ["nuevo", "hombre", "mujer", "todos"];
+const VALID_TABS = ["nuevo", "hombre", "mujer", "ninos", "todos"];
 
 export default async function TiendaPage({
   searchParams,

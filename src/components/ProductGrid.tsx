@@ -58,6 +58,7 @@ const tabs = [
   { key: "nuevo", label: "LO NUEVO" },
   { key: "hombre", label: "HOMBRE" },
   { key: "mujer", label: "MUJER" },
+  { key: "ninos", label: "NIÑOS" },
   { key: "todos", label: "VER TODO" },
 ];
 

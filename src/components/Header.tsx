@@ -130,8 +130,30 @@ const megaMenus: Record<string, MenuContent> = {
     ctaHref: "/tienda?cat=mujer",
   },
   "NIÑOS": {
-    empty: true,
-    message: "La colección para los más pequeños llega pronto.",
+    columns: [
+      {
+        title: "Camisetas",
+        items: [
+          { label: "Polo Retro Coca Cola Niño", href: "/producto/visitante-1986-nino" },
+          { label: "Polo Retro Coca Cola Niña", href: "/producto/visitante-1986-nina" },
+          { label: "Retro Crema Niños", href: "/producto/retro-crema-ninos" },
+        ],
+      },
+      {
+        title: "Estilo",
+        items: [
+          { label: "Adidas Local Niños", href: "/producto/adidas-local-ninos" },
+        ],
+      },
+      {
+        title: "Categorías",
+        items: [
+          { label: "Ver Todo Niños", href: "/tienda?cat=ninos" },
+        ],
+      },
+    ],
+    ctaLabel: "Ver Todo Niños",
+    ctaHref: "/tienda?cat=ninos",
   },
   "NUEVO Y EN TENDENCIA": {
     columns: [
