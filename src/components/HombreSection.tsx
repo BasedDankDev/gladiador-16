@@ -16,7 +16,7 @@ interface ApiProduct {
 const HOMBRE_ORDER = [
   { slug: "polo-retro-hombre", displayName: "Polo Retro Saprissa", image: "/hombre/polo-retro/1.png" },
   { slug: "polo-modernista-hombre", displayName: "Polo Modernista Saprissa", image: "/hombre/polo-modernista/1.png" },
-  { slug: "camiseta-goku-hombre", displayName: "Camiseta Goku Saprissa", image: "/hombre/camiseta-goku/1.png" },
+  { slug: "visitante-1986-hombre", displayName: "Camiseta Visitante 1986 Coca-Cola", image: "/hombre/visitante-1986/1.png" },
 ];
 
 const formatPrice = (price: number) => {

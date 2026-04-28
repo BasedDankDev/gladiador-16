@@ -3,9 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const SLUGS = [
-  "retro-2008-hombre",
-  "camiseta-papa-hombre",
-  "retro-2005-hombre",
+  "camiseta-goku-hombre",
 ];
 
 async function main() {

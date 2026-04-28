@@ -80,7 +80,8 @@ const megaMenus: Record<string, MenuContent> = {
       {
         title: "Camisetas",
         items: [
-          { label: "Camiseta Goku Saprissa", href: "/producto/camiseta-goku-hombre" },
+          { label: "Visitante 1986 Coca-Cola", href: "/producto/visitante-1986-hombre" },
+          { label: "Adidas Local", href: "/producto/adidas-local-maroon" },
         ],
       },
       {
@@ -93,7 +94,7 @@ const megaMenus: Record<string, MenuContent> = {
       {
         title: "Estilo",
         items: [
-          { label: "Sublimadas", href: "/tienda?cat=hombre" },
+          { label: "Retro", href: "/tienda?cat=hombre" },
           { label: "Oversize", href: "/tienda?cat=hombre" },
         ],
       },
@@ -137,10 +138,10 @@ const megaMenus: Record<string, MenuContent> = {
       {
         title: "Lo Más Nuevo",
         items: [
-          { label: "Camiseta Goku Saprissa", href: "/producto/camiseta-goku-hombre" },
+          { label: "Visitante 1986 Coca-Cola Hombre", href: "/producto/visitante-1986-hombre" },
+          { label: "Visitante 1986 Coca-Cola Mujer", href: "/producto/visitante-1986-mujer" },
+          { label: "Adidas Local", href: "/producto/adidas-local-maroon" },
           { label: "Camiseta Atemporal Morada", href: "/producto/atemporal-morada-mujer" },
-          { label: "Polo Modernista Saprissa", href: "/producto/polo-modernista-hombre" },
-          { label: "Polo Retro Crop Mujer", href: "/producto/polo-retro-crop-mujer" },
         ],
       },
       {
