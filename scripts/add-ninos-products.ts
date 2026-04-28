@@ -14,6 +14,7 @@ const PRODUCTS = [
       "/ninos/retro-crema/2.png",
       "/ninos/retro-crema/3.png",
       "/ninos/retro-crema/4.png",
+      "/ninos/retro-crema/5.png",
     ],
     productType: "retro",
   },
