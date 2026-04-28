@@ -81,7 +81,7 @@ const megaMenus: Record<string, MenuContent> = {
         title: "Camisetas",
         items: [
           { label: "Visitante 1986 Coca-Cola", href: "/producto/visitante-1986-hombre" },
-          { label: "Adidas Local", href: "/producto/adidas-local-maroon" },
+          { label: "Polo Retro Adidas Local", href: "/producto/adidas-local-hombre" },
         ],
       },
       {
@@ -107,6 +107,8 @@ const megaMenus: Record<string, MenuContent> = {
       {
         title: "Camisetas",
         items: [
+          { label: "Polo Retro Coca Cola", href: "/producto/visitante-1986-mujer" },
+          { label: "Polo Retro Adidas Local", href: "/producto/adidas-local-mujer" },
           { label: "Camiseta Atemporal Blanca", href: "/producto/saprissa-mujer-retro" },
           { label: "Camiseta Atemporal Morada", href: "/producto/atemporal-morada-mujer" },
         ],
@@ -162,7 +164,7 @@ const megaMenus: Record<string, MenuContent> = {
         items: [
           { label: "Visitante 1986 Coca-Cola Hombre", href: "/producto/visitante-1986-hombre" },
           { label: "Visitante 1986 Coca-Cola Mujer", href: "/producto/visitante-1986-mujer" },
-          { label: "Adidas Local", href: "/producto/adidas-local-maroon" },
+          { label: "Polo Retro Adidas Local", href: "/producto/adidas-local-hombre" },
           { label: "Camiseta Atemporal Morada", href: "/producto/atemporal-morada-mujer" },
         ],
       },
