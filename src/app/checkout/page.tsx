@@ -358,7 +358,7 @@ export default function CheckoutPage() {
                         Realiza tu pago, envianos el comprobante y espera la confirmacion de nuestro equipo.
                       </p>
                       <p className="text-black/50 leading-relaxed">
-                        Puedes pagar en nuestra cuenta bancaria (los detalles apareceran al darle <strong className="text-black">Realizar Pedido</strong>) o por SINPE Movil al <strong className="text-black">+506 8855 7999 — SERIART HOME DIECISEIS S.A.</strong>. Usa el numero del pedido como detalle de pago y envia el comprobante a nuestro WhatsApp de negocios: <strong className="text-black">+506 8855 7999</strong>. Tu pedido no se procesara hasta que se haya recibido el importe en nuestra cuenta.
+                        Puedes pagar en nuestra cuenta bancaria (los detalles apareceran al darle <strong className="text-black">Realizar Pedido</strong>) o por SINPE Movil al <strong className="text-black">+506 8971 4343 — Brenes Guevara Jose</strong>. Usa el numero del pedido como detalle de pago y envia el comprobante a nuestro WhatsApp de negocios: <strong className="text-black">+506 8855 7999</strong>. Tu pedido no se procesara hasta que se haya recibido el importe en nuestra cuenta.
                       </p>
                     </div>
                   </div>
