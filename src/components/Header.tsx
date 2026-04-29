@@ -125,6 +125,7 @@ const megaMenus: Record<string, MenuContent> = {
         items: [
           { label: "Atemporales", href: "/tienda?cat=mujer" },
           { label: "Crop", href: "/tienda?cat=mujer" },
+          { label: "Oversize", href: "/tienda?cat=mujer" },
         ],
       },
     ],
