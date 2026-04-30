@@ -177,15 +177,15 @@ export default function PagoPage({ params }: { params: Promise<{ id: string }> }
           <div className="bg-white rounded-2xl border border-black/10 shadow-sm mb-5 overflow-hidden">
             <div className="px-5 pt-4 pb-3 border-b border-black/10">
               <p className="text-[10px] text-black/40 uppercase tracking-wider">SINPE Movil</p>
-              <p className="font-bold text-sm mt-1">Brenes Guevara Jose</p>
+              <p className="font-bold text-sm mt-1">SERIART HOME DIECISEIS S.A.</p>
             </div>
 
             {/* Numero SINPE */}
             <div className="flex items-center justify-between gap-3 px-5 py-4">
               <p className="text-[10px] text-black/40 uppercase tracking-wider shrink-0">Numero</p>
               <div className="flex items-center gap-2 min-w-0">
-                <p className="font-bold text-sm tabular-nums truncate">8971 4343</p>
-                <CopyButton value="89714343" label="SINPE" />
+                <p className="font-bold text-sm tabular-nums truncate">8855 7999</p>
+                <CopyButton value="88557999" label="SINPE" />
               </div>
             </div>
           </div>
