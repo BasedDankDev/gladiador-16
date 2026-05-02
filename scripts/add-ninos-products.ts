@@ -7,7 +7,7 @@ const PRICE = 15900;
 const PRODUCTS = [
   {
     slug: "retro-crema-ninos",
-    name: "Retro Crema Niños",
+    name: "Polo Retro Niños",
     image: "/ninos/retro-crema/1.png",
     images: [
       "/ninos/retro-crema/1.png",
