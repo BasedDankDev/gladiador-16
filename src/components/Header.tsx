@@ -109,7 +109,7 @@ const megaMenus: Record<string, MenuContent> = {
         items: [
           { label: "Polo Retro Coca Cola", href: "/producto/visitante-1986-mujer" },
           { label: "Polo Retro Adidas Local", href: "/producto/adidas-local-mujer" },
-          { label: "Camiseta Atemporal Blanca", href: "/producto/saprissa-mujer-retro" },
+          { label: "Atemporal Blanca", href: "/producto/atemporal-blanca-mujer" },
           { label: "Camiseta Atemporal Morada", href: "/producto/atemporal-morada-mujer" },
         ],
       },

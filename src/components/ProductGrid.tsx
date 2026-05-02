@@ -29,7 +29,7 @@ type DisplayProduct = {
 const HOVER_IMAGES: Record<string, string> = {
   "polo-modernista-hombre": "/hombre/polo-modernista/3.png",
   "polo-retro-hombre": "/hombre/polo-retro/3.png",
-  "saprissa-mujer-retro": "/mujer/saprissa-mujer-closeup.png",
+  "atemporal-blanca-mujer": "/mujer/saprissa-mujer-closeup.png",
   "atemporal-morada-mujer": "/mujer/atemporal-morada/3.png",
   "polo-modernista-crop-mujer": "/mujer/polo-modernista-crop-v2/3.png",
   "polo-retro-crop-mujer": "/mujer/polo-retro-crop-v2/3.png",
@@ -58,7 +58,7 @@ const MUJER_ORDER = [
   "polo-modernista-crop-mujer",
   "atemporal-morada-mujer",
   "polo-retro-crop-mujer",
-  "saprissa-mujer-retro",
+  "atemporal-blanca-mujer",
 ];
 
 const formatPrice = (price: number) => {
