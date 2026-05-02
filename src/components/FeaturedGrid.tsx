@@ -46,7 +46,7 @@ const cards: Card[] = [
   },
   {
     title: "Aftermatch",
-    description: "Disponible a partir del 1 de mayo",
+    description: "Disponible a partir del 5 de mayo",
     cta: "Próximamente",
     href: "#",
     images: ["/featured/aftermatch.avif"],
