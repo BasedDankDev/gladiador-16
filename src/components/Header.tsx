@@ -139,7 +139,7 @@ const megaMenus: Record<string, MenuContent> = {
         items: [
           { label: "Polo Retro Coca Cola Niño", href: "/producto/visitante-1986-nino" },
           { label: "Polo Retro Coca Cola Niña", href: "/producto/visitante-1986-nina" },
-          { label: "Polo Retro Niños", href: "/producto/retro-crema-ninos" },
+          { label: "Polo Retro Niños", href: "/producto/polo-retro-ninos" },
         ],
       },
       {
