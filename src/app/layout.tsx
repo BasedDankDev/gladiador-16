@@ -4,6 +4,7 @@ import "./globals.css";
 import SessionProvider from "@/context/SessionProvider";
 import { CartProvider } from "@/context/CartContext";
 import CartDrawer from "@/components/CartDrawer";
+import WhatsAppBubble from "@/components/WhatsAppBubble";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -28,6 +29,7 @@ export default function RootLayout({
           <CartProvider>
             {children}
             <CartDrawer />
+            <WhatsAppBubble />
           </CartProvider>
         </SessionProvider>
       </body>
