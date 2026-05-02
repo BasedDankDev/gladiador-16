@@ -12,13 +12,17 @@ function csvEscape(value: unknown): string {
   return str;
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   const session = await auth();
   if (!session?.user?.email || !isAdmin(session.user.email)) {
     return NextResponse.json({ error: "No autorizado" }, { status: 403 });
   }
 
+  const url = new URL(request.url);
+  const onlyWithOrders = url.searchParams.get("withOrders") === "1";
+
   const users = await prisma.user.findMany({
+    where: onlyWithOrders ? { orders: { some: {} } } : undefined,
     select: {
       id: true,
       name: true,
@@ -92,10 +96,11 @@ export async function GET() {
   const body = "﻿" + csv;
 
   const date = new Date().toISOString().slice(0, 10);
+  const filename = onlyWithOrders ? `clientes-con-pedidos-${date}.csv` : `clientes-${date}.csv`;
   return new Response(body, {
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="clientes-${date}.csv"`,
+      "Content-Disposition": `attachment; filename="${filename}"`,
       "Cache-Control": "no-store",
     },
   });

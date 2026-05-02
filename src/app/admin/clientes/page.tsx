@@ -49,17 +49,30 @@ export default function AdminCustomers() {
           <h1 className="text-2xl font-bold tracking-tight">Clientes Registrados</h1>
           <p className="text-sm text-white/30 mt-1">{customers.length} clientes en total</p>
         </div>
-        <a
-          href="/api/admin/customers/export"
-          className="inline-flex items-center gap-2 bg-gold/90 hover:bg-gold text-black text-xs font-semibold uppercase tracking-wider px-4 py-2.5 rounded-lg transition-colors"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-            <path d="M7 10l5 5 5-5" />
-            <path d="M12 15V3" />
-          </svg>
-          Descargar CSV
-        </a>
+        <div className="flex items-center gap-2 flex-wrap">
+          <a
+            href="/api/admin/customers/export"
+            className="inline-flex items-center gap-2 bg-white/[0.06] hover:bg-white/[0.1] text-white text-xs font-semibold uppercase tracking-wider px-4 py-2.5 rounded-lg transition-colors border border-white/[0.08]"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+              <path d="M7 10l5 5 5-5" />
+              <path d="M12 15V3" />
+            </svg>
+            Todos
+          </a>
+          <a
+            href="/api/admin/customers/export?withOrders=1"
+            className="inline-flex items-center gap-2 bg-gold/90 hover:bg-gold text-black text-xs font-semibold uppercase tracking-wider px-4 py-2.5 rounded-lg transition-colors"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+              <path d="M7 10l5 5 5-5" />
+              <path d="M12 15V3" />
+            </svg>
+            Solo con Pedidos
+          </a>
+        </div>
       </div>
 
       {/* Search */}
