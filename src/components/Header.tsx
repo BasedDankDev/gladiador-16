@@ -117,7 +117,7 @@ const megaMenus: Record<string, MenuContent> = {
         title: "Polos Crop",
         items: [
           { label: "Polo Modernista Crop Saprissa", href: "/producto/polo-modernista-crop-mujer" },
-          { label: "Polo Retro Crop Saprissa", href: "/producto/polo-retro-crop-mujer" },
+          { label: "Polo Retro Crop", href: "/producto/polo-retro-crop-mujer" },
         ],
       },
       {
