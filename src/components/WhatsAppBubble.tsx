@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 
 const PHONE = "50688557999";
-const MESSAGE = "Hola Gladiador 16, tengo una consulta.";
+const MESSAGE = "¡Pura vida! Me encanta esta colección, ¿me podrían ayudar con los pasos para realizar el pedido?";
 
 export default function WhatsAppBubble() {
   const pathname = usePathname();
