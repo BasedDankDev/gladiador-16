@@ -13,8 +13,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Galeria 16 | Ropa Deportiva de Elite",
-  description: "Ropa deportiva de elite — Tendencias actuales, verano 2026. San José, Costa Rica.",
+  title: "Galeria 16 | Camisetas de colección",
+  description: "Camisetas de colección — cada pieza, una galería. Envíos a todo Costa Rica.",
 };
 
 export default function RootLayout({

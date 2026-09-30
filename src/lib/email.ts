@@ -134,7 +134,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
 
       <!-- Footer -->
       <div style="background:#560319;padding:20px;text-align:center;">
-        <p style="color:white;font-size:11px;margin:0;letter-spacing:1px;">GALERIA 16 — Ropa Deportiva de Elite</p>
+        <p style="color:white;font-size:11px;margin:0;letter-spacing:1px;">GALERIA 16 — Camisetas de coleccion</p>
         <p style="color:rgba(255,255,255,0.5);font-size:10px;margin:4px 0 0;">San Jose, Costa Rica</p>
       </div>
     </div>

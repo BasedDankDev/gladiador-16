@@ -60,7 +60,7 @@ export default function Hero() {
         {/* Tagline + EST row */}
         <div className="flex justify-between items-end mb-3 gap-3">
           <p className="text-[9px] md:text-xs font-light tracking-[0.2em] md:tracking-[0.25em] uppercase text-white/70 leading-relaxed">
-            Ropa deportiva de elite<br />
+            Camisetas de coleccion<br />
             San Jose, Costa Rica
           </p>
           <p className="text-[9px] md:text-xs font-light tracking-[0.2em] md:tracking-[0.25em] uppercase text-white/70 whitespace-nowrap">

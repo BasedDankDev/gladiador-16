@@ -38,7 +38,7 @@ export default function Footer() {
               </span>
             </h3>
             <p className="text-[10px] text-white/40 tracking-[0.2em] uppercase mt-4 leading-relaxed">
-              ROPA DEPORTIVA DE ELITE
+              CAMISETAS DE COLECCION
               <br />
               SAN JOSE, COSTA RICA
             </p>
