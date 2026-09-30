@@ -21,7 +21,7 @@ export const articles: Article[] = [
     slug: "historia-camisetas-saprissa",
     category: "HISTORIA",
     title: "HISTORIA DE LAS CAMISETAS DE SAPRISSA",
-    author: "Gladiador 16",
+    author: "Galeria 16",
     date: "10 Marzo, 2026",
     coverImage: "/images/editorial/camiseta-81-83.webp",
     intro:
@@ -119,7 +119,7 @@ export const articles: Article[] = [
     slug: "nuestra-historia-saprissa",
     category: "INSTITUCIONAL",
     title: "NUESTRA HISTORIA: ASÍ NACIÓ EL MÁS GRANDE DE CENTROAMÉRICA",
-    author: "Gladiador 16",
+    author: "Galeria 16",
     date: "25 Marzo, 2026",
     coverImage: "/images/editorial/saprissa-logo-historia.png",
     intro:
@@ -245,7 +245,7 @@ export const articles: Article[] = [
     slug: "gabriel-badilla-gladiador-de-la-vida",
     category: "HOMENAJE",
     title: "GABRIEL BADILLA: EL GLADIADOR DE LA VIDA",
-    author: "Gladiador 16",
+    author: "Galeria 16",
     date: "25 Marzo, 2026",
     coverImage: "/images/editorial/badilla-1.jpg",
     intro:
@@ -290,7 +290,7 @@ export const articles: Article[] = [
     slug: "ricardo-saprissa-ayma-visionario",
     category: "INSTITUCIONAL",
     title: "RICARDO SAPRISSA AYMÁ: UN VISIONARIO QUE TRANSFORMÓ EL FÚTBOL NACIONAL",
-    author: "Gladiador 16",
+    author: "Galeria 16",
     date: "25 Marzo, 2026",
     coverImage: "/images/editorial/saprissa-ayma-1.webp",
     intro:
@@ -336,7 +336,7 @@ export const articles: Article[] = [
     slug: "keylor-navas-halcon-de-la-cueva",
     category: "LEYENDA",
     title: "EL HALCÓN QUE CRECIÓ EN LA CUEVA: KEYLOR NAVAS",
-    author: "Gladiador 16",
+    author: "Galeria 16",
     date: "25 Marzo, 2026",
     coverImage: "/images/editorial/keylor-1.webp",
     intro:
@@ -381,7 +381,7 @@ export const articles: Article[] = [
     slug: "evaristo-coronado-caballero-del-futbol",
     category: "LEYENDA",
     title: "EVARISTO CORONADO: EL CABALLERO DEL FÚTBOL",
-    author: "Gladiador 16",
+    author: "Galeria 16",
     date: "25 Marzo, 2026",
     coverImage: "/images/editorial/evaristo-1.webp",
     intro:

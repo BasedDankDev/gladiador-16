@@ -23,7 +23,7 @@ model Product {
   id          String      @id @default(cuid())
   name        String
   slug        String      @unique
-  brand       String      @default("GLADIADOR 16")
+  brand       String      @default("GALERIA 16")
   price       Int
   image       String
   images      String?

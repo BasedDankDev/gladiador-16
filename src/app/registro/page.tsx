@@ -204,7 +204,7 @@ export default function RegisterPage() {
           <div className="w-full max-w-md text-center">
             <Image
               src="/cool-s-logo.svg"
-              alt="Gladiador 16"
+              alt="Galeria 16"
               width={40}
               height={52}
               className="mx-auto mb-8 invert"

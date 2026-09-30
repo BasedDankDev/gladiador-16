@@ -70,7 +70,7 @@ export default function Hero() {
 
         {/* Big brand name — bottom, full width */}
         <h1 className="text-[14vw] md:text-[13vw] font-black tracking-tighter leading-[0.85] uppercase text-white">
-          GLADIADOR <span className="text-outline">16</span>
+          GALERIA <span className="text-outline">16</span>
         </h1>
 
         {/* CTA Buttons */}

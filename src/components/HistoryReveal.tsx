@@ -62,7 +62,7 @@ export default function HistoryReveal() {
       <div className="flex justify-center mb-12">
         <Image
           src="/cool-s-logo.svg"
-          alt="Gladiador 16"
+          alt="Galeria 16"
           width={28}
           height={38}
           className="invert"

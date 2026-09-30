@@ -13,7 +13,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Gladiador 16 | Ropa Deportiva de Elite",
+  title: "Galeria 16 | Ropa Deportiva de Elite",
   description: "Ropa deportiva de elite — Tendencias actuales, verano 2026. San José, Costa Rica.",
 };
 

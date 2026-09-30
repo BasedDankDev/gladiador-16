@@ -42,8 +42,8 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
     <div style="max-width:600px;margin:0 auto;font-family:Arial,sans-serif;color:#333;">
       <!-- Header -->
       <div style="background:#560319;padding:24px;text-align:center;">
-        <img src="https://gladiador16.com/gladiador-logo.png" alt="Gladiador 16" width="48" height="48" style="display:block;margin:0 auto 10px;" />
-        <h1 style="color:white;margin:0;font-size:18px;letter-spacing:2px;">GLADIADOR 16</h1>
+        <img src="https://galeria16.com/galeria-logo.png" alt="Galeria 16" width="48" height="48" style="display:block;margin:0 auto 10px;" />
+        <h1 style="color:white;margin:0;font-size:18px;letter-spacing:2px;">GALERIA 16</h1>
       </div>
 
       <!-- Title -->
@@ -134,7 +134,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
 
       <!-- Footer -->
       <div style="background:#560319;padding:20px;text-align:center;">
-        <p style="color:white;font-size:11px;margin:0;letter-spacing:1px;">GLADIADOR 16 — Ropa Deportiva de Elite</p>
+        <p style="color:white;font-size:11px;margin:0;letter-spacing:1px;">GALERIA 16 — Ropa Deportiva de Elite</p>
         <p style="color:rgba(255,255,255,0.5);font-size:10px;margin:4px 0 0;">San Jose, Costa Rica</p>
       </div>
     </div>
@@ -154,7 +154,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
       from,
       to: data.customerEmail,
       replyTo: adminEmails[0] || undefined,
-      subject: `Pedido #${orderNumber} - Gladiador 16`,
+      subject: `Pedido #${orderNumber} - Galeria 16`,
       html,
     });
     customerOk = true;
@@ -203,8 +203,8 @@ function buildAdminEmail(data: OrderEmailData, orderNumber: string, date: string
   return `
     <div style="max-width:600px;margin:0 auto;font-family:Arial,sans-serif;color:#333;">
       <div style="background:#560319;padding:24px;text-align:center;">
-        <img src="https://gladiador16.com/gladiador-logo.png" alt="Gladiador 16" width="48" height="48" style="display:block;margin:0 auto 10px;" />
-        <h1 style="color:white;margin:0;font-size:18px;letter-spacing:2px;">GLADIADOR 16 — ADMIN</h1>
+        <img src="https://galeria16.com/galeria-logo.png" alt="Galeria 16" width="48" height="48" style="display:block;margin:0 auto 10px;" />
+        <h1 style="color:white;margin:0;font-size:18px;letter-spacing:2px;">GALERIA 16 — ADMIN</h1>
       </div>
 
       <div style="padding:30px 24px;">

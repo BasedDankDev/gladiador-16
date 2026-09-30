@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const STORAGE_KEY = "gladiador:viewed-products";
+const STORAGE_KEY = "galeria:viewed-products";
 const MAX_VIEWED = 8;
 
 export function useViewedProducts() {

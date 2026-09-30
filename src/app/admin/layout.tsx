@@ -120,7 +120,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Logo area */}
         <div className="px-5 py-6 border-b border-white/[0.06]">
           <p className="text-[10px] text-white/30 uppercase tracking-[0.2em]">Admin</p>
-          <h2 className="text-sm font-bold tracking-tight mt-0.5">Gladiador 16</h2>
+          <h2 className="text-sm font-bold tracking-tight mt-0.5">Galeria 16</h2>
         </div>
 
         {/* Nav */}

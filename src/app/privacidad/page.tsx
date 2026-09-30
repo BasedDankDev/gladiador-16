@@ -14,7 +14,7 @@ export default function Privacidad() {
 
           <div className="space-y-6 text-base text-gray-700 leading-relaxed">
             <p>
-              En Gladiador 16 valoramos tu privacidad. Esta politica describe como recopilamos, usamos y protegemos tu informacion personal cuando utilizas nuestro sitio web.
+              En Galeria 16 valoramos tu privacidad. Esta politica describe como recopilamos, usamos y protegemos tu informacion personal cuando utilizas nuestro sitio web.
             </p>
 
             <h2 className="text-xl font-bold text-black pt-2">Informacion que recopilamos</h2>
@@ -39,7 +39,7 @@ export default function Privacidad() {
 
             <h2 className="text-xl font-bold text-black pt-2">Contacto</h2>
             <p>
-              Si tienes preguntas sobre esta politica de privacidad, escribenos a info@gladiador16.cr o llamanos al +506 8855 7999.
+              Si tienes preguntas sobre esta politica de privacidad, escribenos a info@galeria16.cr o llamanos al +506 8855 7999.
             </p>
           </div>
         </div>

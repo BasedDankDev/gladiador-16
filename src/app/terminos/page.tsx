@@ -14,12 +14,12 @@ export default function Terminos() {
 
           <div className="space-y-6 text-base text-gray-700 leading-relaxed">
             <p>
-              Al acceder y utilizar el sitio web de Gladiador 16, aceptas los siguientes terminos y condiciones. Te recomendamos leerlos detenidamente antes de realizar cualquier compra.
+              Al acceder y utilizar el sitio web de Galeria 16, aceptas los siguientes terminos y condiciones. Te recomendamos leerlos detenidamente antes de realizar cualquier compra.
             </p>
 
             <h2 className="text-xl font-bold text-black pt-2">1. Uso del sitio</h2>
             <p>
-              Este sitio web es propiedad de Gladiador 16. El contenido, imagenes, disenos y textos son propiedad exclusiva de la marca y estan protegidos por las leyes de propiedad intelectual de Costa Rica.
+              Este sitio web es propiedad de Galeria 16. El contenido, imagenes, disenos y textos son propiedad exclusiva de la marca y estan protegidos por las leyes de propiedad intelectual de Costa Rica.
             </p>
 
             <h2 className="text-xl font-bold text-black pt-2">2. Productos y precios</h2>
@@ -44,7 +44,7 @@ export default function Terminos() {
 
             <h2 className="text-xl font-bold text-black pt-2">6. Contacto</h2>
             <p>
-              Para cualquier consulta sobre estos terminos, puedes comunicarte con nosotros al +506 8855 7999 o al correo info@gladiador16.cr.
+              Para cualquier consulta sobre estos terminos, puedes comunicarte con nosotros al +506 8855 7999 o al correo info@galeria16.cr.
             </p>
           </div>
         </div>

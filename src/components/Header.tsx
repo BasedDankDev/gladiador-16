@@ -244,8 +244,8 @@ export default function Header() {
           {/* Logo / Crest — centered on mobile, left on desktop */}
           <Link href="/" className="absolute left-1/2 -translate-x-1/2 md:relative md:left-auto md:translate-x-0 z-10">
             <Image
-              src="/gladiador-logo.png"
-              alt="Gladiador 16"
+              src="/galeria-logo.png"
+              alt="Galeria 16"
               width={44}
               height={44}
               className="md:w-[56px] md:h-[56px] w-11 h-11"
@@ -381,7 +381,7 @@ export default function Header() {
           />
           <div className="absolute left-0 top-0 bottom-0 w-[82%] max-w-sm bg-black border-r border-white/10 flex flex-col">
             <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
-              <Image src="/gladiador-logo.png" alt="Gladiador 16" width={36} height={36} />
+              <Image src="/galeria-logo.png" alt="Galeria 16" width={36} height={36} />
               <button
                 aria-label="Cerrar menu"
                 onClick={() => setMobileOpen(false)}

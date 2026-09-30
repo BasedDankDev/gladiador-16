@@ -14,7 +14,7 @@ export default function Reglamentos() {
 
           <div className="space-y-6 text-base text-gray-700 leading-relaxed">
             <p>
-              En Gladiador 16 nos comprometemos a ofrecer una experiencia de compra transparente y justa. A continuacion detallamos nuestros reglamentos generales.
+              En Galeria 16 nos comprometemos a ofrecer una experiencia de compra transparente y justa. A continuacion detallamos nuestros reglamentos generales.
             </p>
 
             <h2 className="text-xl font-bold text-black pt-2">Compras y disponibilidad</h2>
@@ -34,7 +34,7 @@ export default function Reglamentos() {
 
             <h2 className="text-xl font-bold text-black pt-2">Uso de contenido</h2>
             <p>
-              Las fotografias, textos y disenos publicados en este sitio son propiedad de Gladiador 16. Queda prohibida su reproduccion total o parcial sin autorizacion previa por escrito.
+              Las fotografias, textos y disenos publicados en este sitio son propiedad de Galeria 16. Queda prohibida su reproduccion total o parcial sin autorizacion previa por escrito.
             </p>
 
             <h2 className="text-xl font-bold text-black pt-2">Propiedad intelectual y originalidad</h2>

@@ -46,7 +46,7 @@ export async function POST(req: Request) {
       images: images || null,
       badge: badge || null,
       category: category || "general",
-      brand: brand || "GLADIADOR 16",
+      brand: brand || "GALERIA 16",
       variants: variants || null,
       inStock: inStock !== false,
     },

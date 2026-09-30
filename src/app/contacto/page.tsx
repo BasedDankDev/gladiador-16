@@ -24,7 +24,7 @@ export default function Contacto() {
               </div>
               <div>
                 <h3 className="text-sm font-bold text-black uppercase tracking-wider mb-1">Correo electronico</h3>
-                <p className="text-gray-600">info@gladiador16.cr</p>
+                <p className="text-gray-600">info@galeria16.cr</p>
               </div>
               <div>
                 <h3 className="text-sm font-bold text-black uppercase tracking-wider mb-1">Horario de atencion</h3>

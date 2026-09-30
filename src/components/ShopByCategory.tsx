@@ -13,7 +13,7 @@ export default function BrandStory() {
           <div className="relative aspect-[4/3] overflow-hidden">
             <Image
               src="/hombre/polo-modernista/1.png"
-              alt="Gladiador 16"
+              alt="Galeria 16"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -23,7 +23,7 @@ export default function BrandStory() {
           {/* Text */}
           <div>
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-6">
-              Bienvenido a Gladiador 16, una marca creada por la aficion.
+              Bienvenido a Galeria 16, una marca creada por la aficion.
             </h2>
             <p className="text-sm text-gray-600 leading-relaxed mb-4">
               Nuestra ropa e historias capturan los momentos que definen la experiencia del hincha y la cultura de nuestras comunidades. Elevamos estos momentos, grandes y pequenos, que hacen del deporte algo tan extraordinario y significativo para tantas personas.

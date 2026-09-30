@@ -35,7 +35,7 @@ export default function NuestraHistoria() {
               Con herencia de El Atleta (1970)
             </h2>
             <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-              Pioneros en serigrafia deportiva en Costa Rica. Hoy, desde Servirapidos Serigraficos, continuamos esa tradicion con tecnologia de punta en sublimacion y telas de alto rendimiento, acabados nitidos en materiales como Brush Norteamericano, Dry Fit, Speed Dry, Speed, Geek y Columbia. Todo ese conocimiento lo canalizamos en nuestra marca propia, Gladiador 16, donde cada prenda refleja decadas de experiencia al servicio de la aficion.
+              Pioneros en serigrafia deportiva en Costa Rica. Hoy, desde Servirapidos Serigraficos, continuamos esa tradicion con tecnologia de punta en sublimacion y telas de alto rendimiento, acabados nitidos en materiales como Brush Norteamericano, Dry Fit, Speed Dry, Speed, Geek y Columbia. Todo ese conocimiento lo canalizamos en nuestra marca propia, Galeria 16, donde cada prenda refleja decadas de experiencia al servicio de la aficion.
             </p>
           </div>
 

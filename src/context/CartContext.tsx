@@ -33,13 +33,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("gladiador16-cart");
+    const saved = localStorage.getItem("galeria16-cart");
     if (saved) setItems(JSON.parse(saved));
     setLoaded(true);
   }, []);
 
   useEffect(() => {
-    if (loaded) localStorage.setItem("gladiador16-cart", JSON.stringify(items));
+    if (loaded) localStorage.setItem("galeria16-cart", JSON.stringify(items));
   }, [items, loaded]);
 
   const addItem = (item: CartItem) => {

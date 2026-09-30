@@ -28,7 +28,7 @@ const emptyForm = {
   images: "",
   badge: "",
   category: "general",
-  brand: "GLADIADOR 16",
+  brand: "GALERIA 16",
   inStock: true,
 };
 
